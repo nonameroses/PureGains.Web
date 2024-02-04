@@ -20,14 +20,14 @@
       </div>
 
       <div *ngIf="auth.isAuthenticated$ | async" class="items-center hidden space-x-8 lg:flex">
-        <div class="flex flex-wrap items-center text-xl font-semibld antialiased">
+        <div *ngIf="auth.user$ | async as user" class="flex flex-wrap items-center text-xl font-semibld antialiased">
           <h3 class="mb-2 block h-12 mr-4">
             <img class="h-12 object-cover" src="../../../assets/logo.png" alt="Store Logo" />
           </h3>
 
-          <a href="#"
+          <a  href="#"
             class="mb-2 whitespace-no-wrap inline-flex items-center px-1 py-2 rounded text-slate-500 hover:text-white hover:bg-cp-3">
-            <span>Bill Gates</span>
+            <span>{{user.name}}</span>
 
             <svg class="h-5 w-5 ml-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
               <path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z" />
@@ -35,7 +35,7 @@
           </a>
           <a class="mb-2 whitespace-no-wrap inline-flex items-center px-1 py-2 rounded text-black hover:text-white hover:bg-gray-900"
             href="#">
-            elated-stonebraker021313
+            {{user.email}}
           </a>
         </div>
         <a class="flex text-gray-600 hover:text-blue-500 cursor-pointer transition-colors duration-300">
