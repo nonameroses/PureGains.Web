@@ -26,10 +26,20 @@ module.exports = {
       },
       'black-grey-10' : '#2C2F3F',
       'black-grey-20' : '#272933',
+      'cp-1':'#e63946',
+      'cp-2':'#f1faee',
+      'cp-3':'#a8dadc',
+      'cp-4':'#457b9d',
+      'cp-41':'#2e5168',
+      'cp-42':'#355f7a',
+      'cp-43':'#3d6d8b',
+      'cp-44':'#45659d',
+      'cp-5':'#1d3557',
       
     }
   },
    
   },
-  plugins: [require("preline/plugin")],
+  plugins: [require("preline/plugin"),   require('flowbite/plugin')]
+  
 };
