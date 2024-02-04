@@ -3,323 +3,96 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.8.1/cdn.min.js" defer></script>
 
 <!-- Slider Component Container -->
-<div class="flex flex-col items-center justify-center mt-32 " x-cloak x-data="appData()" x-init="appInit()">
-    <div class="flex flex-col">
-        <!-- Page Scroll Progress -->
+<div class="flex flex-col items-center justify-center mt-32" x-cloak x-data="appData()" x-init="appInit()">
+  <div class="flex flex-col">
+    <!-- Page Scroll Progress -->
 
+    <!-- Navbar -->
+    <nav class="flex justify-around py-3 bg-cp-2/90 backdrop-blur-md shadow-md w-full fixed top-0 left-0 right-0 z-10">
+      <!-- Logo Container -->
+      <div *ngIf="(auth.isAuthenticated$ | async) === false" class="flex items-center">
+        <!-- Logo -->
+        <a class="cursor-pointer">
+          <h3 class="text-2xl font-medium text-blue-500">
+            <img class="h-12 object-cover" src="../../../assets/logo.png" alt="Store Logo" />
+          </h3>
+        </a>
+      </div>
 
-        <!-- Navbar -->
-        <nav class="flex justify-around py-4 bg-cp-2/90
-            backdrop-blur-md shadow-md w-full
-            fixed top-0 left-0 right-0 z-10">
-
-            <!-- Logo Container -->
-            <div class="flex items-center">
-                <!-- Logo -->
-                <a class="cursor-pointer">
-                    <h3 class="text-2xl font-medium text-blue-500">
-                        <img class="h-12  object-cover"
-                            src="../../../assets/logo.png" alt="Store Logo">
-                    </h3>
-                </a>
-            </div>
-
-
-
-
-            <div
-            class="flex justify-between items-center pt-4 pb-2 border-b-2 border-slate-500"
-          >
-            <div
-              class="flex flex-wrap items-center text-xl font-semibld antialiased"
-            >
-            <h3 class="mb-2 block h-12 mr-4">
-              <img class="h-12  object-cover"
-                  src="../../../assets/logo.png" alt="Store Logo">
+      <div *ngIf="auth.isAuthenticated$ | async" class="items-center hidden space-x-8 lg:flex">
+        <div class="flex flex-wrap items-center text-xl font-semibld antialiased">
+          <h3 class="mb-2 block h-12 mr-4">
+            <img class="h-12 object-cover" src="../../../assets/logo.png" alt="Store Logo" />
           </h3>
 
-              <a
-                href="#"
-                class="mb-2 whitespace-no-wrap inline-flex items-center px-1 py-2 rounded text-slate-500 hover:text-white hover:bg-gray-900"
-              >
-                <span>Bill Gates</span>
-  
-                <svg
-                  class="h-5 w-5 ml-2"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"
-                  />
-                </svg>
-              </a>
-              <a
-                class="mb-2 whitespace-no-wrap inline-flex items-center px-1 py-2 rounded text-white hover:text-white hover:bg-gray-900"
-                href="#"
-              >
-                elated-stonebraker021313
-              </a>
-            </div>
-            <div class="flex-no-shrink">
-              <button type="button">
-                <img
-                  class="block h-10 w-10 border-2 border-slate-500 hover:border-white rounded-full"
-                  src="https://avatars.githubusercontent.com/u/72197979?v=4"
-                  alt=""
-                />
-              </button>
-            </div>
-          </div>
+          <a href="#"
+            class="mb-2 whitespace-no-wrap inline-flex items-center px-1 py-2 rounded text-slate-500 hover:text-white hover:bg-cp-3">
+            <span>Bill Gates</span>
 
+            <svg class="h-5 w-5 ml-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z" />
+            </svg>
+          </a>
+          <a class="mb-2 whitespace-no-wrap inline-flex items-center px-1 py-2 rounded text-black hover:text-white hover:bg-gray-900"
+            href="#">
+            elated-stonebraker021313
+          </a>
+        </div>
+        <a class="flex text-gray-600 hover:text-blue-500 cursor-pointer transition-colors duration-300">
+          Home
+        </a>
 
-            
-            <!-- Links Section -->
-            <div class="items-center hidden space-x-8 lg:flex">
-                <a class="flex text-gray-600 hover:text-blue-500
-                    cursor-pointer transition-colors duration-300">
-                    Home
-                </a>
+        <a class="flex text-gray-600 cursor-pointer transition-colors duration-300 font-semibold text-blue-600">
+          Profile
+        </a>
 
-                <a class="flex text-gray-600 
-                    cursor-pointer transition-colors duration-300
-                    font-semibold text-blue-600">
-                    Themes
-                </a>
-
-                <a class="flex text-gray-600 hover:text-blue-500
-                    cursor-pointer transition-colors duration-300">
-                    Developers
-                </a>
-
-                <a class="flex text-gray-600 hover:text-blue-500
-                    cursor-pointer transition-colors duration-300">
-                    Pricing
-                </a>
-
-                <a class="flex text-gray-600 hover:text-blue-500
-                    cursor-pointer transition-colors duration-300">
-                    Blog
-                </a>
-
-                <a class="flex text-gray-600 hover:text-blue-500
-                    cursor-pointer transition-colors duration-300">
-                    About Us
-                </a>
-            </div>
-
-            <!-- Icon Menu Section -->
-            <div class="flex items-center space-x-5">
-                <!-- Register -->
-                <a  *ngIf="(auth.isAuthenticated$ | async) === false" class="flex text-gray-600 hover:text-blue-500
-                    cursor-pointer transition-colors duration-300">
-
-                    <svg class="fill-current h-5 w-5 mr-2 mt-0.5" xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24"
-                        viewBox="0 0 24 24">
-                        <path
-                            d="M12 0L11.34 .03L15.15 3.84L16.5 2.5C19.75 4.07 22.09 7.24 22.45 11H23.95C23.44 4.84 18.29 0 12 0M12 4C10.07 4 8.5 5.57 8.5 7.5C8.5 9.43 10.07 11 12 11C13.93 11 15.5 9.43 15.5 7.5C15.5 5.57 13.93 4 12 4M12 6C12.83 6 13.5 6.67 13.5 7.5C13.5 8.33 12.83 9 12 9C11.17 9 10.5 8.33 10.5 7.5C10.5 6.67 11.17 6 12 6M.05 13C.56 19.16 5.71 24 12 24L12.66 23.97L8.85 20.16L7.5 21.5C4.25 19.94 1.91 16.76 1.55 13H.05M12 13C8.13 13 5 14.57 5 16.5V18H19V16.5C19 14.57 15.87 13 12 13M12 15C14.11 15 15.61 15.53 16.39 16H7.61C8.39 15.53 9.89 15 12 15Z" />
-                    </svg>
-
-                    Register
-                </a>
-			
-                <!-- Login -->
-       
-                <div *ngIf="(auth.isAuthenticated$ | async) === false">
-                  <button (click)="loginWithRedirect()" class="bg-cp-4 hover:bg-cp-41 text-white font-semibold py-2 
-                  px-4 border-b-4 border-cp-41 hover:border-cp-41 rounded">
-                    Login
-                  </button>
-                </div>
-             
-                <a class="flex text-gray-600 
-                cursor-pointer transition-colors duration-300
-                font-semibold text-blue-600"   *ngIf="auth.isAuthenticated$ | async" >
-
-                <svg class="fill-current h-5 w-5 mr-2 mt-0.5" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24"
-                    viewBox="0 0 24 24" (click)="logout()">
-                    <path
-                        d="M10,17V14H3V10H10V7L15,12L10,17M10,2H19A2,2 0 0,1 21,4V20A2,2 0 0,1 19,22H10A2,2 0 0,1 8,20V18H10V20H19V4H10V6H8V4A2,2 0 0,1 10,2Z" />
-                </svg>
-      
-                Logout
-            </a>
-
-                <div *ngIf="auth.isAuthenticated$ | async">
-                  <button (click)="logout()" class="bg-cp-4 hover:bg-cp-41 text-white font-semibold py-2 
-                  px-4 border-b-4 border-cp-41 hover:border-cp-41 rounded">
-                    Logout
-                  </button>
-                </div>
-
-
-          
-
-
-            </div>
-        </nav>
-    </div>
-
-   
-</div>
-
-
-
-
-
-
-
-<div class="nav-container">
-  <nav class="navbar navbar-expand-md navbar-light bg-light">
-    <div class="container">
-      <div class="navbar-brand logo"></div>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNav"
-        aria-controls="navbarNav"
-        [attr.aria-expanded]="!isCollapsed"
-        aria-label="Toggle navigation"
-        (click)="isCollapsed = !isCollapsed"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div
-        class="collapse navbar-collapse"
-        id="navbarNav"
-        [ngbCollapse]="isCollapsed"
-      >
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a routerLink="/" class="nav-link">Home</a>
-          </li>
-          <li class="nav-item" *ngIf="auth.isAuthenticated$ | async">
-            <a routerLink="external-api" class="nav-link">External API</a>
-          </li>
-          <li class="nav-item" *ngIf="auth.isAuthenticated$ | async">
-            <button
-              class="btn btn-link p-0"
-              style="min-width: unset"
-              id="qsLogoutBtn"
-              (click)="logout()"
-            >
-              Log out
-            </button>
-          </li>
-        </ul>
-
-        <ul class="navbar-nav d-none d-md-block">
-          <!-- Login button: show if NOT authenticated -->
-          <li
-            class="nav-item"
-            *ngIf="(auth.isAuthenticated$ | async) === false"
-          >
-            <button
-              id="qsLoginBtn"
-              class="btn btn-primary btn-margin"
-              (click)="loginWithRedirect()"
-            >
-              Log in
-            </button>
-          </li>
-          <!-- / Login button -->
-
-
-          <!-- Fullsize dropdown: show if authenticated -->
-          <li
-            class="nav-item dropdown"
-            *ngIf="auth.user$ | async as user"
-            ngbDropdown
-          >
-            <a
-              ngbDropdownToggle
-              class="nav-link dropdown-toggle"
-              id="profileDropDown"
-              data-toggle="dropdown"
-            >
-              <!-- Profile image should be set to the profile picture from the id token -->
-              <img
-                [src]="user.picture"
-                alt="Profile picture"
-                class="nav-user-profile rounded-circle"
-                style="width: 75px;"
-              />
-            </a>
-            <div class="dropdown-menu dropdown-menu-left" ngbDropdownMenu>
-              <!-- Show the user's full name from the id token here -->
-              <div class="dropdown-header">
-                {{ user.name }}
-              </div>
-              <a routerLink="/profile" class="dropdown-item dropdown-profile">
-                <fa-icon [icon]="faUser" class="mr-3"></fa-icon> Profile
-              </a>
-              <button
-                (click)="logout()"
-                class="btn btn-link dropdown-item"
-              >
-                <fa-icon [icon]="faPowerOff" class="mr-3"></fa-icon> Log out
-              </button>
-            </div>
-          </li>
-          <!-- /Fullsize dropdown -->
-        </ul>
-
-        <!-- Responsive login button: show if NOT authenticated -->
-        <ul
-          class="navbar-nav d-md-none"
-          *ngIf="(auth.isAuthenticated$ | async) === false"
-        >
-          <button
-            class="btn btn-primary btn-block"
-            id="qsLoginBtn"
-            (click)="loginWithRedirect()"
-          >
-            Log in
-          </button>
-
-        </ul>
-        <!-- /Responsive login button -->
-
-        <!-- Responsive profile dropdown: show if authenticated -->
-        <ul
-          class="navbar-nav d-md-none justify-content-between"
-          *ngIf="auth.user$ | async as user"
-          style="min-height: 170px;"
-        >
-          <li class="nav-item">
-            <span class="user-info">
-              <!-- Profile image should be set to the profile picture from the id token -->
-              <img
-                alt="Profile picture"
-                class="nav-user-profile d-inline-block rounded-circle mr-3"
-                style="width: 75px;"
-                [src]="user.picture"
-              />
-              <!-- Show the user's full name from the id token here -->
-              <h6 class="d-inline-block">{{ user.name }}</h6>
-            </span>
-          </li>
-          <li>
-            <fa-icon [icon]="faUser" class="mr-3"></fa-icon>
-            <a routerLink="/profile">Profile</a>
-          </li>
-
-          <li>
-            <fa-icon [icon]="faPowerOff" class="mr-3"></fa-icon>
-            <button
-              class="btn btn-link p-0"
-              (click)="logout()"
-            >
-              Log out
-            </button>
-          </li>
-        </ul>
+        <a class="flex text-gray-600 hover:text-blue-500 cursor-pointer transition-colors duration-300">
+          About Us
+        </a>
       </div>
-    </div>
-  </nav>
+
+      <!-- Icon Menu Section -->
+      <div class="flex items-center space-x-5">
+        <!-- Register -->
+        <a *ngIf="(auth.isAuthenticated$ | async) === false"
+          class="flex text-gray-600 hover:text-blue-500 cursor-pointer transition-colors duration-300">
+          <svg class="fill-current h-5 w-5 mr-2 mt-0.5" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 24 24">
+            <path
+              d="M12 0L11.34 .03L15.15 3.84L16.5 2.5C19.75 4.07 22.09 7.24 22.45 11H23.95C23.44 4.84 18.29 0 12 0M12 4C10.07 4 8.5 5.57 8.5 7.5C8.5 9.43 10.07 11 12 11C13.93 11 15.5 9.43 15.5 7.5C15.5 5.57 13.93 4 12 4M12 6C12.83 6 13.5 6.67 13.5 7.5C13.5 8.33 12.83 9 12 9C11.17 9 10.5 8.33 10.5 7.5C10.5 6.67 11.17 6 12 6M.05 13C.56 19.16 5.71 24 12 24L12.66 23.97L8.85 20.16L7.5 21.5C4.25 19.94 1.91 16.76 1.55 13H.05M12 13C8.13 13 5 14.57 5 16.5V18H19V16.5C19 14.57 15.87 13 12 13M12 15C14.11 15 15.61 15.53 16.39 16H7.61C8.39 15.53 9.89 15 12 15Z" />
+          </svg>
+
+          Register
+        </a>
+
+        <!-- Login -->
+
+        <div *ngIf="(auth.isAuthenticated$ | async) === false">
+          <button (click)="loginWithRedirect()"
+            class="bg-cp-4 hover:bg-cp-41 text-white font-semibold py-2 px-4 border-b-4 border-cp-41 hover:border-cp-41 rounded">
+            Login
+          </button>
+        </div>
+
+        <a class="flex text-gray-600 cursor-pointer transition-colors duration-300 font-semibold text-blue-600"
+          *ngIf="auth.isAuthenticated$ | async">
+          <svg class="fill-current h-5 w-5 mr-2 mt-0.5" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 24 24"
+            (click)="logout()">
+            <path
+              d="M10,17V14H3V10H10V7L15,12L10,17M10,2H19A2,2 0 0,1 21,4V20A2,2 0 0,1 19,22H10A2,2 0 0,1 8,20V18H10V20H19V4H10V6H8V4A2,2 0 0,1 10,2Z" />
+          </svg>
+
+          Settings
+        </a>
+
+        <div *ngIf="auth.isAuthenticated$ | async">
+          <button (click)="logout()"
+            class="bg-cp-4 hover:bg-cp-41 text-white font-semibold py-2 px-4 border-b-4 border-cp-41 hover:border-cp-41 rounded">
+            Logout
+          </button>
+        </div>
+      </div>
+    </nav>
+  </div>
 </div>
