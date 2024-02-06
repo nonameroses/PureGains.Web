@@ -14,9 +14,9 @@
 
     <main id="main" class="max-h-screen   overflow-y-hidden  snap snap-y snap-mandatory ">
         <section id="equipment" style="background-image: url('../assets/test4.png');"
-            class="pt-20 flex items-center justify-center w-full h-screen bg-center bg-cover snap-start bg-home-1">
+            class="bg-amber-200 pt-20 flex items-center justify-center w-full h-screen bg-center bg-cover snap-start bg-home-1">
 
-            <body class="">
+            <body class="bg-slate-800">
                 <div class="snap-y snap-mandatory h-screen w-screen mx-auto scroll-m-20  ">
                     <div class="container flex flex-col mx-auto  snap-start ">
                         <div class="grid w-full grid-cols-1 my-auto py-12  mb-8 md:grid-cols-2 xl:gap-14 md:gap-5">
@@ -37,7 +37,7 @@
                                                 <section id="{{item.name}}" (click)="item.isSelected = !item.isSelected"
                                                     (click)="getSelectedEquipment()"
                                                     [ngClass]="{ 'scale-110 bg-amber-600': item.isSelected }"
-                                                    class="hover:bg-indigo-100 hover:scale-125  duration-500 shadow-2xl  cursor-pointer   border-black rounded-lg w-44 py-2 px-4  ">
+                                                    class="hover:bg-indigo-500 hover:scale-125  duration-500 shadow-2xl  cursor-pointer  border border-skate-300 rounded-3xl w-40 py-2 px-4   ">
                                                     <div className="relative lg:w-[430px]">
                                                       
                                                         <div>
@@ -58,7 +58,7 @@
                                                             <span>Download</span>
                                                           </button> -->
 
-                                                    <img id="{{item.name}}" class="w-full mt-3  " src={{item.imagePath}}
+                                                    <img id="{{item.name}}" class="w-full mt-3   " src={{item.imagePath}}
                                                         alt="" width="1310" height="873" />
 
                                                     <p id="{{item.name}}"
