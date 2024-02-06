@@ -80,6 +80,7 @@ export class HomeContentComponent {
   ) {}
 
   ngOnInit() {
+    this.equipmentService.getUserById('string');
     this.equipmentService
       .getEquipment()
       .subscribe((response) =>

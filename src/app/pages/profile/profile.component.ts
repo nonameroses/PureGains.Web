@@ -4,6 +4,7 @@ import { AuthService } from '@auth0/auth0-angular';
 import { HighlightModule } from 'ngx-highlightjs';
 import { map } from 'rxjs/operators';
 import { User } from '../../shared/models/identity-models/user-interface';
+import { UserService } from 'src/app/shared/services/identity-services/user.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
