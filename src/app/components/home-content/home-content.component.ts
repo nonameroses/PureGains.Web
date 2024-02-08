@@ -16,13 +16,14 @@ import { UserService } from 'src/app/shared/services/identity-services/user.serv
 import { MuscleGroupService } from 'src/app/shared/services/muscle-group.service';
 import { WorkoutExerciseService } from 'src/app/shared/services/workout-exercise.service';
 import { WorkoutService } from 'src/app/shared/services/workout.service';
+import { NavBarComponent } from '../nav-bar/nav-bar.component';
 
 @Component({
   selector: 'app-home-content',
   templateUrl: './home-content.component.html',
   styleUrls: ['./home-content.component.css'],
   standalone: true,
-  imports: [FontAwesomeModule, CommonModule],
+  imports: [FontAwesomeModule, CommonModule, NavBarComponent],
 })
 export class HomeContentComponent {
   user: User = null;
