@@ -32,26 +32,26 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     // this.userService.getUserById('string');
     // Check If user created his profile TODO:
-    this.userSubscription = this.auth.user$.subscribe({
-      next: (profile) => {
-        this.user = {
-          auth0UserId: profile.sub,
-          email: profile.email,
-          familyName: profile.family_name,
-          givenName: profile.given_name,
-          nickname: profile.nickname,
-          isProfileCreated: true,
-          createdAt: new Date(2012, 0, 1),
-        }
-        this.checkOrInsertUser(this.user);
+    // this.userSubscription = this.auth.user$.subscribe({
+    //   next: (profile) => {
+    //     this.user = {
+    //       auth0UserId: profile.sub,
+    //       email: profile.email,
+    //       familyName: profile.family_name,
+    //       givenName: profile.given_name,
+    //       nickname: profile.nickname,
+    //       isProfileCreated: true,
+    //       createdAt: new Date(2012, 0, 1),
+    //     }
+    //     this.checkOrInsertUser(this.user);
 
-      },
-      error: (error) => {
-        console.error('Error fetching user', error);
-      }
-    });
+    //   },
+    //   error: (error) => {
+    //     console.error('Error fetching user', error);
+    //   }
+    // });
 
-    console.log(this.user);
+    // console.log(this.user);
   }
   
   checkOrInsertUser(user: User){

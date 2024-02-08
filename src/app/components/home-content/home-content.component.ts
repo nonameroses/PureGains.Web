@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
+import { Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Equipment } from 'src/app/shared/models/equipment-interface';
 import { User } from 'src/app/shared/models/identity-models/user-interface';
 import { MuscleGroup } from 'src/app/shared/models/muscle-group.interface';
@@ -12,16 +14,19 @@ import { Workout } from 'src/app/shared/models/workout.interface';
 import { EquipmentService } from 'src/app/shared/services/equipment.service';
 import { UserService } from 'src/app/shared/services/identity-services/user.service';
 import { MuscleGroupService } from 'src/app/shared/services/muscle-group.service';
+import { WorkoutExerciseService } from 'src/app/shared/services/workout-exercise.service';
+import { WorkoutService } from 'src/app/shared/services/workout.service';
 
 @Component({
   selector: 'app-home-content',
   templateUrl: './home-content.component.html',
   styleUrls: ['./home-content.component.css'],
   standalone: true,
-  imports: [FontAwesomeModule, CommonModule]
+  imports: [FontAwesomeModule, CommonModule],
 })
 export class HomeContentComponent {
   user: User = null;
+  userSubscription: Subscription;
   test: User;
   pages: PageSelectionModel[] = [
     {
@@ -42,6 +47,8 @@ export class HomeContentComponent {
 
   equipment: Equipment[] = [];
   muscleGroups: MuscleGroup[] = [];
+
+  workoutInProgress: Workout;
 
   workoutExercises: WorkoutExercise[] = [
     {
@@ -73,45 +80,22 @@ export class HomeContentComponent {
       isSelected: false,
     },
   ];
-  activeWorkout: Workout = {
-    id:1,
-    exercises: this.workoutExercises
-  }
+  id: any;
+  // activeWorkout: Workout = {
+  //   id:1,
+  //   exercises: this.workoutExercises
+  // }
 
   constructor(
     private equipmentService: EquipmentService,
     private muscleGroupService: MuscleGroupService,
-    public auth: AuthService
-    , private userService: UserService
-    
+    private workoutService: WorkoutService,
+    private workoutExerciseService :WorkoutExerciseService,
+    public auth: AuthService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
-    this.auth.user$.subscribe({
-      next: (profile) => {
-        this.user = {
-          auth0UserId: profile.sub,
-          email: profile.email,
-          familyName: profile.family_name,
-          givenName: profile.given_name,
-          nickname: profile.nickname,
-          isProfileCreated: true,
-          createdAt: new Date(2012, 0, 1),
-        }
-        this.userService.getUserById(this.user.auth0UserId).subscribe({
-          next: (user) => {
-            this.test = user;
-          }
-        });
-        console.log(this.test);
-
-      },
-      error: (error) => {
-        console.error('Error fetching user', error);
-      }
-    });
-
-    this.equipmentService.getUserById('string');
     this.equipmentService
       .getEquipment()
       .subscribe((response) =>
@@ -123,6 +107,66 @@ export class HomeContentComponent {
       .subscribe((response) =>
         (this.muscleGroups = response).map((x) => (x.isSelected = false))
       );
+
+    this.auth.user$.subscribe({
+      next: (profile) => {
+        this.user = {
+          auth0UserId: profile.sub,
+          email: profile.email,
+          familyName: profile.family_name,
+          givenName: profile.given_name,
+          nickname: profile.nickname,
+          isProfileCreated: false,
+          createdAt: new Date(2012, 0, 1),
+        } as User;
+        this.checkOrInsertUser(this.user);
+        this.userService.getUserByAuthId(this.user.auth0UserId).subscribe({
+          next: (response) => {
+            console.log(response)
+            this.user = response;
+          }
+        })
+        //this.initialiseWorkout(this.user.id);
+      },
+      error: (error) => {
+        console.error('Error fetching user', error);
+      },
+    });
+   
+  }
+  checkOrInsertUser(user: User){
+    if(!this.user.isProfileCreated){
+      this.userService.addUser(user).subscribe({
+        next: response => {
+          console.log(response)
+          return
+        }
+      });
+    }
+    //this.userService.getUserById()
+  }
+  // initialiseWorkout(id: number){
+  //   this.workoutService.addWorkout(id).subscribe({
+  //     next: (response) => {
+  //       this.workout = response
+  //     }
+  //   })
+  // }
+
+  buildWorkout() {
+    this.workoutService.addWorkout(this.user.id).subscribe({
+      next: (response) => {
+        this.workoutInProgress = response
+
+       // this.workoutExerciseService.addWorkoutExercise(this.workoutInProgress.)
+      }
+      
+
+
+      
+    })
+
+    //this.ex
   }
   getSelectedEquipment(): Equipment[] {
     this.selectedEquipment = this.equipment.filter((e) => e.isSelected);
@@ -165,8 +209,6 @@ export class HomeContentComponent {
       this.active = true;
     }
   }
-
-  
 
   public waitAndGoDown(id: string) {
     if (this.selectedEquipment.length > 0) {

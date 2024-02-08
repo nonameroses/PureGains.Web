@@ -4,4 +4,5 @@ export interface WorkoutExercise {
     workoutId: number;
     exerciseId: number;
     isSelected : boolean;
+    //Isfinhesd
 }
