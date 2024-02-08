@@ -1,13 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { AuthService } from '@auth0/auth0-angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import { Equipment } from 'src/app/shared/models/equipment-interface';
+import { User } from 'src/app/shared/models/identity-models/user-interface';
 import { MuscleGroup } from 'src/app/shared/models/muscle-group.interface';
 import { PageSelectionModel } from 'src/app/shared/models/pageSelectionModel-interface';
 import { WorkoutExercise } from 'src/app/shared/models/workout-exercise.interface';
 import { Workout } from 'src/app/shared/models/workout.interface';
 import { EquipmentService } from 'src/app/shared/services/equipment.service';
+import { UserService } from 'src/app/shared/services/identity-services/user.service';
 import { MuscleGroupService } from 'src/app/shared/services/muscle-group.service';
 
 @Component({
@@ -18,6 +21,8 @@ import { MuscleGroupService } from 'src/app/shared/services/muscle-group.service
   imports: [FontAwesomeModule, CommonModule]
 })
 export class HomeContentComponent {
+  user: User = null;
+  test: User;
   pages: PageSelectionModel[] = [
     {
       pageId: 'equipment',
@@ -76,10 +81,36 @@ export class HomeContentComponent {
   constructor(
     private equipmentService: EquipmentService,
     private muscleGroupService: MuscleGroupService,
+    public auth: AuthService
+    , private userService: UserService
     
   ) {}
 
   ngOnInit() {
+    this.auth.user$.subscribe({
+      next: (profile) => {
+        this.user = {
+          auth0UserId: profile.sub,
+          email: profile.email,
+          familyName: profile.family_name,
+          givenName: profile.given_name,
+          nickname: profile.nickname,
+          isProfileCreated: true,
+          createdAt: new Date(2012, 0, 1),
+        }
+        this.userService.getUserById(this.user.auth0UserId).subscribe({
+          next: (user) => {
+            this.test = user;
+          }
+        });
+        console.log(this.test);
+
+      },
+      error: (error) => {
+        console.error('Error fetching user', error);
+      }
+    });
+
     this.equipmentService.getUserById('string');
     this.equipmentService
       .getEquipment()
@@ -134,6 +165,8 @@ export class HomeContentComponent {
       this.active = true;
     }
   }
+
+  
 
   public waitAndGoDown(id: string) {
     if (this.selectedEquipment.length > 0) {

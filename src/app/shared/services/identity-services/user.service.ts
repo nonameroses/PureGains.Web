@@ -10,9 +10,9 @@ import { Observable } from 'rxjs';
 export class UserService {
   constructor(private http: HttpClient) {}
 
-  // getUserById(id: string) {
-  //   return this.http.get<User>(`${config.apiUri}/api/User?id=` + id);
-  // }
+  getUserById(id: string) {
+    return this.http.get<User>(`${config.apiUri}/api/User?id=` + id);
+  }
 
   addUser(request: User) : Observable<any> {
     const user: User = {
