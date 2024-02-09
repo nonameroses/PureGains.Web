@@ -37,7 +37,12 @@ module.exports = {
       'cp-5':'#1d3557',
       
     }
+    
   },
+  fontFamily: {
+    'sans': ['Roboto', 'sans-serif'],
+    'roboto': ['Roboto', 'sans-serif'],
+  }
    
   },
   plugins: [require("preline/plugin"),   require('flowbite/plugin')]
