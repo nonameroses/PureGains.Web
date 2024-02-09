@@ -1,15 +1,41 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workout</title>
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/motion-tailwind/motion-tailwind.css"
-        rel="stylesheet" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.tailwindcss.com" rel="stylesheet">
 </head>
+<header class="absolute antialiased   ">
+    <app-nav-bar></app-nav-bar>
+</header>
 
+
+<body class="bg-black  h-screen w-screen  pt-24 items-center justify-center " style="background: #292c2f;">
+
+    <div class="bg-black mx-auto grid max-w-4xl grid-cols-2  gap-4 bg-zinc-50 sm:col-span-12 ">
+        <div class="text-center  header col-span-12 rounded-lg border border-gray-300 bg-gray-600 py-8 ">
+            <h1
+                class="  text-4xl sm:col-span-2  sm:gap-4 sm:grid-cols-2 md:col-span-2 md:text-5x1 md:grid-cols-2 ">
+                <span class="bg-amber-200">Select the equipment available to you </span>
+
+
+            </h1>
+            <span class="text-lg "> Exercises will be generated with the selected equipment</span>
+        </div>
+        <div class="col-span-12 rounded-lg border border-gray-500 bg-gray-200 p-64 sm:col-span-6">
+            <!-- Main Content -->
+        </div>
+        <div class="col-span-12 rounded-lg border border-indigo-400 bg-gray-200 pl-64 sm:col-span-2">
+            <!-- Sidebar -->
+        </div>
+        <div class="footer col-span-12 rounded-lg border border-gray-800 bg-gray-700 p-6">
+            <!-- Footer content -->
+        </div>
+    </div>
+</body>
+
+</html>
 
 <!-- <div class="container mx-auto p-2">
     <div class="flex justify-between items-center pt-4 pb-2 border-b-2 border-slate-500">
@@ -19,42 +45,46 @@
     </div>
 </div> -->
 
-<header class="fixed antialiased   ">
-    <app-nav-bar></app-nav-bar>
-  </header>
 
-<body class="grid place-items-center min-h-screen ">
+
+
+<!-- <main class="flex max-h-screen overflow-y-hidden">
+
+    <section id="equipment" class="bg-red-200  flex items-center justify-center w-114 h-screen bg-center bg-cover snap-start bg-home-1">
+        <body class=" grid place-items-center min-h-screen ">
  
-    <div class="p-4 max-w-5x1 grid gap-44 sm:grid-cols-2 sm:p-8 md:grid-cols-2">
-        <!-- <h1 class="text-4xl sm:col-span-2 bg-amber-200 sm:w-1/2">Grid Layout with Taiwlind CSS        </h1> -->
-        <h1 class="text-center text-4xl sm:col-span-2  md:grid sm:gap-4 sm:grid-cols-2 md:col-span-2 md:text-5x1 md:grid-cols-1 md:mb-12"> <span
-                class="bg-amber-200">Select the equipment available to you </span> 
-            <span class="text-lg"> Exercises will be generated with the selected equipment</span>
-
-            </h1>
-
-        <!-- <h2 class=" md:text-5x1 md:grid-cols-1">Exercises will be generated with the selected equipment</h2> -->
-
-
-        <div class="h-72 bg-blue-500  sm:square">1</div>
-        <div class="h-72 bg-pink-500   sm:square">2</div>
-        <!-- <div class="h-16 bg-blue-500 sm:h-auto sm:square">3</div>
-        <div class="h-16 bg-pink-500 sm:h-auto sm:square">4</div>
-        <div class="h-16 bg-blue-500 sm:h-auto sm:square">5</div>
-        <div class="h-16 bg-pink-500 sm:h-auto sm:square">6</div>
-        <div class="h-16 bg-blue-500 sm:h-auto sm:square">7</div>
-        <div class="h-16 bg-pink-500 sm:h-auto sm:square">8</div> -->
+            <div class="p-4 max-w-5x1 grid gap-44 sm:grid-cols-2 sm:p-8 md:grid-cols-2">
+              
+                <h1 class="text-center text-4xl sm:col-span-2  md:grid sm:gap-4 sm:grid-cols-2 md:col-span-2 md:text-5x1 md:grid-cols-1 md:mb-12"> <span
+                        class="bg-amber-200">Select the equipment available to you </span> 
+                    <span class="text-lg"> Exercises will be generated with the selected equipment</span>
         
-        <p>dadada nada</p>
+                    </h1>
+        
+              
+        
+        
+                <div class="h-72 bg-blue-500  sm:h-auto sm:square">1</div>
+                <div class="h-72 bg-pink-500   sm:h-auto sm:square">2</div>
+          
+                
+                <p>dadada nada</p>
+        
+            </div>
+        
+        
+        
+        
+        </body>
 
-    </div>
+    </section>
+
+    
+    
+</main> -->
 
 
 
-
-</body>
-
-</html>
 
 
 
