@@ -17,21 +17,22 @@
         <div class="text-center   text-white header col-span-12 rounded-lg border border-gray-300  py-8 ">
             <h1
                 class="font-roboto italic text-5xl sm:col-span-2  sm:gap-4 sm:grid-cols-2 md:col-span-2 md:text-5x1 md:grid-cols-2 ">
-                <span class="">Select equipment </span> <span
-                    class="equipment ">
-                    available</span> <span>  to you</span>
+                <span class="">Select equipment </span> <span class="equipment ">
+                    available</span> <span> to you</span>
 
 
             </h1>
-            <span class="text-2xl font-roboto text-gray-200"> Exercises will be generated with the selected equipment</span>
-        </div> 
+            <span class="text-2xl font-roboto text-gray-200"> Exercises will be generated with the selected
+                equipment</span>
+        </div>
         <div class="col-span-12 rounded-xl border border-gray-500  p-12  sm:col-span-8 flex items-center w-full ">
             <!-- Main Content -->
             <div class=" grid grid-cols-2 gap-9  md:grid-cols-2 lg:grid-cols-4 ">
-            <!-- <div class="grid grid-col-4 sm:col-span-2  md:col-span-2 sm:gap-4 sm:grid-cols-4 lg:grid-cols-4 "> -->
+                <!-- <div class="grid grid-col-4 sm:col-span-2  md:col-span-2 sm:gap-4 sm:grid-cols-4 lg:grid-cols-4 "> -->
                 <div *ngFor="let item of equipment" [attr.data-value]="equipment">
                     <section id="{{item.name}}" (click)="item.isSelected = !item.isSelected"
-                        (click)="getSelectedEquipment()" [ngClass]="{ 'scale-110 bg-sky-600 bg-opacity-50 border-white border-1': item.isSelected }"
+                        (click)="getSelectedEquipment()"
+                        [ngClass]="{ 'scale-110 bg-sky-600 bg-opacity-50 border-white border-1': item.isSelected }"
                         class=" hover:border-sky-700 border-transparent border-2 hover:scale-125  duration-500 shadow-2xl  cursor-pointer  border-2 border-neutral-600  rounded-xl w-22 py-2 px-4  ">
                         <img id="{{item.name}}" class="w-24 mt-3  " src={{item.imagePath}} alt="" width="1310"
                             height="873" />
@@ -46,36 +47,36 @@
 
 
                 </div>
-</div>
-
-                <!-- <div   class="relative items-center w-110 py-12 mx-auto md:px-12 lg:px-20 max-w-7xl">
-            <div class=" grid grid-cols-2 gap-9  md:grid-cols-2 lg:grid-cols-4 ">
-                <div *ngFor="let item of equipment" [attr.data-value]="equipment">
-                    <section id="{{item.name}}" (click)="item.isSelected = !item.isSelected"
-                        (click)="getSelectedEquipment()"
-                        [ngClass]="{ 'scale-110 bg-amber-600': item.isSelected }"
-                        class="hover:bg-indigo-100 hover:scale-125  duration-500 shadow-2xl  cursor-pointer   border-black rounded-lg w-44 py-2 px-4  ">                             
-                        <img id="{{item.name}}" class="w-full mt-3  " src={{item.imagePath}}
-                            alt="" width="1310" height="873" />
-
-                        <p id="{{item.name}}"
-                            class="mt-2 text-lg font-medium leading-6 text-white text-center">
-                            {{item.name}}
-                        </p>
-                    </section>
-
-                </div>
             </div>
-        </div> -->
 
+        </div>
+        <div class="col-span-12 rounded-lg border border-gray-400   p-32 sm:col-span-4">
+            <!-- Sidebar -->
+
+            
+            <div class="flex items-center justify-center  
+            h-12 w-12 rounded-full border-2 border-green-700 ">
+                <span class="text-white font-bold text-2xl">
+                    1
+                </span>
             </div>
-            <div class="col-span-12 rounded-lg border border-gray-400 bg-gray-200 p-32 sm:col-span-4">
-                <!-- Sidebar -->
+            <div class="flex items-center justify-center  
+            h-12 w-12 rounded-full border-2 border-green-700  ">
+                <span class="text-white font-bold text-2xl">
+                    2
+                </span>
             </div>
-            <div class="footer col-span-12 rounded-lg border border-gray-800 bg-gray-700 p-6">
-                <!-- Footer content -->
+            <div class="flex items-center justify-center  
+            h-12 w-12 rounded-full   border-2 border-green-700">
+                <span class="text-white font-bold text-2xl">
+                    3
+                </span>
             </div>
         </div>
+        <div class="footer col-span-12 rounded-lg border border-gray-800 bg-gray-700 p-6">
+            <!-- Footer content -->
+        </div>
+    </div>
 </body>
 
 
@@ -135,8 +136,8 @@
               
         
         
-                <div class="h-72 bg-blue-500  sm:h-auto sm:square">1</div>
-                <div class="h-72 bg-pink-500   sm:h-auto sm:square">2</div>
+                <div class="h-12 bg-blue-500  sm:h-auto sm:square">1</div>
+                <div class="h-12 bg-pink-500   sm:h-auto sm:square">2</div>
           
                 
                 <p>dadada nada</p>
