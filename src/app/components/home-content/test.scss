@@ -23,6 +23,16 @@ background-clip: text;
 text-fill-color: transparent;
   }
 
+
+  .btb {
+    background: linear-gradient(60deg, #3A62FF 13.4%, #70E3F5 86.6%);
+-webkit-background-clip: border-box;
+-webkit-text-fill-color: transparent;
+background-clip: border-box;
+text-fill-color: transparent;
+  }
+
+
   .test {
     background: linear-gradient(180.2deg, rgb(30, 33, 48) 6.8%, rgb(20, 22, 24) 131%);
   }
