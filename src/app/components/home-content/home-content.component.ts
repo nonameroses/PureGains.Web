@@ -21,7 +21,7 @@ import { NavBarComponent } from '../nav-bar/nav-bar.component';
 @Component({
   selector: 'app-home-content',
   templateUrl: './home-content.component.html',
-  styleUrls: ['./home-content.component.css'],
+  styleUrls: ['./test.scss'],
   standalone: true,
   imports: [FontAwesomeModule, CommonModule, NavBarComponent],
 })
