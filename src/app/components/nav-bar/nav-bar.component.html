@@ -6,19 +6,19 @@
     <!-- Page Scroll Progress -->
 
     <!-- Navbar -->
-    <nav class="flex justify-around py-3  backdrop-blur-md shadow-md w-full fixed top-0 left-0 right-0 z-10">
+    <nav class="flex justify-around py-8  bg-opacity-0  w-full fixed top-0 left-0 right-0 z-10">
       <!-- Logo Container -->
-      <div *ngIf="(auth.isAuthenticated$ | async) === false" class="flex items-center">
-        <!-- Logo -->
-        <a class="cursor-pointer">
-          <h3 class="text-2xl font-medium text-blue-500">
-            <img class="h-12 object-cover" src="../../../assets/logo.png" alt="Store Logo" />
-          </h3>
-        </a>
-      </div>
 
-      <div *ngIf="auth.isAuthenticated$ | async" class="items-center hidden space-x-8 lg:flex">
-        <div *ngIf="auth.user$ | async as user" class="flex flex-wrap items-center text-xl font-semibld antialiased">
+
+      <div *ngIf="auth.isAuthenticated$ | async" class="items-center mr-12 hidden space-x-12 lg:flex ">
+        <a class="flex text-gray-600 cursor-pointer transition-colors duration-300 font-semibld text-white  "  >
+          Home
+      </a>
+      <a class="flex text-gray-600 cursor-pointer transition-colors duration-300 font-semibld text-white "  >
+        About Us
+      </a>
+      
+        <!-- <div *ngIf="auth.user$ | async as user" class="flex flex-wrap items-center text-xl font-semibld antialiased">
           <h3 class="mb-2 block h-12 mr-4">
             <img class="h-12 object-cover" src="../../../assets/logo.png" alt="Store Logo" />
           </h3>
@@ -35,25 +35,21 @@
             href="#">
             {{user.email}}
           </a>
-        </div>
-        <a routerLink="/" class="flex text-gray-600 hover:text-blue-500 cursor-pointer transition-colors duration-300">
-          Home
-        </a>
-
-        <a routerLink="/profile" class="flex text-gray-600 cursor-pointer transition-colors duration-300 font-semibold text-blue-600">
-          Profile
-        </a>
-
-        <a class="flex text-gray-600 hover:text-blue-500 cursor-pointer transition-colors duration-300">
-          About Us
-        </a>
+        </div> -->
+  
       </div>
+      
+      <a class="cursor-pointer justify-center">
+        <h3 class="text-2xl font-medium text-white-500">
+          <img class="h-8 object-cover" src="../../../assets/logo.png" alt="Store Logo" />
+        </h3>
+      </a>
 
       <!-- Icon Menu Section -->
-      <div class="flex items-center space-x-5">
+      <div class="flex items-center ">
         <!-- Register -->
         <a *ngIf="(auth.isAuthenticated$ | async) === false"
-          class="flex text-gray-600 hover:text-blue-500 cursor-pointer transition-colors duration-300">
+          class="flex text-white-600 hover:text-blue-500 cursor-pointer transition-colors duration-300">
           <svg class="fill-current h-5 w-5 mr-2 mt-0.5" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 24 24">
             <path
@@ -72,7 +68,16 @@
           </button>
         </div>
 
-        <a class="flex text-gray-600 cursor-pointer transition-colors duration-300 font-semibold text-blue-600"
+        <a class="flex text-gray-600 cursor-pointer transition-colors duration-300 font-semibld text-white mr-4"
+        *ngIf="auth.isAuthenticated$ | async">
+        Profile
+      </a>
+        <a class="flex text-gray-600 cursor-pointer transition-colors duration-300 font-semibld text-white mr-4"
+          *ngIf="auth.isAuthenticated$ | async">
+          Settings
+        </a>
+
+        <a class="flex text-gray-600 cursor-pointer transition-colors duration-300 font-bold text-white"
           *ngIf="auth.isAuthenticated$ | async">
           <svg class="fill-current h-5 w-5 mr-2 mt-0.5" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 24 24"
@@ -81,15 +86,10 @@
               d="M10,17V14H3V10H10V7L15,12L10,17M10,2H19A2,2 0 0,1 21,4V20A2,2 0 0,1 19,22H10A2,2 0 0,1 8,20V18H10V20H19V4H10V6H8V4A2,2 0 0,1 10,2Z" />
           </svg>
 
-          Settings
+          Logout
         </a>
 
-        <div *ngIf="auth.isAuthenticated$ | async">
-          <button (click)="logout()"
-            class="bg-cp-4 hover:bg-cp-41 text-white font-semibold py-2 px-4 border-b-4 border-cp-41 hover:border-cp-41 rounded">
-            Logout
-          </button>
-        </div>
+    
       </div>
     </nav>
   </div>

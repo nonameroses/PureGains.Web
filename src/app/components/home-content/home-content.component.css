@@ -7,3 +7,11 @@
   background-size:16px 16px;
   
 }
+.equipment {
+  background: linear-gradient(60deg, #3A62FF 13.4%, #70E3F5 86.6%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+text-fill-color: transparent;
+}
+
