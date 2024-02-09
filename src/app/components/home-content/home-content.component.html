@@ -14,6 +14,14 @@
         <app-nav-bar></app-nav-bar>
     </header>
     <div class="mx-auto grid max-w-screen-xl grid-cols-12 gap-4 p-1">
+         <div className="relative">
+                <div
+                  className="absolute -inset-2 rounded-lg bg-gradient-to-tr from-neutral-600 via-slate-600 to-blue-600 opacity-50 blur-2xl"
+                ></div>
+                <div className="relative flex w-full h-64 items-center justify-center border border-zinc-700 rounded-lg bg-zinc-900 text-slate-300">
+                  Gradient shadow
+                </div>
+              </div>
         <div class="text-center   text-white header col-span-12 rounded-lg  py-8 ">
             <h1
                 class="font-roboto italic text-5xl sm:col-span-2  sm:gap-4 sm:grid-cols-2 md:col-span-2 md:text-5x1 md:grid-cols-2 ">
@@ -32,8 +40,9 @@
                 <div *ngFor="let item of equipment" [attr.data-value]="equipment">
                     <section id="{{item.name}}" (click)="item.isSelected = !item.isSelected"
                         (click)="getSelectedEquipment()"
-                        [ngClass]="{ 'scale-110 bg-sky-600 bg-opacity-50 border-white border-1': item.isSelected }"
-                        class=" hover:border-sky-700 border-transparent border-2 hover:scale-125  duration-500 shadow-2xl  cursor-pointer  border-2 border-neutral-600  rounded-xl w-22 py-2 px-4  ">
+                        [ngClass]="{ 'scale-110 bg-bliu-2 bg-opacity-50 border-black border-1': item.isSelected }"
+                        class=" hover:border-blue-700 border-transparent border-2 hover:scale-125  duration-500 shadow-2xl  cursor-pointer  border-2 border-neutral-600 
+                         rounded-xl w-22 py-2 px-4 shadow-[0px_5px_80px_5px_rgba(34,76,182,_0.15)]  ">
                         <img id="{{item.name}}" class="w-24 mt-3  " src={{item.imagePath}} alt="" width="1310"
                             height="873" />
 
@@ -141,7 +150,7 @@
         <div class="footer col-span-8 rounded-lg flex items-center justify-center  ">
             <!-- Footer content -->
             <button type="button" 
-            class="  px-12 py-2 rounded-lg text-white text-sm tracking-wider font-medium outline-none border-2 border-blue-600 hover:bg-blue-600 hover:text-white transition-all duration-300">
+            class="  px-12 py-2 rounded-lg text-white text-sm tracking-wider text-lg font-medium outline-none border-2 border-bliu-1  hover:bg-bliu-2  hover:text-white transition-all duration-300">
             Continue</button>
             
             <!-- <button class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-white rounded-lg group border-2 boder-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">

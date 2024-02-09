@@ -16,7 +16,7 @@ html, body {
   }
   
   .equipment {
-    background: linear-gradient(60deg, #3A62FF 13.4%, #70E3F5 86.6%);
+    background: linear-gradient(60deg, #3a62ff 13.4%, #70E3F5 86.6%);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 background-clip: text;
@@ -25,14 +25,17 @@ text-fill-color: transparent;
 
 
   .btb {
-    background: linear-gradient(60deg, #3A62FF 13.4%, #70E3F5 86.6%);
--webkit-background-clip: border-box;
--webkit-text-fill-color: transparent;
-background-clip: border-box;
-text-fill-color: transparent;
+    background-color: #3a62ff;
   }
+  .btb-2 {
 
-
+    background-color: linear-gradient(60deg, #3a62ff 13.4%, #70E3F5 86.6%);;
+  }
+  .btb-d-1 {
+ 
+    border-color: linear-gradient(60deg, #3a62ff 13.4%, #70E3F5 86.6%);;
+  } 
   .test {
     background: linear-gradient(180.2deg, rgb(30, 33, 48) 6.8%, rgb(20, 22, 24) 131%);
   }
+
