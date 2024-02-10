@@ -33,9 +33,9 @@
                 <div *ngFor="let item of equipment" [attr.data-value]="equipment">
                     <section id="{{item.name}}" (click)="item.isSelected = !item.isSelected"
                         (click)="getSelectedEquipment()"
-                        [ngClass]="{ 'scale-110 bg-bliu-3 bg-opacity-50 border-black border-1': item.isSelected }"
+                        [ngClass]="{ 'scale-110 bg-gradient-to-bl bg-gradient-to-tl from-blue-500/20 via-sky-600/20 to-purple-900/20 bg-opacity-50 border-black border-1': item.isSelected }"
                         class="  border-transparent border   hover:scale-125  duration-500 shadow-2xl drop-shadow-2xl cursor-pointer  border-2 border-neutral-600 
-                         rounded-xl w-22 py-2 px-4 shadow-[0px_5px_80px_5px_rgba(34,76,182,_0.15)]  ">
+                         rounded-xl w-22 py-2 px-4 shadow-[0px_5px_80px_5px_rgba(131,181,251,_0.15)]  ">
                         <img id="{{item.name}}" class="w-64 mt-3  " src={{item.imagePath}} alt="" width="1310"
                             height="873" />
 
