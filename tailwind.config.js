@@ -36,10 +36,22 @@ module.exports = {
       'cp-44':'#45659d',
       'cp-5':'#1d3557',
       'bliu-1' : '#3a62ff',
-      'bliu-2' : '#224cb6'
-      
-    }
+      'bliu-2' : '#224cb6',
+      'bliu-3' : '#007BFF',
+      'bliu-4' : '#1BC0EA',
+      'green-1' : '#2ECC40',
+      'darkblue': '#000428',
+      'deepblue': '#004e92',
+
+      'orange-1' : '#FFA500'
     
+
+    },
+    gradientColorStops: theme => ({
+      ...theme('colors'),
+      'primary': '#000428',
+      'secondary': '#004e92',
+    }),
   },
   fontFamily: {
     'sans': ['Roboto', 'sans-serif'],
