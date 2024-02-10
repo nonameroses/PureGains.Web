@@ -159,39 +159,146 @@
 
 <body id="muscleGroupSelection" class="font-roboto bg-black  test h-screen w-screen mx-auto scroll-m-20 pt-24 snap-y snap-mandatory  items-center justify-center ">
 
-        <div class="mx-auto grid max-w-screen-xl grid-cols-12 gap-4 p-1  ">
-            sds
+    <div  class="mx-auto grid max-w-screen-xl overflow-y-hidden grid-cols-12 gap-4 p-1">
+ 
+        <div class="text-center   text-white header col-span-12 rounded-lg  py-8 ">
+            <h1
+                class=" italic text-5xl sm:col-span-2  sm:gap-4 sm:grid-cols-2 md:col-span-2 md:text-5x1 md:grid-cols-2 ">
+                <span class="">Select muscles that you want to </span> <span class="text-bliu-4 ">
+                    target</span> 
+
+
+            </h1>
+            <span class="text-2xl font-roboto text-gray-200">Exercises will be generated accordingly</span>
+        </div>
+        <div class="col-span-12 rounded-xl   p-12  sm:col-span-8 flex items-center w-full ">
+            <!-- Main Content -->
+            <div class=" grid grid-cols-2 gap-9  md:grid-cols-2 lg:grid-cols-4 ">
+                <!-- <div class="grid grid-col-4 sm:col-span-2  md:col-span-2 sm:gap-4 sm:grid-cols-4 lg:grid-cols-4 "> -->
+                <div *ngFor="let item of muscleGroups" >
+                    <section id="{{item.name}}" (click)="item.isSelected = !item.isSelected"
+                        (click)="getSelectedMuscleGroup($event)"
+                        [ngClass]="{ 'scale-110 bg-bliu-3 bg-opacity-50 border-black border-1': item.isSelected }"
+                        class="  border-transparent border   hover:scale-125  duration-500 shadow-2xl drop-shadow-2xl cursor-pointer  border-2 border-neutral-600 
+                         rounded-xl w-22 py-2 px-4 shadow-[0px_5px_80px_5px_rgba(34,76,182,_0.15)]  ">
+                        <img id="{{item.name}}" class="w-64 mt-3  " src={{item.imagePath}} alt="" width="1310"
+                            height="873" />
+
+                        <p id="{{item.name}}" class=" mt-2 text-lg font-medium leading-6 text-white text-center">
+                            {{item.name}}
+                        </p>
+
+
+
+                    </section>
+
+
+                </div>
             </div>
+
+        </div>
+        <div class="col-span-12 rounded-lg     grid grid-cols-1 sm:col-span-4 text-center ">
+            <!-- Sidebar -->
+
+
+            <div
+                class="space-y-8 relative  before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-300 before:to-transparent lg:ml-4">
+
+                <!-- Item #1 -->
+                <div
+                    class="opacity-60  relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active ">
+                    <!-- Icon -->
+                    <div
+                        class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-slate-300 group-[.is-active]:bg-emerald-500 text-slate-500 group-[.is-active]:text-emerald-50 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+                        <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="12" height="10">
+                            <path fill-rule="nonzero"
+                                d="M10.422 1.257 4.655 7.025 2.553 4.923A.916.916 0 0 0 1.257 6.22l2.75 2.75a.916.916 0 0 0 1.296 0l6.415-6.416a.916.916 0 0 0-1.296-1.296Z" />
+                        </svg>
+                    </div>
+                    <!-- Card -->
+                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)]  p-4 shadow-2xl ">
+                        <div class="flex items-center justify-center space-x-2 mb-1">
+                            <div class="font-bold text-white">Equipment</div>
+
+                        </div>
+                        <div class="text-white">Select your Equipment</div>
+                    </div>
+                </div>
+ 
+                <!-- Item #2 -->
+                <div
+                    class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                    <!-- Icon -->
+                    <div
+                        class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-slate-300 group-[.is-active]:bg-emerald-500 text-slate-500 group-[.is-active]:text-emerald-50 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+                        <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="12" height="10">
+                            <path fill-rule="nonzero"
+                                d="M10.422 1.257 4.655 7.025 2.553 4.923A.916.916 0 0 0 1.257 6.22l2.75 2.75a.916.916 0 0 0 1.296 0l6.415-6.416a.916.916 0 0 0-1.296-1.296Z" />
+                        </svg>
+                    </div>
+                    <!-- Card -->
+                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)]  p-4  shadow-2xl">
+                        <div class="flex items-center justify-center space-x-2 mb-1">
+                            <div class="font-bold text-white">Muscles</div>
+
+                        </div>
+                        <div class="text-white">Choose your training</div>
+                    </div>
+                </div>
+
+
+
+                <!-- Item #5 -->
+                <div class="opacity-60  relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                    <!-- Icon -->
+                    <div
+                        class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-slate-300 group-[.is-active]:bg-emerald-500 text-slate-500 group-[.is-active]:text-emerald-50 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+                        <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="12" height="12">
+                            <path
+                                d="M12 10v2H7V8.496a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5V12H0V4.496a.5.5 0 0 1 .206-.4l5.5-4a.5.5 0 0 1 .588 0l5.5 4a.5.5 0 0 1 .206.4V10Z" />
+                        </svg>
+                    </div>
+                    <!-- Card -->
+                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 shadow-2xl">
+                        <div class="flex items-center justify-center space-x-2 mb-1">
+                            <div class="font-bold text-white">Exercises</div>
+
+                        </div>
+                        <div class="text-white">Customize your workout</div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="footer col-span-8 rounded-lg flex items-center justify-center  ">
+            <!-- Footer content -->
+
+            <button type="button"  (click)="waitAndGoDown(pages[0].pageId)"
+            class="  px-12 py-2 rounded-lg text-white text-sm tracking-wider text-lg font-medium outline-none border-2 border-bliu-4  hover:bg-bliu-4  hover:text-white transition-all duration-300">
+            Go Back</button>
+
+            <button type="button"  (click)="waitAndGoDown(pages[2].pageId)"
+            class="  px-12 py-2 rounded-lg text-white text-sm tracking-wider text-lg font-medium outline-none border-2 border-bliu-4  hover:bg-bliu-4  hover:text-white transition-all duration-300">
+            Continue</button>
+            
+
+
+            <!-- <button class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-white rounded-lg group border-2 boder-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+                <span class="relative px-5 py-2.5 transition-all ease-in duration-75  dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                Purple to blue
+                </span>
+                </button> -->
+        </div>
+    </div>
+
     
  
     
 
 </body>
 </div>
-<!-- 
-<body class="bg-black  h-screen w-screen  pt-24 items-center justify-center " style="background: #292c2f;">
-
-    <div class="bg-black mx-auto grid max-w-4xl grid-cols-12  gap-4 bg-zinc-50  ">
-        <div class="text-center  header col-span-12 rounded-lg border border-gray-300 bg-gray-600 py-8 ">
-            <h1
-                class="  text-4xl sm:col-span-2  sm:gap-4 sm:grid-cols-2 md:col-span-2 md:text-5x1 md:grid-cols-2 ">
-                <span class="bg-amber-200">Select the equipment available to you </span>
-
-
-            </h1>
-            <span class="text-lg "> Exercises will be generated with the selected equipment</span>
-        </div>
-        <div class="col-span-12 rounded-lg border border-gray-500 bg-gray-200 p-64 sm:col-span-8">
-          
-        </div>
-        <div class="col-span-12 rounded-lg border border-indigo-400 bg-gray-200 pl-64 sm:col-span-4">
-       
-        </div>
-        <div class="footer col-span-12 rounded-lg border border-gray-800 bg-gray-700 p-6">
-          
-        </div>
-    </div>
-</body> -->
 
 
 
@@ -398,3 +505,31 @@
         <a href="#" class="mt-2 text-xs underline">Read more &rarr;</a>
       </div>
     </section> -->
+
+
+
+
+    <!-- 
+<body class="bg-black  h-screen w-screen  pt-24 items-center justify-center " style="background: #292c2f;">
+
+    <div class="bg-black mx-auto grid max-w-4xl grid-cols-12  gap-4 bg-zinc-50  ">
+        <div class="text-center  header col-span-12 rounded-lg border border-gray-300 bg-gray-600 py-8 ">
+            <h1
+                class="  text-4xl sm:col-span-2  sm:gap-4 sm:grid-cols-2 md:col-span-2 md:text-5x1 md:grid-cols-2 ">
+                <span class="bg-amber-200">Select the equipment available to you </span>
+
+
+            </h1>
+            <span class="text-lg "> Exercises will be generated with the selected equipment</span>
+        </div>
+        <div class="col-span-12 rounded-lg border border-gray-500 bg-gray-200 p-64 sm:col-span-8">
+          
+        </div>
+        <div class="col-span-12 rounded-lg border border-indigo-400 bg-gray-200 pl-64 sm:col-span-4">
+       
+        </div>
+        <div class="footer col-span-12 rounded-lg border border-gray-800 bg-gray-700 p-6">
+          
+        </div>
+    </div>
+</body> -->
