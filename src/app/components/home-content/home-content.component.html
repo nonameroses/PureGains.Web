@@ -7,13 +7,13 @@
     <link href="https://cdn.tailwindcss.com" rel="stylesheet">
 
 </head>
+<div class="max-h-screen  overflow-y-hidden  snap snap-y snap-mandatory ">
 
-
-<body class="font-roboto test h-screen w-screen  pt-24 items-center justify-center">
+<body id="equipment" class="font-roboto test h-screen w-screen  pt-24 items-center justify-center ">
     <header class="absolute antialiased bg-white  ">
         <app-nav-bar></app-nav-bar>
     </header>
-    <div class="mx-auto grid max-w-screen-xl grid-cols-12 gap-4 p-1">
+    <div  class="mx-auto grid max-w-screen-xl overflow-y-hidden grid-cols-12 gap-4 p-1">
  
         <div class="text-center   text-white header col-span-12 rounded-lg  py-8 ">
             <h1
@@ -142,7 +142,7 @@
         </div>
         <div class="footer col-span-8 rounded-lg flex items-center justify-center  ">
             <!-- Footer content -->
-            <button type="button" 
+            <button type="button"  (click)="waitAndGoDown(pages[1].pageId)"
             class="  px-12 py-2 rounded-lg text-white text-sm tracking-wider text-lg font-medium outline-none border-2 border-bliu-4  hover:bg-bliu-4  hover:text-white transition-all duration-300">
             Continue</button>
             
@@ -153,9 +153,21 @@
                 </button> -->
         </div>
     </div>
+
+
 </body>
 
+<body id="muscleGroupSelection" class="font-roboto bg-black  test h-screen w-screen mx-auto scroll-m-20 pt-24 snap-y snap-mandatory  items-center justify-center ">
 
+        <div class="mx-auto grid max-w-screen-xl grid-cols-12 gap-4 p-1  ">
+            sds
+            </div>
+    
+ 
+    
+
+</body>
+</div>
 <!-- 
 <body class="bg-black  h-screen w-screen  pt-24 items-center justify-center " style="background: #292c2f;">
 
