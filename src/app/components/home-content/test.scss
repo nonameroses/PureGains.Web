@@ -37,6 +37,10 @@ text-fill-color: transparent;
     border-color: linear-gradient(60deg, #3a62ff 13.4%, #70E3F5 86.6%);;
   } 
   .test {
-    background: linear-gradient(180.2deg, rgb(35, 61, 90) 6.8%, rgb(37, 57, 77) 131%);
+    //  background: linear-gradient(180.2deg, rgb(28, 34, 43) 6.8%, rgb(62, 73, 85) 131%);
+    background: linear-gradient(180.2deg, rgb(24, 28, 34) 6.8%, rgb(56, 75, 95) 131%);
   }
-
+  .test-2 {
+    //  background: linear-gradient(180.2deg, rgb(28, 34, 43) 6.8%, rgb(62, 73, 85) 131%);
+    background: linear-gradient(180.2deg, rgb(56, 75, 95) 6.8%, rgb(24, 28, 34) 131%);
+  }
