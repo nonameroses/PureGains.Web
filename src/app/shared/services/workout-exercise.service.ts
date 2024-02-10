@@ -14,8 +14,8 @@ export class WorkoutExerciseService {
     return this.http.get<WorkoutExercise[]>('https://localhost:7199/WorkoutExercises/getWorkoutExercises');
   }
 
-  // addWorkoutExercise(workoutId: number, exerciseId: number) : Observable<any> {
+  addWorkoutExercise(workoutId: number, exerciseId: number) : Observable<any> {
   
-  //   return this.http.put<User>('https://localhost:7199/WorkoutExercises/addWorkoutExercise?workoutId=' + workoutId +'&exerciseId=' + exerciseId, exerciseId);
-  // }
+    return this.http.put<WorkoutExercise>('https://localhost:7199/WorkoutExercises/addWorkoutExercise?workoutId=' + workoutId +'&exerciseId=' + exerciseId, exerciseId);
+  }
 }

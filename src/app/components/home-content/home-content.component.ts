@@ -17,6 +17,8 @@ import { MuscleGroupService } from 'src/app/shared/services/muscle-group.service
 import { WorkoutExerciseService } from 'src/app/shared/services/workout-exercise.service';
 import { WorkoutService } from 'src/app/shared/services/workout.service';
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
+import { ExerciseService } from 'src/app/shared/services/exercise.service';
+import { Exercise } from 'src/app/shared/models/exercise.interface';
 
 @Component({
   selector: 'app-home-content',
@@ -49,7 +51,12 @@ export class HomeContentComponent {
   equipment: Equipment[] = [];
   muscleGroups: MuscleGroup[] = [];
 
+
+  exercises : Exercise[] = []; 
+
   workoutInProgress: Workout;
+
+  
 
   workoutExercises: WorkoutExercise[] = [
     {
@@ -92,6 +99,7 @@ export class HomeContentComponent {
     private muscleGroupService: MuscleGroupService,
     private workoutService: WorkoutService,
     private workoutExerciseService :WorkoutExerciseService,
+    private exerciseService :ExerciseService,
     public auth: AuthService,
     private userService: UserService
   ) {}
@@ -117,7 +125,7 @@ export class HomeContentComponent {
           familyName: profile.family_name,
           givenName: profile.given_name,
           nickname: profile.nickname,
-          isProfileCreated: false,
+          isProfileCreated: true,
           createdAt: new Date(2012, 0, 1),
         } as User;
         this.checkOrInsertUser(this.user);
@@ -160,6 +168,16 @@ export class HomeContentComponent {
         this.workoutInProgress = response
 
        // this.workoutExerciseService.addWorkoutExercise(this.workoutInProgress.)
+
+
+       this.exerciseService.getExercisesForUser(this.selectedEquipment.map(e => e.id), this.selectedMuscleGroups.map(m => m.id)).subscribe({
+        next: (response) => {
+          this.exercises = response
+          console.log(this.exercises);
+        }
+       })
+
+       
       }
       
 
