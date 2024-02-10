@@ -52,7 +52,38 @@ export class HomeContentComponent {
   muscleGroups: MuscleGroup[] = [];
 
 
-  exercises : Exercise[] = []; 
+  exercises : Exercise[] = [
+    {
+      id: 1,
+      name: "Explosive Push-ups",
+      description: "Using a bench for either hand placement or feet placement, perform a push-up with enough force to lift your body off the ground.",
+      youtubeUrl: "https://www.youtube.com/watch?v=exampleURL"
+    },
+    {
+      id: 2,
+      name: "Bench Dips",
+      description: "Facing away from the bench, place your hands on it and lower your body by bending your elbows, then push back up.",
+      youtubeUrl: "https://www.youtube.com/watch?v=FVjtOSA-dz8"
+    },
+    {
+      id: 3,
+      name: "Single-Arm Kettlebell Curl",
+      description: "Hold a kettlebell in one hand with a neutral grip and curl it towards your shoulder. Repeat on both sides.",
+      youtubeUrl: "https://www.youtube.com/watch?v=exampleURL"
+    },
+    {
+      id: 4,
+      name: "Kettlebell Floor Press",
+      description: "Lie on the floor and press kettlebells upwards, similar to a bench press but with a limited range of motion.",
+      youtubeUrl: "https://www.youtube.com/watch?v=exampleURL"
+    },
+    {
+      id: 5,
+      name: "Push-up",
+      description: "Standard push-ups engage the chest, shoulders, and triceps, with hands shoulder-width apart.",
+      youtubeUrl: "https://www.youtube.com/watch?v=sq4VAZ1TtRw"
+    }
+  ]; 
 
   workoutInProgress: Workout;
 
