@@ -48,23 +48,23 @@
 
                                       
 
-                                        <div class="group relative  ">
+                                        <div class="group absolute  ">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
                                           
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
                                                 
                                             </svg>
-                                            <span class="absolute top-5 scale-0 transition-all rounded bg-gray-800 p-2 text-xs text-white group-hover:scale-100"> <div id="tooltip1" role="tooltip" class="z-20 -mt-20 w-64 absolute transition duration-150 ease-in-out left-0 ml-8 shadow-lg bg-white p-4 rounded">
+                                            <span class="absolute top-5 scale-0 transition-all rounded  p-2 text-xs text-white group-hover:scale-100"> <div id="tooltip1" role="tooltip" class="z-20 -mt-20 w-64 absolute transition duration-150 ease-in-out left-0 ml-8 shadow-lg bg-white p-4 rounded">
                                
                                                 <p class="text-sm font-bold text-gray-800 pb-1">Keep track of follow ups</p>
-                                                <p class="text-xs leading-4 text-gray-600 pb-3">Reach out to more prospects at the right moment.</p>
+                                                <p class="text-xs leading-4 text-gray-600 pb-3">{{item.description}}</p>
                                                 <div class="flex justify-between">
-                                                    <div class="flex items-center">
-                                                        <span class="text-xs font-bold text-indigo-700">Step 1 of 4</span>
-                                                    </div>
-                                                    <div class="flex items-center">
-                                                        <button class="focus:outline-none  focus:text-gray-400 text-xs text-gray-600 underline mr-2 cursor-pointer">Skip Tour</button>
-                                                        <button onblur="hideTooltip(1)" class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-400 focus:outline-none bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-5 py-1 text-xs">Next</button>
+                                                  
+                                                    <div class="flex items-end">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 128 128">
+                                                            <path fill="#ff697b" d="M86.2,104H41.8C32,104,24,96,24,86.2V41.8C24,32,32,24,41.8,24h44.4C96,24,104,32,104,41.8v44.4C104,96,96,104,86.2,104z"></path><path fill="#ff697b" d="M86.2,104H41.8C32,104,24,96,24,86.2V41.8C24,32,32,24,41.8,24h44.4C96,24,104,32,104,41.8v44.4C104,96,96,104,86.2,104z"></path><path fill="#fff" d="M24,41.8v14.7c14.5-11.1,41.2-24.9,79.5-19C101.5,29.7,94.6,24,86.2,24H41.8C32,24,24,32,24,41.8z"></path><path fill="#fff" d="M53.5 49L53.5 79 79.5 64z"></path><path fill="none" stroke="#444b54" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="6" d="M86.2,104H41.8C32,104,24,96,24,86.2V41.8C24,32,32,24,41.8,24h44.4C96,24,104,32,104,41.8v44.4C104,96,96,104,86.2,104z"></path>
+                                                            </svg>
+
                                                     </div>
                                                 </div>
                                             </div></span>
