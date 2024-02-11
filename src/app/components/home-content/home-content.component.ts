@@ -19,6 +19,7 @@ import { WorkoutService } from 'src/app/shared/services/workout.service';
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
 import { ExerciseService } from 'src/app/shared/services/exercise.service';
 import { Exercise } from 'src/app/shared/models/exercise.interface';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-home-content',
@@ -26,8 +27,35 @@ import { Exercise } from 'src/app/shared/models/exercise.interface';
   styleUrls: ['./test.scss'],
   standalone: true,
   imports: [FontAwesomeModule, CommonModule, NavBarComponent],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0', display: 'none' })),
+      state('expanded', style({ height: '*', display: 'table-row' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class HomeContentComponent {
+  rows = [
+    {
+      id: 1,
+      mainContent: 'Main Content 1',
+      detailContent: 'Detail Content 1',
+      isExpanded: false,
+    },
+    {
+      id: 2,
+      mainContent: 'Main Content 2',
+      detailContent: 'Detail Content 2',
+      isExpanded: false,
+    },
+    // Add more rows as needed
+  ];
+
+  toggleExpand(row: any): void {
+    row.isExpanded = !row.isExpanded;
+  }
+
   user: User = null;
   userSubscription: Subscription;
   test: User;
@@ -57,31 +85,36 @@ export class HomeContentComponent {
       id: 1,
       name: "Explosive Push-ups",
       description: "Using a bench for either hand placement or feet placement, perform a push-up with enough force to lift your body off the ground.",
-      youtubeUrl: "https://www.youtube.com/watch?v=exampleURL"
+      youtubeUrl: "https://www.youtube.com/watch?v=exampleURL",
+      isExpandable: false
     },
     {
       id: 2,
       name: "Bench Dips",
       description: "Facing away from the bench, place your hands on it and lower your body by bending your elbows, then push back up.",
-      youtubeUrl: "https://www.youtube.com/watch?v=FVjtOSA-dz8"
+      youtubeUrl: "https://www.youtube.com/watch?v=FVjtOSA-dz8",
+      isExpandable: false
     },
     {
       id: 3,
       name: "Single-Arm Kettlebell Curl",
       description: "Hold a kettlebell in one hand with a neutral grip and curl it towards your shoulder. Repeat on both sides.",
-      youtubeUrl: "https://www.youtube.com/watch?v=exampleURL"
+      youtubeUrl: "https://www.youtube.com/watch?v=exampleURL",
+      isExpandable: false
     },
     {
       id: 4,
       name: "Kettlebell Floor Press",
       description: "Lie on the floor and press kettlebells upwards, similar to a bench press but with a limited range of motion.",
-      youtubeUrl: "https://www.youtube.com/watch?v=exampleURL"
+      youtubeUrl: "https://www.youtube.com/watch?v=exampleURL",
+      isExpandable: false
     },
     {
       id: 5,
       name: "Push-up",
       description: "Standard push-ups engage the chest, shoulders, and triceps, with hands shoulder-width apart.",
-      youtubeUrl: "https://www.youtube.com/watch?v=sq4VAZ1TtRw"
+      youtubeUrl: "https://www.youtube.com/watch?v=sq4VAZ1TtRw",
+      isExpandable: false
     }
   ]; 
 
