@@ -1,4 +1,3 @@
-
 <html lang="en">
 
 <head>
@@ -36,90 +35,123 @@
                         <!-- <div class="sm:flex sm:items-center sm:justify-between flex-col sm:flex-row border">
                             <p class="flex-1 text-base font-bold text-white">Edit Payments</p>
                         </div> -->
-                     
-                            <section *ngFor="let item of exercises" class="gap-4" id="accordion-collapse">
 
-                      
-                                <div  data-accordion="collapse" class="w-auto">
-                                    <h2 id="heading-{{item.id}}">
-                                      <button type="button" class="acc-trigger flex items-center justify-between w-full p-3 font-medium rtl:text-right text-red-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#body-1" aria-expanded="true" aria-controls="body-1">
-                                        <span>{{item.name}}</span>
-                                
-                                        <svg [ngClass]="{ 'animate-rotate-to-180 ' : shouldRotate, 'animate-rotate-to-0 ' : !shouldRotate}" xmlns="http://www.w3.org/2000/svg" fill="none"  class="  w-3 h-3 text-blue-500  shrink-0" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                                          </svg>
-                                          
-                                      </button>
-                                    </h2>
-                                    <div id="body-{{item.id}}" class="hidden" aria-labelledby="heading-1">
-                                      <div class="p-2 border border-b-0 border-gray-200 bg-amber-200 dark:border-gray-700 dark:bg-gray-900 ">
-                                        <p class="mb-2 text-gray-500 dark:text-gray-400">{{item.description}}</p>
-                                        <p class="text-gray-500 dark:text-gray-400">Check out this guide to learn how to <a href="/docs/getting-started/introduction/" class="text-blue-600 dark:text-blue-500 hover:underline">get started</a> and start developing websites even faster with components on top of Tailwind CSS.</p>
-                                      </div>
-                                    </div>                                 
-                                  </div>
-                            
-                      
+                        <section *ngFor="let item of exercises" class="gap-4" id="accordion-collapse">
 
 
-                                <div class="relative w-auto overflow-hidden rounded-xl space-y-1 text-black hover:scale-105  duration-500 shadow-2xl drop-shadow-2xl  ">
-                                    <input type="checkbox" class="peer absolute top-0 insert-x-0 w-full h-12
-                                    opacity-0 z-10 cursor-pointer">
-                                    <div class="bg-slate-100 h-12 w-full pl-1 flex items-center">
-                                        <div
-                                            class="bg-black  flex mr-2 top-0 right-0 text-white transition-transform  duration-500 rotate-0 peer-checked:rotate-180">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                                            </svg>
-                                        </div>
+                            <div data-accordion="collapse" class="w-auto">
 
+                                <h2 id="heading-{{item.id}}">
+
+                                    <button type="button" class="acc-trigger flex items-center justify-between w-full p-3 font-medium rtl:text-right text-red-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 
+                                      dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 
+                                      dark:hover:bg-gray-800 gap-3" data-accordion-target="#body-1"
+                                        aria-expanded="true" aria-controls="body-1">
+                                        <svg [ngClass]="{ 'animate-rotate-to-180 ' : shouldRotate, 'animate-rotate-to-0 ' : !shouldRotate}"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none"
+                                        class="  w-3 h-3 text-blue-500  shrink-0" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                    </svg>
                                         <div class="flex align-items-center ">
                                             <img class="rounded-full h-10 w-10 mr-3 object-cover"
                                                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Eo_circle_light-blue_letter-c.svg/512px-Eo_circle_light-blue_letter-c.svg.png"
                                                 alt="unsplash image">
-
                                         </div>
-                                        <h1
-                                            class="whitespace-no-wrap text-xs sm:text-base font-bold text-gray-900 sm:px-6 p-3">
-                                            {{item.name}}
-                                        </h1>
-                                        <h1
-                                            class="whitespace-no-wrap text-xs sm:text-base font-bold text-black sm:px-6 p-3">
-                                            ye buddy </h1>
-                                        <p class="flex p-3 text-gray-7  00">Chest</p>
-
-                                        <div class="absolute flex right-0 mr-2">
-                                            <svg class="" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                class="w-6 h-6">
+                                        <!-- sm:mr-44 lg:mr-96 -->
+                                        <span class="text-xs text-left  sm:text-base font-bold l-10 sm:px-6 p-1">{{item.name}}</span>
+                                        <div class=" flex right-0 mr-2">
+                                            <svg class="" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                     d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
                                             </svg>
-                                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="w-6 h-6" viewBox="0 0 48 48">
-                                                <path d="M 24 4 C 20.491685 4 17.570396 6.6214322 17.080078 10 L 10.238281 10 A 1.50015 1.50015 0 0 0 9.9804688 9.9785156 A 1.50015 1.50015 0 0 0 9.7578125 10 L 6.5 10 A 1.50015 1.50015 0 1 0 6.5 13 L 8.6386719 13 L 11.15625 39.029297 C 11.427329 41.835926 13.811782 44 16.630859 44 L 31.367188 44 C 34.186411 44 36.570826 41.836168 36.841797 39.029297 L 39.361328 13 L 41.5 13 A 1.50015 1.50015 0 1 0 41.5 10 L 38.244141 10 A 1.50015 1.50015 0 0 0 37.763672 10 L 30.919922 10 C 30.429604 6.6214322 27.508315 4 24 4 z M 24 7 C 25.879156 7 27.420767 8.2681608 27.861328 10 L 20.138672 10 C 20.579233 8.2681608 22.120844 7 24 7 z M 11.650391 13 L 36.347656 13 L 33.855469 38.740234 C 33.730439 40.035363 32.667963 41 31.367188 41 L 16.630859 41 C 15.331937 41 14.267499 40.033606 14.142578 38.740234 L 11.650391 13 z M 20.476562 17.978516 A 1.50015 1.50015 0 0 0 19 19.5 L 19 34.5 A 1.50015 1.50015 0 1 0 22 34.5 L 22 19.5 A 1.50015 1.50015 0 0 0 20.476562 17.978516 z M 27.476562 17.978516 A 1.50015 1.50015 0 0 0 26 19.5 L 26 34.5 A 1.50015 1.50015 0 1 0 29 34.5 L 29 19.5 A 1.50015 1.50015 0 0 0 27.476562 17.978516 z"></path>
-                                                </svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="w-6 h-6"
+                                                viewBox="0 0 48 48">
+                                                <path
+                                                    d="M 24 4 C 20.491685 4 17.570396 6.6214322 17.080078 10 L 10.238281 10 A 1.50015 1.50015 0 0 0 9.9804688 9.9785156 A 1.50015 1.50015 0 0 0 9.7578125 10 L 6.5 10 A 1.50015 1.50015 0 1 0 6.5 13 L 8.6386719 13 L 11.15625 39.029297 C 11.427329 41.835926 13.811782 44 16.630859 44 L 31.367188 44 C 34.186411 44 36.570826 41.836168 36.841797 39.029297 L 39.361328 13 L 41.5 13 A 1.50015 1.50015 0 1 0 41.5 10 L 38.244141 10 A 1.50015 1.50015 0 0 0 37.763672 10 L 30.919922 10 C 30.429604 6.6214322 27.508315 4 24 4 z M 24 7 C 25.879156 7 27.420767 8.2681608 27.861328 10 L 20.138672 10 C 20.579233 8.2681608 22.120844 7 24 7 z M 11.650391 13 L 36.347656 13 L 33.855469 38.740234 C 33.730439 40.035363 32.667963 41 31.367188 41 L 16.630859 41 C 15.331937 41 14.267499 40.033606 14.142578 38.740234 L 11.650391 13 z M 20.476562 17.978516 A 1.50015 1.50015 0 0 0 19 19.5 L 19 34.5 A 1.50015 1.50015 0 1 0 22 34.5 L 22 19.5 A 1.50015 1.50015 0 0 0 20.476562 17.978516 z M 27.476562 17.978516 A 1.50015 1.50015 0 0 0 26 19.5 L 26 34.5 A 1.50015 1.50015 0 1 0 29 34.5 L 29 19.5 A 1.50015 1.50015 0 0 0 27.476562 17.978516 z">
+                                                </path>
+                                            </svg>
                                         </div>
+                                     
 
-
-                                    </div>
-                                    <!-- arrow -->
-
-
-                                    <!-- contn -->
+                                    </button>
+                                </h2>
+                                <div id="body-{{item.id}}" class="hidden" aria-labelledby="heading-1">
                                     <div
-                                        class="bg-slate-300 overflow-hidden translation-all duration-500 max-h-0 peer-checked:max-h-40">
-                                        <div class="p-2">
-                                            <p class="text-black">
-                                                {{ item.description }}
-                                            </p>
-                                        </div>
-
+                                        class="p-2 border border-b-0 border-gray-200 bg-amber-200 dark:border-gray-700 dark:bg-gray-900 ">
+                                        <p class="mb-2 text-gray-500 dark:text-gray-400">{{item.description}}</p>
+                                        <p class="text-gray-500 dark:text-gray-400">Check out this guide to learn how to
+                                            <a href="/docs/getting-started/introduction/"
+                                                class="text-blue-600 dark:text-blue-500 hover:underline">get started</a>
+                                            and start developing websites even faster with components on top of Tailwind
+                                            CSS.</p>
                                     </div>
                                 </div>
+                            </div>
 
-                                <!-- <tr class="bg-gray-200 rounded-xl border-b " (click)="toggleExpand(item)">
+
+<!-- 
+
+                            <div
+                                class="relative w-auto overflow-hidden rounded-xl space-y-1 text-black hover:scale-105  duration-500 shadow-2xl drop-shadow-2xl  ">
+                                <input type="checkbox" class="peer absolute top-0 insert-x-0 w-full h-12
+                                    opacity-0 z-10 cursor-pointer">
+                                <div class="bg-slate-100 h-12 w-full pl-1 flex items-center">
+                                    <div
+                                        class="bg-black  flex mr-2 top-0 right-0 text-white transition-transform  duration-500 rotate-0 peer-checked:rotate-180">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                        </svg>
+                                    </div>
+
+                                    <div class="flex align-items-center ">
+                                        <img class="rounded-full h-10 w-10 mr-3 object-cover"
+                                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Eo_circle_light-blue_letter-c.svg/512px-Eo_circle_light-blue_letter-c.svg.png"
+                                            alt="unsplash image">
+
+                                    </div>
+                                    <h1
+                                        class="whitespace-no-wrap text-xs sm:text-base font-bold text-gray-900 sm:px-6 p-3">
+                                        {{item.name}}
+                                    </h1>
+                                    <h1
+                                        class="whitespace-no-wrap text-xs sm:text-base font-bold text-black sm:px-6 p-3">
+                                        ye buddy </h1>
+                                    <p class="flex p-3 text-gray-7  00">Chest</p>
+
+                                    <div class="absolute flex right-0 mr-2">
+                                        <svg class="" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="w-6 h-6"
+                                            viewBox="0 0 48 48">
+                                            <path
+                                                d="M 24 4 C 20.491685 4 17.570396 6.6214322 17.080078 10 L 10.238281 10 A 1.50015 1.50015 0 0 0 9.9804688 9.9785156 A 1.50015 1.50015 0 0 0 9.7578125 10 L 6.5 10 A 1.50015 1.50015 0 1 0 6.5 13 L 8.6386719 13 L 11.15625 39.029297 C 11.427329 41.835926 13.811782 44 16.630859 44 L 31.367188 44 C 34.186411 44 36.570826 41.836168 36.841797 39.029297 L 39.361328 13 L 41.5 13 A 1.50015 1.50015 0 1 0 41.5 10 L 38.244141 10 A 1.50015 1.50015 0 0 0 37.763672 10 L 30.919922 10 C 30.429604 6.6214322 27.508315 4 24 4 z M 24 7 C 25.879156 7 27.420767 8.2681608 27.861328 10 L 20.138672 10 C 20.579233 8.2681608 22.120844 7 24 7 z M 11.650391 13 L 36.347656 13 L 33.855469 38.740234 C 33.730439 40.035363 32.667963 41 31.367188 41 L 16.630859 41 C 15.331937 41 14.267499 40.033606 14.142578 38.740234 L 11.650391 13 z M 20.476562 17.978516 A 1.50015 1.50015 0 0 0 19 19.5 L 19 34.5 A 1.50015 1.50015 0 1 0 22 34.5 L 22 19.5 A 1.50015 1.50015 0 0 0 20.476562 17.978516 z M 27.476562 17.978516 A 1.50015 1.50015 0 0 0 26 19.5 L 26 34.5 A 1.50015 1.50015 0 1 0 29 34.5 L 29 19.5 A 1.50015 1.50015 0 0 0 27.476562 17.978516 z">
+                                            </path>
+                                        </svg>
+                                    </div>
+
+
+                                </div>
+                         
+                                <div
+                                    class="bg-slate-300 overflow-hidden translation-all duration-500 max-h-0 peer-checked:max-h-40">
+                                    <div class="p-2">
+                                        <p class="text-black">
+                                            {{ item.description }}
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div> -->
+
+                            <!-- <tr class="bg-gray-200 rounded-xl border-b " (click)="toggleExpand(item)">
                                         <td width="50%"
                                             class="whitespace-no-wrap  text-sm font-bold text-gray-900 sm:px-6 p-3  ">
                                             {{item.name}}
@@ -137,14 +169,14 @@
                                         </td>
 
                                     </tr> -->
-                                 
-                                <tr *ngIf="item.isExpanded" class="mb-4 bg-gray-200 border-b-2 border-2 border-b">
-                                    <td class="mb-4" colspan="4">{{ item.description }}</td>
-                                </tr>
 
-                            </section>
+                            <tr *ngIf="item.isExpanded" class="mb-4 bg-gray-200 border-b-2 border-2 border-b">
+                                <td class="mb-4" colspan="4">{{ item.description }}</td>
+                            </tr>
 
-                       
+                        </section>
+
+
                     </div>
 
                 </div>
