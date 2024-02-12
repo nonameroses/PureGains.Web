@@ -36,12 +36,47 @@
                             <p class="flex-1 text-base font-bold text-gray-900">Latest Payments</p>
                         </div>
 
-                        <div class="overflow-auto lg:overflow-visible border shadow">
-                            <table
-                                class="min-w-full table text-black space-y-6 text-sm divide-y divide-gray-200 ">
-                                <tbody *ngFor="let item of exercises" class="lg:border-gray-300  ">
+                        <div class="overflow-auto lg:overflow-visible  shadow">
+                          <section *ngFor="let item of exercises" class="gap-4">
 
-                                    <tr class="bg-gray-200 rounded-xl border-b " (click)="toggleExpand(item)">
+                         
+                        
+                       
+                                  <div class="relative w-max-screen overflow-hidden rounded-xl space-y-1 text-black ">
+                                    <input type="checkbox"
+                                    class="peer absolute top-0 insert-x-0 w-full h-12
+                                    opacity-0 z-10 cursor-pointer">
+                                    <div class="bg-slate-100 h-12 w-full pl-5 flex items-center">
+                                  
+                                        <div class="flex align-items-center">
+                                            <img class="rounded-full h-12 w-12 mr-3 object-cover" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Eo_circle_light-blue_letter-c.svg/512px-Eo_circle_light-blue_letter-c.svg.png" alt="unsplash image">
+                                         
+                                        </div>
+                                      <h1 class="whitespace-no-wrap text-xs sm:text-base font-bold text-gray-900 sm:px-6 p-3">
+                                        {{item.name}}
+                                      </h1>
+                                      <h1 class="whitespace-no-wrap text-xs sm:text-base font-bold text-black sm:px-6 p-3" >ye buddy </h1>
+                                        <p class="flex p-3 text-gray-7  00">Chest</p>
+                                    </div>
+                                    <!-- arrow -->
+                                    <div class="bg-black  absolute top-3 right-3 text-white transition-transform  duration-500 rotate-0 peer-checked:rotate-180">
+                                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                        class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                      </svg>
+                                    </div>
+                                
+                                    <!-- contn -->
+                                    <div class="bg-slate-300 overflow-hidden translation-all duration-500 max-h-0 peer-checked:max-h-40">
+                                      <div class="p-2">
+                                        <p class="text-black">
+                                          {{ item.description }}
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                    <!-- <tr class="bg-gray-200 rounded-xl border-b " (click)="toggleExpand(item)">
                                         <td width="50%"
                                             class="whitespace-no-wrap  text-sm font-bold text-gray-900 sm:px-6 p-3  ">
                                             {{item.name}}
@@ -58,13 +93,13 @@
 
                                         </td>
 
-                                    </tr>
+                                    </tr> -->
                                     <tr *ngIf="item.isExpanded" class="mb-4 bg-gray-200 border-b-2 border-2 border-b">
                                         <td class="mb-4" colspan="4">{{ item.description }}</td>
                                     </tr>
 
-                                </tbody>
-                            </table>
+                                  </section>
+                          
                         </div>
                     </div>
 
