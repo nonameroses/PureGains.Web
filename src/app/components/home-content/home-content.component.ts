@@ -19,7 +19,13 @@ import { WorkoutService } from 'src/app/shared/services/workout.service';
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
 import { ExerciseService } from 'src/app/shared/services/exercise.service';
 import { Exercise } from 'src/app/shared/models/exercise.interface';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
 import { Accordion, AccordionItem } from 'flowbite';
 @Component({
   selector: 'app-home-content',
@@ -29,15 +35,21 @@ import { Accordion, AccordionItem } from 'flowbite';
   imports: [FontAwesomeModule, CommonModule, NavBarComponent],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({ height: '0px', minHeight: '0', display: 'none' })),
+      state(
+        'collapsed',
+        style({ height: '0px', minHeight: '0', display: 'none' })
+      ),
       state('expanded', style({ height: '*', display: 'table-row' })),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+      transition(
+        'expanded <=> collapsed',
+        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
+      ),
     ]),
   ],
 })
 export class HomeContentComponent {
   shouldRotate: boolean = false;
-  hasBeenClicked : boolean = false;
+  hasBeenClicked: boolean = false;
   rows = [
     {
       id: 1,
@@ -81,48 +93,50 @@ export class HomeContentComponent {
   equipment: Equipment[] = [];
   muscleGroups: MuscleGroup[] = [];
 
-
-  exercises : Exercise[] = [
+  exercises: Exercise[] = [
     {
       id: 1,
-      name: "Explosive Push-ups",
-      description: "Using a bench for either hand placement or feet placement, perform a push-up with enough force to lift your body off the ground.",
-      youtubeUrl: "https://www.youtube.com/watch?v=exampleURL",
-      isExpandable: false
+      name: 'Explosive Push-ups',
+      description:
+        'Using a bench for either hand placement or feet placement, perform a push-up with enough force to lift your body off the ground.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=exampleURL',
+      isExpandable: false,
     },
     {
       id: 2,
-      name: "Bench Dips",
-      description: "Facing away from the bench, place your hands on it and lower your body by bending your elbows, then push back up.",
-      youtubeUrl: "https://www.youtube.com/watch?v=FVjtOSA-dz8",
-      isExpandable: false
+      name: 'Bench Dips',
+      description:
+        'Facing away from the bench, place your hands on it and lower your body by bending your elbows, then push back up.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=FVjtOSA-dz8',
+      isExpandable: false,
     },
     {
       id: 3,
-      name: "Single-Arm Kettlebell Curl",
-      description: "Hold a kettlebell in one hand with a neutral grip and curl it towards your shoulder. Repeat on both sides.",
-      youtubeUrl: "https://www.youtube.com/watch?v=exampleURL",
-      isExpandable: false
+      name: 'Single-Arm Kettlebell Curl',
+      description:
+        'Hold a kettlebell in one hand with a neutral grip and curl it towards your shoulder. Repeat on both sides.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=exampleURL',
+      isExpandable: false,
     },
     {
       id: 4,
-      name: "Kettlebell Floor Press",
-      description: "Lie on the floor and press kettlebells upwards, similar to a bench press but with a limited range of motion.",
-      youtubeUrl: "https://www.youtube.com/watch?v=exampleURL",
-      isExpandable: false
+      name: 'Kettlebell Floor Press',
+      description:
+        'Lie on the floor and press kettlebells upwards, similar to a bench press but with a limited range of motion.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=exampleURL',
+      isExpandable: false,
     },
     {
       id: 5,
-      name: "Push-up",
-      description: "Standard push-ups engage the chest, shoulders, and triceps, with hands shoulder-width apart.",
-      youtubeUrl: "https://www.youtube.com/watch?v=sq4VAZ1TtRw",
-      isExpandable: false
-    }
-  ]; 
+      name: 'Push-up',
+      description:
+        'Standard push-ups engage the chest, shoulders, and triceps, with hands shoulder-width apart.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=sq4VAZ1TtRw',
+      isExpandable: false,
+    },
+  ];
 
   workoutInProgress: Workout;
-
-  
 
   workoutExercises: WorkoutExercise[] = [
     {
@@ -164,8 +178,8 @@ export class HomeContentComponent {
     private equipmentService: EquipmentService,
     private muscleGroupService: MuscleGroupService,
     private workoutService: WorkoutService,
-    private workoutExerciseService :WorkoutExerciseService,
-    private exerciseService :ExerciseService,
+    private workoutExerciseService: WorkoutExerciseService,
+    private exerciseService: ExerciseService,
     public auth: AuthService,
     private userService: UserService
   ) {}
@@ -198,29 +212,26 @@ export class HomeContentComponent {
         this.checkOrInsertUser(this.user);
         this.userService.getUserByAuthId(this.user.auth0UserId).subscribe({
           next: (response) => {
-            console.log(response)
+            console.log(response);
             this.user = response;
-          }
-        })
+          },
+        });
         //this.initialiseWorkout(this.user.id);
       },
       error: (error) => {
         console.error('Error fetching user', error);
       },
     });
-   
   }
 
-  zaza(){
-    
-  }
-  checkOrInsertUser(user: User){
-    if(!this.user.isProfileCreated){
+  zaza() {}
+  checkOrInsertUser(user: User) {
+    if (!this.user.isProfileCreated) {
       this.userService.addUser(user).subscribe({
-        next: response => {
-          console.log(response)
-          return
-        }
+        next: (response) => {
+          console.log(response);
+          return;
+        },
       });
     }
     //this.userService.getUserById()
@@ -236,84 +247,74 @@ export class HomeContentComponent {
   buildWorkout() {
     this.workoutService.addWorkout(this.user.id).subscribe({
       next: (response) => {
-        this.workoutInProgress = response
+        this.workoutInProgress = response;
 
-       // this.workoutExerciseService.addWorkoutExercise(this.workoutInProgress.)
+        // this.workoutExerciseService.addWorkoutExercise(this.workoutInProgress.)
 
-
-       this.exerciseService.getExercisesForUser(this.selectedEquipment.map(e => e.id), this.selectedMuscleGroups.map(m => m.id)).subscribe({
-        next: (response) => {
-          this.exercises = response
-          console.log(this.exercises);
-        }
-       })
-
-       
-      }
-      
-
-
-      
-    })
+        this.exerciseService
+          .getExercisesForUser(
+            this.selectedEquipment.map((e) => e.id),
+            this.selectedMuscleGroups.map((m) => m.id)
+          )
+          .subscribe({
+            next: (response) => {
+              this.exercises = response;
+              console.log(this.exercises);
+            },
+          });
+      },
+    });
 
     //this.ex
   }
 
-  da(){
+  da() {
     const accordionElement = document.getElementById('accordion-collapse');
 
+    // create an array of objects with the id, trigger element (eg. button), and the content element
+    const accordionItems: AccordionItem[] = [
+      {
+        id: 'accordion-collapse-heading-1"',
+        triggerEl: document.querySelector('#accordion-collapse-heading-1'),
+        targetEl: document.querySelector('#accordion-collapse-body-1'),
+        active: false,
+      },
+    ];
 
-// create an array of objects with the id, trigger element (eg. button), and the content element
-const accordionItems: AccordionItem[] = [
-  {
-      id: 'accordion-collapse-heading-1"',
-      triggerEl: document.querySelector('#accordion-collapse-heading-1'),
-      targetEl: document.querySelector('#accordion-collapse-body-1'),
-      active: false
-  },
-  {
-      id: 'accordion-collapse-heading-2',
-      triggerEl: document.querySelector('#accordion-example-heading-2'),
-      targetEl: document.querySelector('#accordion-example-body-2'),
-      active: false
-  },
-  {
-      id: 'accordion-collapse-heading-3',
-      triggerEl: document.querySelector('#accordion-example-heading-3'),
-      targetEl: document.querySelector('#accordion-example-body-3'),
-      active: false
-  }
-];
-
-// options with default values
-const options = {
-    alwaysOpen: true,
-    activeClasses: 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white',
-    inactiveClasses: 'text-gray-500 dark:text-gray-400',
-    onOpen: (item) => {
+    // options with default values
+    const options = {
+      alwaysOpen: true,
+      activeClasses:
+        'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white',
+      inactiveClasses: 'text-gray-500 dark:text-gray-400',
+      onOpen: (item) => {
         console.log('accordion item has been shown');
         console.log(item);
         this.shouldRotate = true;
-    },
-    onClose: (item) => {
+      },
+      onClose: (item) => {
         console.log('accordion item has been hidden');
         console.log(item);
         this.shouldRotate = false;
-    },
-    onToggle: (item) => {
+      },
+      onToggle: (item) => {
         console.log('accordion item has been toggled');
         console.log(item);
-    },
-    
-};
+      },
+    };
 
-// instance options object
-const instanceOptions = {
-    id: 'collapse-example',
-    override: true
-};
+    // instance options object
+    const instanceOptions = {
+      id: 'collapse-example',
+      override: true,
+    };
 
-const accordion = new Accordion(accordionElement, accordionItems, options, instanceOptions);
+    const accordion = new Accordion(
+      accordionElement,
+      accordionItems,
+      options,
+      instanceOptions
+    );
   }
   getSelectedEquipment(): Equipment[] {
     this.selectedEquipment = this.equipment.filter((e) => e.isSelected);
