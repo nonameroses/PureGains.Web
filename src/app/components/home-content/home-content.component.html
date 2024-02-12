@@ -43,27 +43,30 @@
 
                                 <h2 id="heading-{{item.id}}">
 
-                                    <button type="button" class="acc-trigger flex items-center justify-between w-full p-3 font-medium rtl:text-right text-red-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 
+                                    <button type="button" class="acc-trigger flex flex- items-center  w-full p-3 font-medium rtl:text-right text-red-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 
                                       dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 
-                                      dark:hover:bg-gray-800 gap-3" data-accordion-target="#body-1"
+                                      dark:hover:bg-gray-800 gap-3 " data-accordion-target="#body-1"
                                         aria-expanded="true" aria-controls="body-1">
                                         <svg [ngClass]="{ 'animate-rotate-to-180 ' : shouldRotate, 'animate-rotate-to-0 ' : !shouldRotate}"
-                                        xmlns="http://www.w3.org/2000/svg" fill="none"
-                                        class="  w-3 h-3 text-blue-500  shrink-0" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                                    </svg>
-                                        <div class="flex align-items-center ">
-                                            <img class="rounded-full h-10 w-10 mr-3 object-cover"
+                                            xmlns="http://www.w3.org/2000/svg" fill="none"
+                                            class="  w-3 h-3 text-blue-500  shrink-0 " viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                        </svg>
+                                        <div class=" ">
+                                            <img class="rounded-full h-10 w-10  object-cover"
                                                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Eo_circle_light-blue_letter-c.svg/512px-Eo_circle_light-blue_letter-c.svg.png"
                                                 alt="unsplash image">
                                         </div>
                                         <!-- sm:mr-44 lg:mr-96 -->
-                                        <span class="text-xs text-left  sm:text-base font-bold l-10 sm:px-6 p-1">{{item.name}}</span>
-                                        <div class=" flex right-0 mr-2">
-                                            <svg class="" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <span
+                                            class="text-xs text-left  sm:text-base font-bold l-10 sm:px-6 p-1">{{item.name}}</span>
+                                        
+                                        <div class=" flex ml-auto right-0 gap-3">
+                                            <svg class="" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                class="w-6 h-6">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                     d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
                                             </svg>
@@ -74,7 +77,7 @@
                                                 </path>
                                             </svg>
                                         </div>
-                                     
+
 
                                     </button>
                                 </h2>
@@ -86,13 +89,14 @@
                                             <a href="/docs/getting-started/introduction/"
                                                 class="text-blue-600 dark:text-blue-500 hover:underline">get started</a>
                                             and start developing websites even faster with components on top of Tailwind
-                                            CSS.</p>
+                                            CSS.
+                                        </p>
                                     </div>
                                 </div>
                             </div>
 
 
-<!-- 
+                            <!-- 
 
                             <div
                                 class="relative w-auto overflow-hidden rounded-xl space-y-1 text-black hover:scale-105  duration-500 shadow-2xl drop-shadow-2xl  ">
