@@ -36,6 +36,8 @@ import { Accordion, AccordionItem } from 'flowbite';
   ],
 })
 export class HomeContentComponent {
+  shouldRotate: boolean = false;
+  hasBeenClicked : boolean = false;
   rows = [
     {
       id: 1,
@@ -169,7 +171,7 @@ export class HomeContentComponent {
   ) {}
 
   ngOnInit() {
-this.da();
+    this.da();
     this.equipmentService
       .getEquipment()
       .subscribe((response) =>
@@ -258,29 +260,31 @@ this.da();
   }
 
   da(){
-    const accordionElement = document.getElementById('accordion-example');
+    const accordionElement = document.getElementById('accordion-collapse');
+
 
 // create an array of objects with the id, trigger element (eg. button), and the content element
 const accordionItems: AccordionItem[] = [
   {
-      id: 'accordion-example-heading-1',
-      triggerEl: document.querySelector('#accordion-example-heading-1'),
-      targetEl: document.querySelector('#accordion-example-body-1'),
+      id: 'accordion-collapse-heading-1"',
+      triggerEl: document.querySelector('#accordion-collapse-heading-1'),
+      targetEl: document.querySelector('#accordion-collapse-body-1'),
       active: false
   },
   {
-      id: 'accordion-example-heading-2',
+      id: 'accordion-collapse-heading-2',
       triggerEl: document.querySelector('#accordion-example-heading-2'),
       targetEl: document.querySelector('#accordion-example-body-2'),
       active: false
   },
   {
-      id: 'accordion-example-heading-3',
+      id: 'accordion-collapse-heading-3',
       triggerEl: document.querySelector('#accordion-example-heading-3'),
       targetEl: document.querySelector('#accordion-example-body-3'),
       active: false
   }
 ];
+
 // options with default values
 const options = {
     alwaysOpen: true,
@@ -289,10 +293,12 @@ const options = {
     onOpen: (item) => {
         console.log('accordion item has been shown');
         console.log(item);
+        this.shouldRotate = true;
     },
     onClose: (item) => {
         console.log('accordion item has been hidden');
         console.log(item);
+        this.shouldRotate = false;
     },
     onToggle: (item) => {
         console.log('accordion item has been toggled');
@@ -303,7 +309,7 @@ const options = {
 
 // instance options object
 const instanceOptions = {
-    id: 'accordion-example',
+    id: 'collapse-example',
     override: true
 };
 
