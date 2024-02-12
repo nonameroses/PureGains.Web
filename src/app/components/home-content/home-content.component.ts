@@ -185,7 +185,7 @@ export class HomeContentComponent {
   ) {}
 
   ngOnInit() {
-    this.da();
+
     this.equipmentService
       .getEquipment()
       .subscribe((response) =>
@@ -267,20 +267,26 @@ export class HomeContentComponent {
 
     //this.ex
   }
-
+  ngAfterViewInit() {
+    this.da();
+    // Your code to initialize the accordion goes here
+  }
   da() {
     const accordionElement = document.getElementById('accordion-collapse');
-
-    // create an array of objects with the id, trigger element (eg. button), and the content element
-    const accordionItems: AccordionItem[] = [
-      {
-        id: 'accordion-collapse-heading-1"',
-        triggerEl: document.querySelector('#accordion-collapse-heading-1'),
-        targetEl: document.querySelector('#accordion-collapse-body-1'),
-        active: false,
-      },
+    var accordionItems: AccordionItem[] = [
+    
     ];
-
+    // create an array of objects with the id, trigger element (eg. button), and the content element
+    for (let i = 0; i < this.exercises.length; i++) {
+      accordionItems.push({
+        id: `heading-${i + 1}"`, // Increment the id by 1 for each item
+        triggerEl: document.querySelector(`#heading-${i + 1}`), // Select the corresponding trigger element
+        targetEl: document.querySelector(`#body-${i + 1}`), // Select the corresponding target element
+        active: false, // Set the active state
+    });
+    }
+  
+    console.log(accordionItems);
     // options with default values
     const options = {
       alwaysOpen: true,
