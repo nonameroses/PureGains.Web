@@ -25,24 +25,24 @@
                 </h1>
                 <span class="text-2xl font-roboto text-gray-200">Exercises will be generated accordingly</span>
             </div>
-            <div class="col-span-12 rounded-xl   p-12  sm:col-span-8 flex items-center w-full ">
+            <div class="col-span-12 rounded-xl   p-12  sm:col-span-8 flex items-center w-full border    ">
                 <!-- Main Content -->
 
 
-                <div class="w-screen">
+                <div class="w-screen border">
 
                     <div class="mx-auto mt-8 max-w-screen-lg px-2 ">
-                        <div class="sm:flex sm:items-center sm:justify-between flex-col sm:flex-row">
-                            <p class="flex-1 text-base font-bold text-gray-900">Latest Payments</p>
-                        </div>
+                        <!-- <div class="sm:flex sm:items-center sm:justify-between flex-col sm:flex-row border">
+                            <p class="flex-1 text-base font-bold text-white">Edit Payments</p>
+                        </div> -->
 
-                        <div class="overflow-auto lg:overflow-visible  shadow">
+                    
                             <section *ngFor="let item of exercises" class="gap-4">
 
 
 
 
-                                <div class="relative w-max-screen overflow-hidden rounded-xl space-y-1 text-black ">
+                                <div class="relative w-auto overflow-hidden rounded-xl space-y-1 text-black hover:scale-105  duration-500 shadow-2xl drop-shadow-2xl  ">
                                     <input type="checkbox" class="peer absolute top-0 insert-x-0 w-full h-12
                                     opacity-0 z-10 cursor-pointer">
                                     <div class="bg-slate-100 h-12 w-full pl-1 flex items-center">
@@ -123,7 +123,7 @@
 
                             </section>
 
-                        </div>
+                       
                     </div>
 
                 </div>
