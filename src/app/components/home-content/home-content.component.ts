@@ -66,9 +66,34 @@ export class HomeContentComponent {
     },
     // Add more rows as needed
   ];
+  activeItem: number | null = null;
+
+  toggleItem(index: number): void {
+    if (this.activeItem === index) {
+      this.activeItem = null; // Collapse the currently active item
+    } else {
+      this.activeItem = index; // Expand the new item
+    }
+  }
+
+  isItemActive(index: number): boolean {
+    return this.activeItem === index;
+  }
 
   toggleExpand(row: any): void {
     row.isExpanded = !row.isExpanded;
+  }
+
+  activeTab: number = 0;
+
+  toggleTab(idx: number): void {
+    this.activeTab = this.activeTab === idx ? 0 : idx;
+    console.log(idx)
+    console.log(this.activeTab)
+  }
+
+  isTabActive(idx: number): boolean {
+    return this.activeTab === idx;
   }
 
   user: User = null;
@@ -269,7 +294,7 @@ export class HomeContentComponent {
     //this.ex
   }
   ngAfterViewInit() {
-    this.da();
+  //  this.da();
     // Your code to initialize the accordion goes here
   }
   da() {
@@ -295,18 +320,18 @@ export class HomeContentComponent {
         'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white',
       inactiveClasses: 'text-gray-500 dark:text-gray-400',
       onOpen: (item) => {
-        console.log('accordion item has been shown');
+       // console.log('accordion item has been shown');
 
         this.shouldRotate = true;
       },
       onClose: (item) => {
-        console.log('accordion item has been hidden');
-        console.log(item);
+      //  console.log('accordion item has been hidden');
+      //  console.log(item);
         this.shouldRotate = false;
       },
       onToggle: (item) => {
-        console.log(this.toggleDetail);
-        console.log('accordion item has been toggled');
+       // console.log(this.toggleDetail);
+       // console.log('accordion item has been toggled');
         console.log(item);
       },
     };
@@ -356,7 +381,7 @@ export class HomeContentComponent {
         (x) => x.name !== 'Full-Body'
       );
     }
-    console.log(this.selectedMuscleGroups);
+    //console.log(this.selectedMuscleGroups);
     return this.selectedMuscleGroups;
   }
 
