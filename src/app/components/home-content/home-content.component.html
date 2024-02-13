@@ -37,13 +37,13 @@
                         </div> -->
              
 
-                        <section *ngFor="let item of exercises; let i = index" class="space-y-3" id="accordion-collapse">
-                            <div data-accordion="collapse" class="w-auto">
+                        <section *ngFor="let item of exercises; let i = index" class="flex space-x-4" id="accordion-collapse">
+                            <div data-accordion="collapse" class="w-full">
                                 <h2 id="heading-{{item.id}}" (click)="toggleTab(i+1)" >
 
-                                    <button  type="button"  class="acc-trigger flex flex- items-center  w-full p-3 font-medium rtl:text-right text-red-500 border border-b-0 border-gray-200 rounded-xl focus:ring-4 focus:ring-gray-200 
-                                      dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 
-                                      dark:hover:bg-gray-800 gap-3  relative transition-all duration-700 border rounded-xl hover:shadow-2xl" data-accordion-target="#body-1"
+                                    <button  type="button"  class="acc-trigger flex flex- items-center  border border-b-0 border-gray-200 w-full p-3 font-medium rtl:text-right text-red-500 rounded-xl focus:rounded-b-none  focus:ring-4 focus:ring-gray-200 
+                                      dark:focus:ring-gray-800  hover:bg-gray-100 
+                                      dark:hover:bg-gray-800 gap-3  relative transition-all duration-700  rounded-xl hover:shadow-2xl" data-accordion-target="#body-1"
                                         aria-expanded="true" aria-controls="body-1">
                                         <svg [ngClass]="{ 'animate-rotate-to-180 ' : isTabActive(i+1), 'animate-rotate-to-0 ' : !isTabActive(i+1)}"
                                             xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -81,14 +81,11 @@
                                 </h2>
                                 <div id="body-{{item.id}}" aria-labelledby="heading-1" >
                                     <div [ngStyle]="{'max-height': isTabActive(i+1) ? '500px' : '0px', 'overflow': 'hidden'}"
-                                    class="relative overflow-hidden transition-all duration-500  border border-b-0 border-gray-200 bg-amber-200 rounded-b-xl dark:border-gray-700 dark:bg-gray-900"
+                                    class="relative  space-x-4 overflow-hidden transition-all duration-500  bg-amber-200 rounded-b-xl dark:border-gray-700 dark:bg-gray-900"
                                      >
                                         <p class="mb-2 text-gray-500 dark:text-gray-400">{{item.description}}</p>
                                         <p class="text-gray-500 dark:text-gray-400">Check out this guide to learn how to
-                                            <a href="/docs/getting-started/introduction/"
-                                                class="text-blue-600 dark:text-blue-500 hover:underline">get started</a>
-                                            and start developing websites even faster with components on top of Tailwind
-                                            CSS.
+                                            
                                         </p>
                                     </div>
                                 </div>
