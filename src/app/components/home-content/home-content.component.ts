@@ -289,7 +289,7 @@ export class HomeContentComponent {
     console.log(accordionItems);
     // options with default values
     const options = {
-      alwaysOpen: true,
+      alwaysOpen: false,
       activeClasses:
         'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white',
       inactiveClasses: 'text-gray-500 dark:text-gray-400',
