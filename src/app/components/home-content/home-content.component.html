@@ -37,11 +37,8 @@
                         </div> -->
 
                         <section *ngFor="let item of exercises" class="gap-4" id="accordion-collapse">
-
-
                             <div data-accordion="collapse" class="w-auto">
-
-                                <h2 id="heading-{{item.id}}" class="peer">
+                                <h2 id="heading-{{item.id}}">
 
                                     <button type="button" class="acc-trigger flex flex- items-center  w-full p-3 font-medium rtl:text-right text-red-500 border border-b-0 border-gray-200 rounded-xl focus:ring-4 focus:ring-gray-200 
                                       dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 
@@ -54,7 +51,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                 d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                         </svg>
-                                        <div class=" ">
+                                        <div >
                                             <img class="rounded-full h-10 w-10  object-cover"
                                                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Eo_circle_light-blue_letter-c.svg/512px-Eo_circle_light-blue_letter-c.svg.png"
                                                 alt="unsplash image">
@@ -81,7 +78,7 @@
 
                                     </button>
                                 </h2>
-                                <div id="body-{{item.id}}" class="p-2 border border-b-0 border-gray-200  rounded-b-xl dark:border-gray-700 dark:bg-gray-900 peer-focus-within:bg-red-400 duration-500 ease-in-out " aria-labelledby="heading-1">
+                                <div id="body-{{item.id}}" aria-labelledby="heading-1" class="hidden">
                                     <div
                                         class="p-2 border border-b-0 border-gray-200 bg-amber-200 rounded-b-xl dark:border-gray-700 dark:bg-gray-900 ">
                                         <p class="mb-2 text-gray-500 dark:text-gray-400">{{item.description}}</p>
