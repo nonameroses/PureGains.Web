@@ -25,26 +25,27 @@
                 </h1>
                 <span class="text-2xl font-roboto text-gray-200">Exercises will be generated accordingly</span>
             </div>
-            <div class="col-span-12 rounded-xl   p-12  sm:col-span-8 flex items-center w-full border    ">
+            <div
+                class="col-span-12 rounded-xl   p-12  sm:col-span-8 flex items-center w-full 
+            bg-gradient-to-bl bg-gradient-to-tl from-blue-500/20 via-sky-600/20 to-purple-900/20 bg-opacity-50 
+            border shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)] ">
                 <!-- Main Content -->
-
-
-                <div class="w-screen border">
-
-                    <div class="mx-auto mt-8 max-w-screen-lg px-2 ">
-                        <!-- <div class="sm:flex sm:items-center sm:justify-between flex-col sm:flex-row border">
-                            <p class="flex-1 text-base font-bold text-white">Edit Payments</p>
-                        </div> -->
-             
-
-                        <section *ngFor="let item of exercises; let i = index" class="flex space-x-4" id="accordion-collapse">
+                <div class="w-screen ">
+                    <div class="mx-auto mt-4 top-3 max-w-screen-lg px-2 ">
+                        <div
+                            class="sm:flex sm:items-center justify-center sm:justify-between flex-col sm:flex-row  text-center">
+                            <p class="flex-1 text-base font-bold text-white">Edit your workout</p>
+                        </div>
+                        <section *ngFor="let item of exercises; let i = index" class="flex space-x-4"
+                            id="accordion-collapse">
                             <div data-accordion="collapse" class="w-full">
-                                <h2 id="heading-{{item.id}}" (click)="toggleTab(i+1)" >
+                                <h2 id="heading-{{item.id}}" (click)="toggleTab(i+1)">
 
-                                    <button  type="button"  class="acc-trigger flex flex- items-center  border border-b-0 border-gray-200 w-full p-3 font-medium rtl:text-right text-red-500 rounded-xl focus:rounded-b-none  focus:ring-4 focus:ring-gray-200 
+                                    <button type="button"
+                                        class="acc-trigger flex flex- items-center  border border-b-0 border-gray-200 w-full p-3 font-medium rtl:text-right text-red-500 rounded-xl focus:rounded-b-none  focus:ring-4 focus:ring-gray-200 
                                       dark:focus:ring-gray-800  hover:bg-gray-100 
-                                      dark:hover:bg-gray-800 gap-3  relative transition-all duration-700  rounded-xl hover:shadow-2xl" data-accordion-target="#body-1"
-                                        aria-expanded="true" aria-controls="body-1">
+                                      dark:hover:bg-gray-800 gap-3  relative transition-all duration-700  rounded-xl hover:shadow-2xl"
+                                        data-accordion-target="#body-1" aria-expanded="true" aria-controls="body-1">
                                         <svg [ngClass]="{ 'animate-rotate-to-180 ' : isTabActive(i+1), 'animate-rotate-to-0 ' : !isTabActive(i+1)}"
                                             xmlns="http://www.w3.org/2000/svg" fill="none"
                                             class="  w-3 h-3 text-blue-500  shrink-0 " viewBox="0 0 24 24"
@@ -52,7 +53,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                 d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                         </svg>
-                                        <div >
+                                        <div>
                                             <img class="rounded-full h-10 w-10  object-cover"
                                                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Eo_circle_light-blue_letter-c.svg/512px-Eo_circle_light-blue_letter-c.svg.png"
                                                 alt="unsplash image">
@@ -60,7 +61,7 @@
                                         <!-- sm:mr-44 lg:mr-96 -->
                                         <span
                                             class="text-xs text-left  sm:text-base font-bold l-10 sm:px-6 p-1">{{item.name}}</span>
-                                        
+
                                         <div class=" flex ml-auto right-0 gap-3">
                                             <svg class="" xmlns="http://www.w3.org/2000/svg" fill="none"
                                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -79,14 +80,12 @@
 
                                     </button>
                                 </h2>
-                                <div id="body-{{item.id}}" aria-labelledby="heading-1" >
+                                <div id="body-{{item.id}}" aria-labelledby="heading-1">
                                     <div [ngStyle]="{'max-height': isTabActive(i+1) ? '500px' : '0px', 'overflow': 'hidden'}"
-                                    class="relative  space-x-4 overflow-hidden transition-all duration-500  bg-amber-200 rounded-b-xl dark:border-gray-700 dark:bg-gray-900"
-                                     >
-                                        <p class="mb-2 text-gray-500 dark:text-gray-400">{{item.description}}</p>
-                                        <p class="text-gray-500 dark:text-gray-400">Check out this guide to learn how to
-                                            
-                                        </p>
+                                        class="relative  space-x-4 overflow-hidden transition-all duration-500  bg-amber-200 rounded-b-xl dark:border-gray-700 dark:bg-gray-900">
+                                        <p class=" p-3 text-gray-500 dark:text-gray-400">{{item.description}}</p>
+
+
                                     </div>
                                 </div>
                             </div>
