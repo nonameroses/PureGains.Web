@@ -10,6 +10,10 @@ module.exports = {
   ],
   theme: {
     extend: {colors: {
+      transitionProperty: {
+        'height': 'max-height',
+        'spacing': 'margin, padding',
+      },
       transparent: 'transparent',
       current: 'currentColor',
       'white': '#ffffff',

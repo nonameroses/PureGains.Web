@@ -48,6 +48,7 @@ import { Accordion, AccordionItem } from 'flowbite';
   ],
 })
 export class HomeContentComponent {
+  toggleDetail = false;
   shouldRotate: boolean = false;
   hasBeenClicked: boolean = false;
   rows = [
@@ -295,7 +296,7 @@ export class HomeContentComponent {
       inactiveClasses: 'text-gray-500 dark:text-gray-400',
       onOpen: (item) => {
         console.log('accordion item has been shown');
-        console.log(item);
+
         this.shouldRotate = true;
       },
       onClose: (item) => {
@@ -304,6 +305,7 @@ export class HomeContentComponent {
         this.shouldRotate = false;
       },
       onToggle: (item) => {
+        console.log(this.toggleDetail);
         console.log('accordion item has been toggled');
         console.log(item);
       },
