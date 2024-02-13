@@ -119,14 +119,15 @@ export class HomeContentComponent {
   equipment: Equipment[] = [];
   muscleGroups: MuscleGroup[] = [];
 
-  exercises: Exercise[] = [
+  currentExercises: Exercise[] = [];
+  allExercises: Exercise[] = [
     {
       id: 1,
       name: 'Explosive Push-ups',
       description:
         'Using a bench for either hand placement or feet placement, perform a push-up with enough force to lift your body off the ground.',
       youtubeUrl: 'https://www.youtube.com/watch?v=exampleURL',
-      isExpandable: false,
+
     },
     {
       id: 2,
@@ -134,7 +135,7 @@ export class HomeContentComponent {
       description:
         'Facing away from the bench, place your hands on it and lower your body by bending your elbows, then push back up.',
       youtubeUrl: 'https://www.youtube.com/watch?v=FVjtOSA-dz8',
-      isExpandable: false,
+
     },
     {
       id: 3,
@@ -142,7 +143,7 @@ export class HomeContentComponent {
       description:
         'Hold a kettlebell in one hand with a neutral grip and curl it towards your shoulder. Repeat on both sides.',
       youtubeUrl: 'https://www.youtube.com/watch?v=exampleURL',
-      isExpandable: false,
+
     },
     {
       id: 4,
@@ -150,7 +151,7 @@ export class HomeContentComponent {
       description:
         'Lie on the floor and press kettlebells upwards, similar to a bench press but with a limited range of motion.',
       youtubeUrl: 'https://www.youtube.com/watch?v=exampleURL',
-      isExpandable: false,
+    
     },
     {
       id: 5,
@@ -158,7 +159,47 @@ export class HomeContentComponent {
       description:
         'Standard push-ups engage the chest, shoulders, and triceps, with hands shoulder-width apart.',
       youtubeUrl: 'https://www.youtube.com/watch?v=sq4VAZ1TtRw',
-      isExpandable: false,
+
+    },
+    {
+      id: 6,
+      name: 'Papa',
+      description:
+        'Using a bench for either hand placement or feet placement, perform a push-up with enough force to lift your body off the ground.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=exampleURL',
+
+    },
+    {
+      id: 7,
+      name: 'Baba',
+      description:
+        'Facing away from the bench, place your hands on it and lower your body by bending your elbows, then push back up.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=FVjtOSA-dz8',
+
+    },
+    {
+      id: 8,
+      name: 'Dadad',
+      description:
+        'Hold a kettlebell in one hand with a neutral grip and curl it towards your shoulder. Repeat on both sides.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=exampleURL',
+
+    },
+    {
+      id: 9,
+      name: 'Xaxa',
+      description:
+        'Lie on the floor and press kettlebells upwards, similar to a bench press but with a limited range of motion.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=exampleURL',
+    
+    },
+    {
+      id: 10,
+      name: 'Zazaz',
+      description:
+        'Standard push-ups engage the chest, shoulders, and triceps, with hands shoulder-width apart.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=sq4VAZ1TtRw',
+
     },
   ];
 
@@ -248,9 +289,21 @@ export class HomeContentComponent {
         console.error('Error fetching user', error);
       },
     });
+
+
+
+    this.limitExerciseNumber();
   }
 
-  zaza() {}
+  limitExerciseNumber() : Exercise[]{
+    var limit : number = 5;
+    this.currentExercises  = this.allExercises.splice(0, limit); 
+
+    return this.currentExercises;
+  }
+
+
+  
   checkOrInsertUser(user: User) {
     if (!this.user.isProfileCreated) {
       this.userService.addUser(user).subscribe({
@@ -284,8 +337,8 @@ export class HomeContentComponent {
           )
           .subscribe({
             next: (response) => {
-              this.exercises = response;
-              console.log(this.exercises);
+              this.allExercises = response;
+              console.log(this.allExercises);
             },
           });
       },
@@ -303,7 +356,7 @@ export class HomeContentComponent {
     
     ];
     // create an array of objects with the id, trigger element (eg. button), and the content element
-    for (let i = 0; i < this.exercises.length; i++) {
+    for (let i = 0; i < this.allExercises.length; i++) {
       accordionItems.push({
         id: `heading-${i + 1}"`, // Increment the id by 1 for each item
         triggerEl: document.querySelector(`#heading-${i + 1}`), // Select the corresponding trigger element
