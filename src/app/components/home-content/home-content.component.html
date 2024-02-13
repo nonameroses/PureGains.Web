@@ -43,7 +43,7 @@
 
                                 <h2 id="heading-{{item.id}}">
 
-                                    <button type="button" class="acc-trigger flex flex- items-center  w-full p-3 font-medium rtl:text-right text-red-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 
+                                    <button type="button" class="acc-trigger flex flex- items-center  w-full p-3 font-medium rtl:text-right text-red-500 border border-b-0 border-gray-200 rounded-xl focus:ring-4 focus:ring-gray-200 
                                       dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 
                                       dark:hover:bg-gray-800 gap-3 " data-accordion-target="#body-1"
                                         aria-expanded="true" aria-controls="body-1">
@@ -81,9 +81,9 @@
 
                                     </button>
                                 </h2>
-                                <div id="body-{{item.id}}" class="hidden" aria-labelledby="heading-1">
+                                <div id="body-{{item.id}}" class="hidden transition-[44px]" aria-labelledby="heading-1">
                                     <div
-                                        class="p-2 border border-b-0 border-gray-200 bg-amber-200 dark:border-gray-700 dark:bg-gray-900 ">
+                                        class=" p-2 border border-b-0 border-gray-200 bg-amber-200 rounded-b-xl dark:border-gray-700 dark:bg-gray-900 ">
                                         <p class="mb-2 text-gray-500 dark:text-gray-400">{{item.description}}</p>
                                         <p class="text-gray-500 dark:text-gray-400">Check out this guide to learn how to
                                             <a href="/docs/getting-started/introduction/"
