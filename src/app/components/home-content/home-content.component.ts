@@ -302,7 +302,9 @@ export class HomeContentComponent {
     return this.currentExercises;
   }
 
-
+  modal(){
+    console.log('das')
+  }
   removeExercise(int: any){
     this.currentExercises.splice(int,1);
     console.log(this.currentExercises);
