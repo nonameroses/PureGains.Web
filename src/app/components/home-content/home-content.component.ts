@@ -88,8 +88,8 @@ export class HomeContentComponent {
 
   toggleTab(idx: number): void {
     this.activeTab = this.activeTab === idx ? 0 : idx;
-    console.log(idx)
-    console.log(this.activeTab)
+    //console.log(idx)
+    //console.log(this.activeTab)
   }
 
   isTabActive(idx: number): boolean {
@@ -303,7 +303,10 @@ export class HomeContentComponent {
   }
 
 
-  
+  removeExercise(int: any){
+    this.currentExercises.splice(int,1);
+    console.log(this.currentExercises);
+  }
   checkOrInsertUser(user: User) {
     if (!this.user.isProfileCreated) {
       this.userService.addUser(user).subscribe({
