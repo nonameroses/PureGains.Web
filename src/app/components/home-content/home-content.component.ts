@@ -26,7 +26,14 @@ import {
   transition,
   animate,
 } from '@angular/animations';
-import { Accordion, AccordionItem } from 'flowbite';
+import {
+  Accordion,
+  AccordionItem,
+  InstanceOptions,
+  Modal,
+  ModalInterface,
+  ModalOptions,
+} from 'flowbite';
 @Component({
   selector: 'app-home-content',
   templateUrl: './home-content.component.html',
@@ -48,6 +55,7 @@ import { Accordion, AccordionItem } from 'flowbite';
   ],
 })
 export class HomeContentComponent {
+  modal: ModalInterface;
   toggleDetail = false;
   shouldRotate: boolean = false;
   hasBeenClicked: boolean = false;
@@ -75,7 +83,42 @@ export class HomeContentComponent {
       this.activeItem = index; // Expand the new item
     }
   }
+  openka() {
+    this.modal.show();
+  }
+  nuka() {
+    const $modalElement: HTMLElement = document.querySelector('#modalEl');
 
+    const modalOptions: ModalOptions = {
+      placement: 'bottom-right',
+      backdrop: 'dynamic',
+      backdropClasses: 'bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-40',
+      closable: true,
+      onHide: () => {
+        console.log('modal is hidden');
+      },
+      onShow: () => {
+        console.log('modal is shown');
+      },
+      onToggle: () => {
+        console.log('modal has been toggled');
+      },
+    };
+
+    // instance options object
+    const instanceOptions: InstanceOptions = {
+      id: 'modalEl',
+      override: true,
+    };
+
+    this.modal = new Modal(
+      $modalElement,
+      modalOptions,
+      instanceOptions
+    );
+
+  
+  }
   isItemActive(index: number): boolean {
     return this.activeItem === index;
   }
@@ -88,8 +131,8 @@ export class HomeContentComponent {
 
   toggleTab(idx: number): void {
     this.activeTab = this.activeTab === idx ? 0 : idx;
-    console.log(idx)
-    console.log(this.activeTab)
+    console.log(idx);
+    console.log(this.activeTab);
   }
 
   isTabActive(idx: number): boolean {
@@ -127,7 +170,6 @@ export class HomeContentComponent {
       description:
         'Using a bench for either hand placement or feet placement, perform a push-up with enough force to lift your body off the ground.',
       youtubeUrl: 'https://www.youtube.com/watch?v=exampleURL',
-
     },
     {
       id: 2,
@@ -135,7 +177,6 @@ export class HomeContentComponent {
       description:
         'Facing away from the bench, place your hands on it and lower your body by bending your elbows, then push back up.',
       youtubeUrl: 'https://www.youtube.com/watch?v=FVjtOSA-dz8',
-
     },
     {
       id: 3,
@@ -143,7 +184,6 @@ export class HomeContentComponent {
       description:
         'Hold a kettlebell in one hand with a neutral grip and curl it towards your shoulder. Repeat on both sides.',
       youtubeUrl: 'https://www.youtube.com/watch?v=exampleURL',
-
     },
     {
       id: 4,
@@ -151,7 +191,6 @@ export class HomeContentComponent {
       description:
         'Lie on the floor and press kettlebells upwards, similar to a bench press but with a limited range of motion.',
       youtubeUrl: 'https://www.youtube.com/watch?v=exampleURL',
-    
     },
     {
       id: 5,
@@ -159,7 +198,6 @@ export class HomeContentComponent {
       description:
         'Standard push-ups engage the chest, shoulders, and triceps, with hands shoulder-width apart.',
       youtubeUrl: 'https://www.youtube.com/watch?v=sq4VAZ1TtRw',
-
     },
     {
       id: 6,
@@ -167,7 +205,6 @@ export class HomeContentComponent {
       description:
         'Using a bench for either hand placement or feet placement, perform a push-up with enough force to lift your body off the ground.',
       youtubeUrl: 'https://www.youtube.com/watch?v=exampleURL',
-
     },
     {
       id: 7,
@@ -175,7 +212,6 @@ export class HomeContentComponent {
       description:
         'Facing away from the bench, place your hands on it and lower your body by bending your elbows, then push back up.',
       youtubeUrl: 'https://www.youtube.com/watch?v=FVjtOSA-dz8',
-
     },
     {
       id: 8,
@@ -183,7 +219,6 @@ export class HomeContentComponent {
       description:
         'Hold a kettlebell in one hand with a neutral grip and curl it towards your shoulder. Repeat on both sides.',
       youtubeUrl: 'https://www.youtube.com/watch?v=exampleURL',
-
     },
     {
       id: 9,
@@ -191,7 +226,6 @@ export class HomeContentComponent {
       description:
         'Lie on the floor and press kettlebells upwards, similar to a bench press but with a limited range of motion.',
       youtubeUrl: 'https://www.youtube.com/watch?v=exampleURL',
-    
     },
     {
       id: 10,
@@ -199,7 +233,6 @@ export class HomeContentComponent {
       description:
         'Standard push-ups engage the chest, shoulders, and triceps, with hands shoulder-width apart.',
       youtubeUrl: 'https://www.youtube.com/watch?v=sq4VAZ1TtRw',
-
     },
   ];
 
@@ -252,7 +285,6 @@ export class HomeContentComponent {
   ) {}
 
   ngOnInit() {
-
     this.equipmentService
       .getEquipment()
       .subscribe((response) =>
@@ -290,21 +322,18 @@ export class HomeContentComponent {
       },
     });
 
-
-
     this.limitExerciseNumber();
   }
 
-  limitExerciseNumber() : Exercise[]{
-    var limit : number = 5;
-    this.currentExercises  = this.allExercises.splice(0, limit); 
+  limitExerciseNumber(): Exercise[] {
+    var limit: number = 5;
+    this.currentExercises = this.allExercises.splice(0, limit);
 
     return this.currentExercises;
   }
 
-
-  removeExercise(int: any){
-    this.currentExercises.splice(int,1);
+  removeExercise(int: any) {
+    this.currentExercises.splice(int, 1);
     console.log(this.currentExercises);
   }
   checkOrInsertUser(user: User) {
@@ -349,15 +378,16 @@ export class HomeContentComponent {
 
     //this.ex
   }
+
   ngAfterViewInit() {
-  //  this.da();
+    this.nuka();
+    //  this.da();
     // Your code to initialize the accordion goes here
   }
+
   da() {
     const accordionElement = document.getElementById('accordion-collapse');
-    var accordionItems: AccordionItem[] = [
-    
-    ];
+    var accordionItems: AccordionItem[] = [];
     // create an array of objects with the id, trigger element (eg. button), and the content element
     for (let i = 0; i < this.allExercises.length; i++) {
       accordionItems.push({
@@ -365,9 +395,9 @@ export class HomeContentComponent {
         triggerEl: document.querySelector(`#heading-${i + 1}`), // Select the corresponding trigger element
         targetEl: document.querySelector(`#body-${i + 1}`), // Select the corresponding target element
         active: false, // Set the active state
-    });
+      });
     }
-  
+
     console.log(accordionItems);
     // options with default values
     const options = {
@@ -376,18 +406,18 @@ export class HomeContentComponent {
         'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white',
       inactiveClasses: 'text-gray-500 dark:text-gray-400',
       onOpen: (item) => {
-       // console.log('accordion item has been shown');
+        // console.log('accordion item has been shown');
 
         this.shouldRotate = true;
       },
       onClose: (item) => {
-      //  console.log('accordion item has been hidden');
-      //  console.log(item);
+        //  console.log('accordion item has been hidden');
+        //  console.log(item);
         this.shouldRotate = false;
       },
       onToggle: (item) => {
-       // console.log(this.toggleDetail);
-       // console.log('accordion item has been toggled');
+        // console.log(this.toggleDetail);
+        // console.log('accordion item has been toggled');
         console.log(item);
       },
     };
