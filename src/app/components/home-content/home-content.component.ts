@@ -303,7 +303,10 @@ export class HomeContentComponent {
   }
 
 
-  
+  removeExercise(int: any){
+    this.currentExercises.splice(int,1);
+    console.log(this.currentExercises);
+  }
   checkOrInsertUser(user: User) {
     if (!this.user.isProfileCreated) {
       this.userService.addUser(user).subscribe({
