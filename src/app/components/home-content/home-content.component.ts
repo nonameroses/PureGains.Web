@@ -62,6 +62,7 @@ export class HomeContentComponent {
       description:
         'Using a bench for either hand placement or feet placement, perform a push-up with enough force to lift your body off the ground.',
       youtubeUrl: 'https://www.youtube.com/watch?v=exampleURL',
+      primaryMuscleGroupId: 3
     },
     {
       id: 2,
@@ -69,6 +70,7 @@ export class HomeContentComponent {
       description:
         'Facing away from the bench, place your hands on it and lower your body by bending your elbows, then push back up.',
       youtubeUrl: 'https://www.youtube.com/watch?v=FVjtOSA-dz8',
+      primaryMuscleGroupId: 3
     },
     {
       id: 3,
@@ -76,6 +78,7 @@ export class HomeContentComponent {
       description:
         'Hold a kettlebell in one hand with a neutral grip and curl it towards your shoulder. Repeat on both sides.',
       youtubeUrl: 'https://www.youtube.com/watch?v=exampleURL',
+      primaryMuscleGroupId: 3
     },
     {
       id: 4,
@@ -83,6 +86,7 @@ export class HomeContentComponent {
       description:
         'Lie on the floor and press kettlebells upwards, similar to a bench press but with a limited range of motion.',
       youtubeUrl: 'https://www.youtube.com/watch?v=exampleURL',
+      primaryMuscleGroupId: 3
     },
     {
       id: 5,
@@ -90,6 +94,7 @@ export class HomeContentComponent {
       description:
         'Standard push-ups engage the chest, shoulders, and triceps, with hands shoulder-width apart.',
       youtubeUrl: 'https://www.youtube.com/watch?v=sq4VAZ1TtRw',
+      primaryMuscleGroupId: 3
     },
     {
       id: 6,
@@ -97,6 +102,7 @@ export class HomeContentComponent {
       description:
         'Using a bench for either hand placement or feet placement, perform a push-up with enough force to lift your body off the ground.',
       youtubeUrl: 'https://www.youtube.com/watch?v=exampleURL',
+      primaryMuscleGroupId: 3
     },
     {
       id: 7,
@@ -104,6 +110,7 @@ export class HomeContentComponent {
       description:
         'Facing away from the bench, place your hands on it and lower your body by bending your elbows, then push back up.',
       youtubeUrl: 'https://www.youtube.com/watch?v=FVjtOSA-dz8',
+      primaryMuscleGroupId: 3
     },
     {
       id: 8,
@@ -111,6 +118,7 @@ export class HomeContentComponent {
       description:
         'Hold a kettlebell in one hand with a neutral grip and curl it towards your shoulder. Repeat on both sides.',
       youtubeUrl: 'https://www.youtube.com/watch?v=exampleURL',
+      primaryMuscleGroupId: 3
     },
     {
       id: 9,
@@ -118,6 +126,7 @@ export class HomeContentComponent {
       description:
         'Lie on the floor and press kettlebells upwards, similar to a bench press but with a limited range of motion.',
       youtubeUrl: 'https://www.youtube.com/watch?v=exampleURL',
+      primaryMuscleGroupId: 3
     },
     {
       id: 10,
@@ -125,6 +134,7 @@ export class HomeContentComponent {
       description:
         'Standard push-ups engage the chest, shoulders, and triceps, with hands shoulder-width apart.',
       youtubeUrl: 'https://www.youtube.com/watch?v=sq4VAZ1TtRw',
+      primaryMuscleGroupId: 3
     },
   ];
 
@@ -161,6 +171,25 @@ export class HomeContentComponent {
     },
   ];
   id: any;
+  // muscleGroups = [
+  //   {
+  //     name: 'Chest',
+  //     exercises: [{ name: 'Bench Press' }, { name: 'Push Up' }],
+  //     showExercises: false,
+  //   },
+  //   {
+  //     name: 'Bicep',
+  //     exercises: [{ name: 'Bicep Curl' }, { name: 'Hammer Curl' }],
+  //     showExercises: false,
+  //   },
+    // Add more muscle groups here
+  // ];
+
+  showExercises: boolean = false;
+
+  toggleExercises(): void {
+    this.showExercises = !this.showExercises;
+  }
 
   constructor(
     private equipmentService: EquipmentService,
@@ -171,6 +200,7 @@ export class HomeContentComponent {
     public auth: AuthService,
     private userService: UserService
   ) {}
+
 
   ngOnInit() {
     this.equipmentService
