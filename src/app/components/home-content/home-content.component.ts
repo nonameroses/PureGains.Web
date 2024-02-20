@@ -19,129 +19,19 @@ import { WorkoutService } from 'src/app/shared/services/workout.service';
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
 import { ExerciseService } from 'src/app/shared/services/exercise.service';
 import { Exercise } from 'src/app/shared/models/exercise.interface';
-import {
-  trigger,
-  state,
-  style,
-  transition,
-  animate,
-} from '@angular/animations';
-import {
-  Accordion,
-  AccordionItem,
-  InstanceOptions,
-  Modal,
-  ModalInterface,
-  ModalOptions,
-} from 'flowbite';
+import { InstanceOptions, Modal, ModalInterface, ModalOptions } from 'flowbite';
 @Component({
   selector: 'app-home-content',
   templateUrl: './home-content.component.html',
   styleUrls: ['./test.scss'],
   standalone: true,
   imports: [FontAwesomeModule, CommonModule, NavBarComponent],
-  animations: [
-    trigger('detailExpand', [
-      state(
-        'collapsed',
-        style({ height: '0px', minHeight: '0', display: 'none' })
-      ),
-      state('expanded', style({ height: '*', display: 'table-row' })),
-      transition(
-        'expanded <=> collapsed',
-        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
-      ),
-    ]),
-  ],
 })
 export class HomeContentComponent {
   modal: ModalInterface;
-  toggleDetail = false;
-  shouldRotate: boolean = false;
-  hasBeenClicked: boolean = false;
-  rows = [
-    {
-      id: 1,
-      mainContent: 'Main Content 1',
-      detailContent: 'Detail Content 1',
-      isExpanded: false,
-    },
-    {
-      id: 2,
-      mainContent: 'Main Content 2',
-      detailContent: 'Detail Content 2',
-      isExpanded: false,
-    },
-    // Add more rows as needed
-  ];
-  activeItem: number | null = null;
-
-  toggleItem(index: number): void {
-    if (this.activeItem === index) {
-      this.activeItem = null; // Collapse the currently active item
-    } else {
-      this.activeItem = index; // Expand the new item
-    }
-  }
-  openka() {
-    this.modal.show();
-  }
-  nuka() {
-    const $modalElement: HTMLElement = document.querySelector('#modalEl');
-
-    const modalOptions: ModalOptions = {
-      placement: 'bottom-right',
-      backdrop: 'dynamic',
-      backdropClasses: 'bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-40',
-      closable: true,
-      onHide: () => {
-        console.log('modal is hidden');
-      },
-      onShow: () => {
-        console.log('modal is shown');
-      },
-      onToggle: () => {
-        console.log('modal has been toggled');
-      },
-    };
-
-    // instance options object
-    const instanceOptions: InstanceOptions = {
-      id: 'modalEl',
-      override: true,
-    };
-
-    this.modal = new Modal(
-      $modalElement,
-      modalOptions,
-      instanceOptions
-    );
-
-  
-  }
-  isItemActive(index: number): boolean {
-    return this.activeItem === index;
-  }
-
-  toggleExpand(row: any): void {
-    row.isExpanded = !row.isExpanded;
-  }
-
   activeTab: number = 0;
 
-  toggleTab(idx: number): void {
-    this.activeTab = this.activeTab === idx ? 0 : idx;
-    console.log(idx);
-    console.log(this.activeTab);
-  }
-
-  isTabActive(idx: number): boolean {
-    return this.activeTab === idx;
-  }
-
   user: User = null;
-  userSubscription: Subscription;
-  test: User;
   pages: PageSelectionModel[] = [
     {
       pageId: 'equipment',
@@ -154,13 +44,15 @@ export class HomeContentComponent {
     },
   ];
   faLink = faLink;
-  active: boolean = false;
+  isEquipmentSelected: boolean = false;
 
-  selectedEquipment: Equipment[] = [];
-  selectedMuscleGroups: MuscleGroup[] = [];
-
+  // Populate from service
   equipment: Equipment[] = [];
   muscleGroups: MuscleGroup[] = [];
+
+  // Populate from user Input
+  selectedEquipment: Equipment[] = [];
+  selectedMuscleGroups: MuscleGroup[] = [];
 
   currentExercises: Exercise[] = [];
   allExercises: Exercise[] = [
@@ -269,10 +161,6 @@ export class HomeContentComponent {
     },
   ];
   id: any;
-  // activeWorkout: Workout = {
-  //   id:1,
-  //   exercises: this.workoutExercises
-  // }
 
   constructor(
     private equipmentService: EquipmentService,
@@ -375,66 +263,12 @@ export class HomeContentComponent {
           });
       },
     });
-
-    //this.ex
   }
 
   ngAfterViewInit() {
-    this.nuka();
-    //  this.da();
-    // Your code to initialize the accordion goes here
+    this.initialiseModal();
   }
 
-  da() {
-    const accordionElement = document.getElementById('accordion-collapse');
-    var accordionItems: AccordionItem[] = [];
-    // create an array of objects with the id, trigger element (eg. button), and the content element
-    for (let i = 0; i < this.allExercises.length; i++) {
-      accordionItems.push({
-        id: `heading-${i + 1}"`, // Increment the id by 1 for each item
-        triggerEl: document.querySelector(`#heading-${i + 1}`), // Select the corresponding trigger element
-        targetEl: document.querySelector(`#body-${i + 1}`), // Select the corresponding target element
-        active: false, // Set the active state
-      });
-    }
-
-    console.log(accordionItems);
-    // options with default values
-    const options = {
-      alwaysOpen: false,
-      activeClasses:
-        'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white',
-      inactiveClasses: 'text-gray-500 dark:text-gray-400',
-      onOpen: (item) => {
-        // console.log('accordion item has been shown');
-
-        this.shouldRotate = true;
-      },
-      onClose: (item) => {
-        //  console.log('accordion item has been hidden');
-        //  console.log(item);
-        this.shouldRotate = false;
-      },
-      onToggle: (item) => {
-        // console.log(this.toggleDetail);
-        // console.log('accordion item has been toggled');
-        console.log(item);
-      },
-    };
-
-    // instance options object
-    const instanceOptions = {
-      id: 'collapse-example',
-      override: true,
-    };
-
-    const accordion = new Accordion(
-      accordionElement,
-      accordionItems,
-      options,
-      instanceOptions
-    );
-  }
   getSelectedEquipment(): Equipment[] {
     this.selectedEquipment = this.equipment.filter((e) => e.isSelected);
     return this.selectedEquipment;
@@ -467,20 +301,19 @@ export class HomeContentComponent {
         (x) => x.name !== 'Full-Body'
       );
     }
-    //console.log(this.selectedMuscleGroups);
     return this.selectedMuscleGroups;
   }
 
   progressSelection() {
     if (this.selectedEquipment.length > 0) {
-      this.active = true;
+      this.isEquipmentSelected = true;
     }
   }
 
   public waitAndGoDown(id: string) {
     if (this.selectedEquipment.length > 0) {
       this.waitForElement(id);
-      this.active = true;
+      this.isEquipmentSelected = true;
     }
   }
 
@@ -510,6 +343,46 @@ export class HomeContentComponent {
       childList: true,
       subtree: true,
     });
+  }
+
+  toggleTab(idx: number): void {
+    this.activeTab = this.activeTab === idx ? 0 : idx;
+    console.log(idx);
+    console.log(this.activeTab);
+  }
+
+  isTabActive(idx: number): boolean {
+    return this.activeTab === idx;
+  }
+  openModal() {
+    this.modal.show();
+  }
+  initialiseModal() {
+    const $modalElement: HTMLElement = document.querySelector('#modalEl');
+
+    const modalOptions: ModalOptions = {
+      placement: 'bottom-right',
+      backdrop: 'dynamic',
+      backdropClasses: 'bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-40',
+      closable: true,
+      onHide: () => {
+        console.log('modal is hidden');
+      },
+      onShow: () => {
+        console.log('modal is shown');
+      },
+      onToggle: () => {
+        console.log('modal has been toggled');
+      },
+    };
+
+    // instance options object
+    const instanceOptions: InstanceOptions = {
+      id: 'modalEl',
+      override: true,
+    };
+
+    this.modal = new Modal($modalElement, modalOptions, instanceOptions);
   }
 }
 
