@@ -25,7 +25,7 @@
                 <span class="text-2xl font-roboto text-gray-200">Add or remove exercises from the list</span>
             </div>
             <div
-                class="col-span-12 rounded-xl   p-12  sm:col-span-8 flex items-center w-full 
+                class="col-span-12 rounded-xl   p-4  sm:col-span-8 flex items-center w-full 
                 bg-gray-900
             border shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)] ">
                 <!-- Main Content -->
@@ -95,16 +95,10 @@
                         <div class=" flex right-0 gap-3 text-white">
                         <button (click)="openModal()" type="button" data-modal-target="crypto-modal"
                             data-modal-toggle="crypto-modal"
-                            class=" ml-auto text-gray-900 bg-sky-500 hover:bg-sky-300 border-black focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-full 
-                            text-sm px-5 py-2.5 text-center inline-flex items-center ">
-                          
-                            <svg class="" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                            class="w-6 h-6 me-2 hover:scale-125 ">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-                        </svg>
-                            Add Exercises
+                            class=" ml-auto text-gray-900 font-bold bg-sky-600 hover:bg-sky-500 border-black focus:ring-4 focus:outline-none focus:ring-gray-100 text-lg rounded-full 
+                            text-sm px-5 py-2.5 text-center inline-flex items-center text-white">
+                 
+                            Add exercises
                          
                         </button>
                         </div>
@@ -227,25 +221,15 @@
 
             </div>
             <div class="footer col-span-8 rounded-lg flex items-center justify-center  ">
-                <!-- Footer content -->
-
                 <button type="button" (click)="waitAndGoDown(pages[1].pageId)"
-                    class="  px-12 py-2 rounded-lg text-white text-sm tracking-wider text-lg font-medium outline-none border-2 border-bliu-4  hover:bg-bliu-4  hover:text-white transition-all duration-300">
+                    class="  px-12 py-2 mr-2 rounded-lg text-white text-sm tracking-wider text-lg font-medium outline-none border-2 border-bliu-4 hover:bg-sky-600 hover:text-white transition-all duration-300">
                     Go Back</button>
-
                 <button type="button" (click)="waitAndGoDown(pages[2].pageId)"
-                    class="  px-12 py-2 rounded-lg text-white text-sm tracking-wider text-lg font-medium outline-none border-2 border-bliu-4  hover:bg-bliu-4  hover:text-white transition-all duration-300">
+                    class="  px-12 py-2 rounded-lg text-white text-sm tracking-wider text-lg font-medium outline-none border-2 border-bliu-4 bg-sky-700  hover:bg-sky-600  hover:text-white transition-all duration-300">
                     Continue</button>
-
-                <!-- <button class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-white rounded-lg group border-2 boder-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
-            <span class="relative px-5 py-2.5 transition-all ease-in duration-75  dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-            Purple to blue
-            </span>
-            </button> -->
             </div>
         </div>
     </body>
-
 
     <body id="equipment" class="font-roboto test h-screen w-screen  pt-24 items-center justify-center ">
         <header class="absolute antialiased bg-white  ">

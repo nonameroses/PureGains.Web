@@ -228,6 +228,7 @@ export class HomeContentComponent {
   }
   addExerciseToWorkout(exercise){
     this.currentExercises.push(exercise);
+    this.modal.hide();
   }
   toggleExercises(muscleGroup: any): void {
     muscleGroup.showExercises = !muscleGroup.showExercises;
