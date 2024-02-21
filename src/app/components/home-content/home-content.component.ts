@@ -20,6 +20,7 @@ import { NavBarComponent } from '../nav-bar/nav-bar.component';
 import { ExerciseService } from 'src/app/shared/services/exercise.service';
 import { Exercise } from 'src/app/shared/models/exercise.interface';
 import { InstanceOptions, Modal, ModalInterface, ModalOptions } from 'flowbite';
+import { MuscleGroupExercises } from 'src/app/shared/models/muscle-group-exercises';
 @Component({
   selector: 'app-home-content',
   templateUrl: './home-content.component.html',
@@ -58,11 +59,11 @@ export class HomeContentComponent {
   allExercises: Exercise[] = [
     {
       id: 1,
-      name: 'Explosive Push-ups',
+      name: 'Bench-Press',
       description:
         'Using a bench for either hand placement or feet placement, perform a push-up with enough force to lift your body off the ground.',
       youtubeUrl: 'https://www.youtube.com/watch?v=exampleURL',
-      primaryMuscleGroupId: 3
+      primaryMuscleGroupId: 3,
     },
     {
       id: 2,
@@ -70,7 +71,7 @@ export class HomeContentComponent {
       description:
         'Facing away from the bench, place your hands on it and lower your body by bending your elbows, then push back up.',
       youtubeUrl: 'https://www.youtube.com/watch?v=FVjtOSA-dz8',
-      primaryMuscleGroupId: 3
+      primaryMuscleGroupId: 3,
     },
     {
       id: 3,
@@ -78,7 +79,7 @@ export class HomeContentComponent {
       description:
         'Hold a kettlebell in one hand with a neutral grip and curl it towards your shoulder. Repeat on both sides.',
       youtubeUrl: 'https://www.youtube.com/watch?v=exampleURL',
-      primaryMuscleGroupId: 3
+      primaryMuscleGroupId: 2,
     },
     {
       id: 4,
@@ -86,15 +87,15 @@ export class HomeContentComponent {
       description:
         'Lie on the floor and press kettlebells upwards, similar to a bench press but with a limited range of motion.',
       youtubeUrl: 'https://www.youtube.com/watch?v=exampleURL',
-      primaryMuscleGroupId: 3
+      primaryMuscleGroupId: 2,
     },
     {
       id: 5,
-      name: 'Push-up',
+      name: 'Pull-Up',
       description:
         'Standard push-ups engage the chest, shoulders, and triceps, with hands shoulder-width apart.',
       youtubeUrl: 'https://www.youtube.com/watch?v=sq4VAZ1TtRw',
-      primaryMuscleGroupId: 3
+      primaryMuscleGroupId: 1,
     },
     {
       id: 6,
@@ -102,7 +103,7 @@ export class HomeContentComponent {
       description:
         'Using a bench for either hand placement or feet placement, perform a push-up with enough force to lift your body off the ground.',
       youtubeUrl: 'https://www.youtube.com/watch?v=exampleURL',
-      primaryMuscleGroupId: 3
+      primaryMuscleGroupId: 1,
     },
     {
       id: 7,
@@ -110,7 +111,15 @@ export class HomeContentComponent {
       description:
         'Facing away from the bench, place your hands on it and lower your body by bending your elbows, then push back up.',
       youtubeUrl: 'https://www.youtube.com/watch?v=FVjtOSA-dz8',
-      primaryMuscleGroupId: 3
+      primaryMuscleGroupId: 1,
+    },
+    {
+      id: 1,
+      name: 'Bench-Press',
+      description:
+        'Using a bench for either hand placement or feet placement, perform a push-up with enough force to lift your body off the ground.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=exampleURL',
+      primaryMuscleGroupId: 3,
     },
     {
       id: 8,
@@ -118,7 +127,7 @@ export class HomeContentComponent {
       description:
         'Hold a kettlebell in one hand with a neutral grip and curl it towards your shoulder. Repeat on both sides.',
       youtubeUrl: 'https://www.youtube.com/watch?v=exampleURL',
-      primaryMuscleGroupId: 3
+      primaryMuscleGroupId: 3,
     },
     {
       id: 9,
@@ -126,7 +135,7 @@ export class HomeContentComponent {
       description:
         'Lie on the floor and press kettlebells upwards, similar to a bench press but with a limited range of motion.',
       youtubeUrl: 'https://www.youtube.com/watch?v=exampleURL',
-      primaryMuscleGroupId: 3
+      primaryMuscleGroupId: 3,
     },
     {
       id: 10,
@@ -134,7 +143,7 @@ export class HomeContentComponent {
       description:
         'Standard push-ups engage the chest, shoulders, and triceps, with hands shoulder-width apart.',
       youtubeUrl: 'https://www.youtube.com/watch?v=sq4VAZ1TtRw',
-      primaryMuscleGroupId: 3
+      primaryMuscleGroupId: 3,
     },
   ];
 
@@ -171,24 +180,55 @@ export class HomeContentComponent {
     },
   ];
   id: any;
-  // muscleGroups = [
-  //   {
-  //     name: 'Chest',
-  //     exercises: [{ name: 'Bench Press' }, { name: 'Push Up' }],
-  //     showExercises: false,
-  //   },
-  //   {
-  //     name: 'Bicep',
-  //     exercises: [{ name: 'Bicep Curl' }, { name: 'Hammer Curl' }],
-  //     showExercises: false,
-  //   },
-    // Add more muscle groups here
-  // ];
-
+  muscleGroupExercises: MuscleGroupExercises[] = [];
+  nmg = [
+    {
+      name: 'Chest',
+      exercises: [{ name: 'Bench Press' }, { name: 'Push Up' }],
+      showExercises: false,
+    },
+    {
+      name: 'Bicep',
+      exercises: [{ name: 'Bicep Curl' }, { name: 'Hammer Curl' }],
+      showExercises: false,
+    },
+  ];
+  selectedMuscleGroupss: MuscleGroup[] = [
+    {
+      name: 'Chest',
+      isSelected: true,
+      id: 3,
+      imagePath: 'das',
+    },
+    {
+      name: 'Back',
+      isSelected: true,
+      id: 1,
+      imagePath: 'das',
+    },
+    {
+      name: 'Bicps',
+      isSelected: true,
+      id: 2,
+      imagePath: 'das',
+    },
+  ];
   showExercises: boolean = false;
 
-  toggleExercises(): void {
-    this.showExercises = !this.showExercises;
+  populateMuscleGroupExercises() {
+    for (let i = 0; i < this.selectedMuscleGroupss.length; i++) {
+      this.muscleGroupExercises.push({
+        name: this.selectedMuscleGroupss[i].name,
+        exercises: this.allExercises.filter(
+          (x) => x.primaryMuscleGroupId == this.selectedMuscleGroupss[i].id
+        ),
+        showExercises: false,
+      });
+    }
+  }
+
+  toggleExercises(muscleGroup: any): void {
+    muscleGroup.showExercises = !muscleGroup.showExercises;
   }
 
   constructor(
@@ -200,7 +240,6 @@ export class HomeContentComponent {
     public auth: AuthService,
     private userService: UserService
   ) {}
-
 
   ngOnInit() {
     this.equipmentService
@@ -241,6 +280,7 @@ export class HomeContentComponent {
     });
 
     this.limitExerciseNumber();
+    this.populateMuscleGroupExercises();
   }
 
   limitExerciseNumber(): Exercise[] {

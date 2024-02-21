@@ -30,6 +30,15 @@ module.exports = {
       },
       'black-grey-10' : '#2C2F3F',
       'black-grey-20' : '#272933',
+      'black-grey-30' : '#1d2021',
+      'black-grey-40' : '#282828',
+      'black-grey-50' : '#ebdbb2',
+      'black-grey-60' : '#272933',
+
+
+
+
+
       'cp-1':'#e63946',
       'cp-2':'#f1faee',
       'cp-3':'#a8dadc',
@@ -47,7 +56,8 @@ module.exports = {
       'darkblue': '#000428',
       'deepblue': '#004e92',
 
-      'orange-1' : '#FFA500'
+      'orange-1' : '#FFA500',
+
     
 
     },
