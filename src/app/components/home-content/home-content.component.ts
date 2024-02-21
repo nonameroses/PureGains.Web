@@ -226,7 +226,9 @@ export class HomeContentComponent {
       });
     }
   }
-
+  addExerciseToWorkout(exercise){
+    this.currentExercises.push(exercise);
+  }
   toggleExercises(muscleGroup: any): void {
     muscleGroup.showExercises = !muscleGroup.showExercises;
   }
