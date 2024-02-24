@@ -266,7 +266,7 @@
         </div>
     </body>
 
-    <body id="workoutPage"
+    <body id="workoutCustomisePage"
         class="font-roboto bg-black  test h-screen w-screen mx-auto scroll-m-20 pt-24 snap-y snap-mandatory  items-center justify-center ">
 
         <div class="mx-auto grid max-w-screen-xl overflow-y-hidden grid-cols-12 gap-4 p-1">
@@ -480,14 +480,27 @@
                 <button type="button" (click)="waitAndGoDown(pages[1].pageId)"
                     class="  px-12 py-2 mr-2 rounded-lg text-white text-sm tracking-wider text-lg font-medium outline-none border-2 border-bliu-4 hover:bg-sky-600 hover:text-white transition-all duration-300">
                     Go Back</button>
-                <button type="button" (click)="waitAndGoDown(pages[2].pageId)"
+                <button type="button" (click)="waitAndGoDown(pages[3].pageId)"
                     class="  px-12 py-2 rounded-lg text-white text-sm tracking-wider text-lg font-medium outline-none border-2 border-bliu-4 bg-sky-700  hover:bg-sky-600  hover:text-white transition-all duration-300">
                     Continue</button>
             </div>
         </div>
     </body>
 
+    <body id="workoutPage"
+        class="font-roboto bg-black  test h-screen w-screen mx-auto scroll-m-20 pt-24 snap-y snap-mandatory  items-center justify-center ">
 
+        <div class="mx-auto grid max-w-screen-xl overflow-y-hidden grid-cols-12 gap-4 p-1">
+
+    
+            <div class="footer col-span-8 rounded-lg flex items-center justify-center  ">
+     
+                <button type="button" (click)="waitAndGoDown(pages[3].pageId)"
+                    class="  px-12 py-2 rounded-lg text-white text-sm tracking-wider text-lg font-medium outline-none border-2 border-bliu-4 bg-sky-700  hover:bg-sky-600  hover:text-white transition-all duration-300">
+                    Finish</button>
+            </div>
+        </div>
+    </body>
 
 </div>
 

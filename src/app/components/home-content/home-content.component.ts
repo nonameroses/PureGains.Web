@@ -41,6 +41,9 @@ export class HomeContentComponent {
       pageId: 'muscleGroupSelection',
     },
     {
+      pageId: 'workoutCustomisePage',
+    },
+    {
       pageId: 'workoutPage',
     },
   ];
