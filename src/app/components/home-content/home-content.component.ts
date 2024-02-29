@@ -20,6 +20,9 @@ import { NavBarComponent } from '../nav-bar/nav-bar.component';
 import { ExerciseService } from 'src/app/shared/services/exercise.service';
 import { Exercise } from 'src/app/shared/models/exercise.interface';
 import { InstanceOptions, Modal, ModalInterface, ModalOptions } from 'flowbite';
+import { InputCounter } from 'flowbite';
+import type { InputCounterOptions, InputCounterInterface } from 'flowbite';
+
 import { MuscleGroupExercises } from 'src/app/shared/models/muscle-group-exercises';
 @Component({
   selector: 'app-home-content',
@@ -58,18 +61,68 @@ export class HomeContentComponent {
   selectedEquipment: Equipment[] = [];
   selectedMuscleGroups: MuscleGroup[] = [];
 
-  allExercises: Exercise[] = [ ];
+  allExercises: Exercise[] = [];
   currentExercises: Exercise[] = [];
-
 
   workoutInProgress: Workout;
 
-  workoutExercises: WorkoutExercise[] = [ ];
+  workoutExercises: WorkoutExercise[] = [];
   id: any;
   muscleGroupExercises: MuscleGroupExercises[] = [];
 
-
   showExercises: boolean = false;
+
+  repsControl() {
+    const $targetEl: HTMLInputElement = document.getElementById(
+      'increment-input'
+    ) as HTMLInputElement;
+
+    // optionally set the increment and decrement elements
+    const $incrementEl: HTMLElement =
+      document.getElementById('increment-button');
+
+    const $decrementEl: HTMLElement =
+      document.getElementById('decrement-button');
+
+    // optional options with default values and callback functions
+    const options: InputCounterOptions = {
+      minValue: 0,
+      maxValue: 30, // infinite
+      onIncrement: () => {
+        console.log('input field value has been incremented');
+      },
+      onDecrement: () => {
+        console.log('input field value has been decremented');
+      },
+    };
+
+    // instance options object
+    const instanceOptions: InstanceOptions = {
+      id: 'increment-input',
+      override: true,
+    };
+
+    /*
+     * $targetEl: required
+     * $incrementEl: optional
+     * $decrementEl: optional
+     * options: optional
+     * instanceOptions: optional
+     */
+    const counterInput: InputCounterInterface = new InputCounter(
+      $targetEl,
+      $incrementEl,
+      $decrementEl,
+      options,
+      instanceOptions
+    );
+
+    // increment the value of the input field
+    counterInput.increment();
+
+    // decrement the value of the input field
+    counterInput.decrement();
+  }
 
   populateMuscleGroupExercises() {
     for (let i = 0; i < this.selectedMuscleGroups.length; i++) {
@@ -82,7 +135,7 @@ export class HomeContentComponent {
       });
     }
   }
-  addExerciseToWorkout(exercise){
+  addExerciseToWorkout(exercise) {
     this.currentExercises.push(exercise);
     this.modal.hide();
   }
@@ -137,9 +190,6 @@ export class HomeContentComponent {
         console.error('Error fetching user', error);
       },
     });
-
-
-
   }
 
   limitExerciseNumber(): Exercise[] {
@@ -197,6 +247,7 @@ export class HomeContentComponent {
 
   ngAfterViewInit() {
     this.initialiseModal();
+    this.repsControl();
   }
 
   getSelectedEquipment(): Equipment[] {
