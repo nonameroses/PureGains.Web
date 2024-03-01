@@ -4,5 +4,8 @@ export interface WorkoutExercise {
     workoutId: number;
     exerciseId: number;
     isSelected : boolean;
+    sets: Map<number,number>;
+
+
     //Isfinhesd
 }

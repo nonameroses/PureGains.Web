@@ -70,6 +70,58 @@ export class HomeContentComponent {
   id: any;
   muscleGroupExercises: MuscleGroupExercises[] = [];
 
+  dummyWorkoutExercises: WorkoutExercise[] = [
+    {
+      id: 1,
+      exerciseId: 1,
+      workoutId: 1,
+      name: 'Pull-Up',
+      isSelected: false,
+      sets: new Map<number, number>([
+        [1, 0], // Set 1: 10 reps
+        [2, 0], // Set 2: 15 reps
+        [3, 0], // Set 3: 12 reps
+    ])
+      
+    },
+    {
+      id: 1,
+      exerciseId: 4,
+      workoutId: 1,
+      name: 'Chin-Up',
+      isSelected: false,
+      sets: new Map<number, number>([
+        [1, 0], // Set 1: 10 reps
+        [2, 0], // Set 2: 15 reps
+        [3, 0], // Set 3: 12 reps
+    ])
+    },
+    {
+      id: 1,
+      exerciseId: 3,
+      workoutId: 1,
+      name: 'Swing',
+      isSelected: false,
+      sets: new Map<number, number>([
+        [1, 0], // Set 1: 10 reps
+        [2, 0], // Set 2: 15 reps
+        [3, 0], // Set 3: 12 reps
+    ])
+    },
+    {
+      id: 1,
+      exerciseId: 2,
+      workoutId: 1,
+      name: 'Dada',
+      isSelected: false,
+      sets: new Map<number, number>([
+        [1, 0], // Set 1: 10 reps
+        [2, 0], // Set 2: 15 reps
+        [3, 0], // Set 3: 12 reps
+    ])
+    },
+  ];
+
   showExercises: boolean = false;
 
   repsControl() {

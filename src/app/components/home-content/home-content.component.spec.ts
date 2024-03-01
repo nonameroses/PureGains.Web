@@ -100,36 +100,36 @@ describe('HomeContentComponent', () => {
     },
   ];
 
-  let workoutExercises: WorkoutExercise[] = [
-    {
-      id: 1,
-      exerciseId: 1,
-      workoutId: 1,
-      name: 'Pull-Up',
-      isSelected: false,
-    },
-    {
-      id: 1,
-      exerciseId: 4,
-      workoutId: 1,
-      name: 'Chin-Up',
-      isSelected: false,
-    },
-    {
-      id: 1,
-      exerciseId: 3,
-      workoutId: 1,
-      name: 'Swing',
-      isSelected: false,
-    },
-    {
-      id: 1,
-      exerciseId: 2,
-      workoutId: 1,
-      name: 'Dada',
-      isSelected: false,
-    },
-  ];
+  // let workoutExercises: WorkoutExercise[] = [
+  //   {
+  //     id: 1,
+  //     exerciseId: 1,
+  //     workoutId: 1,
+  //     name: 'Pull-Up',
+  //     isSelected: false,
+  //   },
+  //   {
+  //     id: 1,
+  //     exerciseId: 4,
+  //     workoutId: 1,
+  //     name: 'Chin-Up',
+  //     isSelected: false,
+  //   },
+  //   {
+  //     id: 1,
+  //     exerciseId: 3,
+  //     workoutId: 1,
+  //     name: 'Swing',
+  //     isSelected: false,
+  //   },
+  //   {
+  //     id: 1,
+  //     exerciseId: 2,
+  //     workoutId: 1,
+  //     name: 'Dada',
+  //     isSelected: false,
+  //   },
+  // ];
 
   let selectedMuscleGroupss: MuscleGroup[] = [
     {

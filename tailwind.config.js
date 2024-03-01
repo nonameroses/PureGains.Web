@@ -52,6 +52,19 @@ module.exports = {
       'bliu-2' : '#224cb6',
       'bliu-3' : '#007BFF',
       'bliu-4' : '#1BC0EA',
+      'dark-bliu-1': '#2C3A4E',
+      'dark-bliu-2': '#33445B',
+      'dark-bliu-3': '#3B4E68',
+      'dark-bliu-4': '#425876',
+      'dark-bliu-5': '#496183',
+      'dark-bliu-6': '#516B90',
+      'dark-bliu-7': '#58759D',
+      'dark-bliu-8': '#627FA7',
+      'dark-bliu-9': '#6F8AAE',
+      'dark-bliu-10': '#7C95B6',
+
+
+      
       'green-1' : '#2ECC40',
       'darkblue': '#000428',
       'deepblue': '#004e92',
