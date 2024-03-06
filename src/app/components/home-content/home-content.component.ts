@@ -24,6 +24,10 @@ import { InputCounter } from 'flowbite';
 import type { InputCounterOptions, InputCounterInterface } from 'flowbite';
 
 import { MuscleGroupExercises } from 'src/app/shared/models/muscle-group-exercises';
+import {
+
+  WorkoutInProgress,
+} from 'src/app/shared/models/workout-exercise-in-progress-interface';
 @Component({
   selector: 'app-home-content',
   templateUrl: './home-content.component.html',
@@ -70,57 +74,66 @@ export class HomeContentComponent {
   id: any;
   muscleGroupExercises: MuscleGroupExercises[] = [];
 
-  dummyWorkoutExercises: WorkoutExercise[] = [
-    {
-      id: 1,
-      exerciseId: 1,
-      workoutId: 1,
-      name: 'Pull-Up',
-      isSelected: false,
-      sets: new Map<number, number>([
-        [1, 0], // Set 1: 10 reps
-        [2, 0], // Set 2: 15 reps
-        [3, 0], // Set 3: 12 reps
-    ])
-      
-    },
-    {
-      id: 1,
-      exerciseId: 4,
-      workoutId: 1,
-      name: 'Chin-Up',
-      isSelected: false,
-      sets: new Map<number, number>([
-        [1, 0], // Set 1: 10 reps
-        [2, 0], // Set 2: 15 reps
-        [3, 0], // Set 3: 12 reps
-    ])
-    },
-    {
-      id: 1,
-      exerciseId: 3,
-      workoutId: 1,
-      name: 'Swing',
-      isSelected: false,
-      sets: new Map<number, number>([
-        [1, 0], // Set 1: 10 reps
-        [2, 0], // Set 2: 15 reps
-        [3, 0], // Set 3: 12 reps
-    ])
-    },
-    {
-      id: 1,
-      exerciseId: 2,
-      workoutId: 1,
-      name: 'Dada',
-      isSelected: false,
-      sets: new Map<number, number>([
-        [1, 0], // Set 1: 10 reps
-        [2, 0], // Set 2: 15 reps
-        [3, 0], // Set 3: 12 reps
-    ])
-    },
-  ];
+  dummyWorkoutExercises: WorkoutInProgress = {
+    id: 1,
+    exercises: [
+      {
+        id: 1,
+        name: 'Pull-Up',
+        sets: new Map<number, number>([
+          [1, 0], // Set 1: 10 reps
+          [2, 0], // Set 2: 15 reps
+          [3, 0], // Set 3: 12 reps
+        ]),
+        isFinished: false,
+        isInProgress: false,
+      },
+      {
+        id: 2,
+        name: 'Deadlift Squats',
+        sets: new Map<number, number>([
+          [1, 0], // Set 1: 10 reps
+          [2, 0], // Set 2: 15 reps
+          [3, 0], // Set 3: 12 reps
+        ]),
+        isFinished: false,
+        isInProgress: false,
+      },
+      {
+        id: 3,
+        name: 'Push-Up',
+        sets: new Map<number, number>([
+          [1, 0], // Set 1: 10 reps
+          [2, 0], // Set 2: 15 reps
+          [3, 0], // Set 3: 12 reps
+        ]),
+        isFinished: false,
+        isInProgress: false,
+      },
+      {
+        id: 4,
+        name: 'Swing',
+        sets: new Map<number, number>([
+          [1, 0], // Set 1: 10 reps
+          [2, 0], // Set 2: 15 reps
+          [3, 0], // Set 3: 12 reps
+        ]),
+        isFinished: false,
+        isInProgress: false,
+      },
+      {
+        id: 5,
+        name: 'Chin-Up',
+        sets: new Map<number, number>([
+          [1, 0], // Set 1: 10 reps
+          [2, 0], // Set 2: 15 reps
+          [3, 0], // Set 3: 12 reps
+        ]),
+        isFinished: false,
+        isInProgress: false,
+      },
+    ],
+  };
 
   showExercises: boolean = false;
 
