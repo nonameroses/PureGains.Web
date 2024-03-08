@@ -24,10 +24,7 @@ import { InputCounter } from 'flowbite';
 import type { InputCounterOptions, InputCounterInterface } from 'flowbite';
 
 import { MuscleGroupExercises } from 'src/app/shared/models/muscle-group-exercises';
-import {
-
-  WorkoutInProgress,
-} from 'src/app/shared/models/workout-exercise-in-progress-interface';
+import { WorkoutInProgress } from 'src/app/shared/models/workout-exercise-in-progress-interface';
 @Component({
   selector: 'app-home-content',
   templateUrl: './home-content.component.html',
@@ -80,127 +77,160 @@ export class HomeContentComponent {
       {
         id: 1,
         name: 'Pull-Up',
-        sets: new Map<number, number>([
-          [1, 0], // Set 1: 10 reps
-          [2, 0], // Set 2: 15 reps
-          [3, 0], // Set 3: 12 reps
-        ]),
+        sets: [
+          {
+            reps: 0,
+            isCurrent: true,
+            isInProgress: true,
+          },
+          {
+            reps: 0,
+            isCurrent: false,
+            isInProgress: false,
+          },
+          {
+            reps: 0,
+            isCurrent: false,
+            isInProgress: false,
+          },
+        ],
         isFinished: false,
-        isInProgress: false,
+        isCurrent: true,
       },
       {
         id: 2,
         name: 'Deadlift Squats',
-        sets: new Map<number, number>([
-          [1, 0], // Set 1: 10 reps
-          [2, 0], // Set 2: 15 reps
-          [3, 0], // Set 3: 12 reps
-        ]),
+        sets: [
+          {
+            reps: 0,
+            isCurrent: false,
+            isInProgress: false,
+          },
+          {
+            reps: 0,
+            isCurrent: false,
+            isInProgress: false,
+          },
+          {
+            reps: 0,
+            isCurrent: false,
+            isInProgress: false,
+          },
+        ],
         isFinished: false,
-        isInProgress: false,
+        isCurrent: false,
       },
       {
         id: 3,
         name: 'Push-Up',
-        sets: new Map<number, number>([
-          [1, 0], // Set 1: 10 reps
-          [2, 0], // Set 2: 15 reps
-          [3, 0], // Set 3: 12 reps
-        ]),
+        sets: [
+          {
+            reps: 0,
+            isCurrent: false,
+            isInProgress: false,
+          },
+          {
+            reps: 0,
+            isCurrent: false,
+            isInProgress: false,
+          },
+          {
+            reps: 0,
+            isCurrent: false,
+            isInProgress: false,
+          },
+        ],
         isFinished: false,
-        isInProgress: false,
+        isCurrent: false,
       },
       {
         id: 4,
         name: 'Swing',
-        sets: new Map<number, number>([
-          [1, 0], // Set 1: 10 reps
-          [2, 0], // Set 2: 15 reps
-          [3, 0], // Set 3: 12 reps
-        ]),
+        sets: [
+          {
+            reps: 0,
+            isCurrent: false,
+            isInProgress: false,
+          },
+          {
+            reps: 0,
+            isCurrent: false,
+            isInProgress: false,
+          },
+          {
+            reps: 0,
+            isCurrent: false,
+            isInProgress: false,
+          },
+        ],
         isFinished: false,
-        isInProgress: false,
+        isCurrent: false,
       },
       {
         id: 5,
         name: 'Chin-Up',
-        sets: new Map<number, number>([
-          [1, 0], // Set 1: 10 reps
-          [2, 0], // Set 2: 15 reps
-          [3, 0], // Set 3: 12 reps
-        ]),
+        sets: [
+          {
+            reps: 0,
+            isCurrent: false,
+            isInProgress: false,
+          },
+          {
+            reps: 0,
+            isCurrent: false,
+            isInProgress: false,
+          },
+          {
+            reps: 0,
+            isCurrent: false,
+            isInProgress: false,
+          },
+        ],
         isFinished: false,
-        isInProgress: false,
+        isCurrent: false,
       },
     ],
+    isFinished: false,
   };
 
   showExercises: boolean = false;
 
-  repsControl() {
+  repsInputControl(){
+   // this.dummyWorkoutExercises.exercises.forEach(x => x.)
+  }
+  initialiseWorkoutExerciseReps() {
+    // Select all input elements that include 'increment-input-' in their ID
+    const inputElements = document.querySelectorAll('[id^="reps-input-"]');
 
-
-    const $targetEl: HTMLInputElement = document.getElementById(
-      'increment-input-0'
-    ) as HTMLInputElement;
-    const $targetEl1: HTMLInputElement = document.getElementById(
-      'increment-input-1'
-    ) as HTMLInputElement;
-
-    // optionally set the increment and decrement elements
-    const $incrementEl: HTMLElement =
-      document.getElementById('increment-button');
-
-    const $decrementEl: HTMLElement =
-      document.getElementById('decrement-button');
-
-    // optional options with default values and callback functions
+    // Optional options with default values and callback functions
     const options: InputCounterOptions = {
       minValue: 0,
-      maxValue: 30, // infinite
-      onIncrement: () => {
-        console.log('input field value has been incremented');
-      },
-      onDecrement: () => {
-        console.log('input field value has been decremented');
-      },
+      maxValue: 30, // Or some other logic to determine the max value dynamically
     };
 
-    // instance options object
+    // Instance options object
     const instanceOptions: InstanceOptions = {
-      id: 'increment-inpssut',
       override: true,
     };
 
-    /*
-     * $targetEl: required
-     * $incrementEl: optional
-     * $decrementEl: optional
-     * options: optional
-     * instanceOptions: optional
-     */
-    const counterInput1: InputCounterInterface = new InputCounter(
-      $targetEl1,
-      $incrementEl,
-      $decrementEl,
-      options,
-      instanceOptions
-    );
-    const counterInput: InputCounterInterface = new InputCounter(
-      $targetEl,
-      $incrementEl,
-      $decrementEl,
-      options,
-      instanceOptions
-    );
-
-    // increment the value of the input field
-    counterInput.increment();
-    counterInput1.increment();
-    // decrement the value of the input field
-    counterInput.decrement();
+    // Loop over each matched element and create an InputCounter instance
+    inputElements.forEach(($targetEl, index) => {
+      // Adjust the instance options id dynamically based on the current element
+      const dynamicInstanceOptions = {
+        ...instanceOptions,
+        id: `reps-input-${index}`,
+      };
+      console.log(dynamicInstanceOptions);
+      // Create a new InputCounter instance for the current element
+      const counterInput: InputCounterInterface = new InputCounter(
+        $targetEl as HTMLInputElement,
+        null,
+        null,
+        options,
+        dynamicInstanceOptions
+      );
+    });
   }
-
   populateMuscleGroupExercises() {
     for (let i = 0; i < this.selectedMuscleGroups.length; i++) {
       this.muscleGroupExercises.push({
@@ -324,7 +354,7 @@ export class HomeContentComponent {
 
   ngAfterViewInit() {
     this.initialiseModal();
-    this.repsControl();
+    this.initialiseWorkoutExerciseReps();
   }
 
   getSelectedEquipment(): Equipment[] {

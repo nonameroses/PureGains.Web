@@ -1,14 +1,19 @@
 export interface WorkoutInProgress {
     id: number;
-
     exercises: ExerciseInProgress[];
-    //Isfinhesd
+    isFinished : boolean;
 }
 
 export interface ExerciseInProgress {
     id: number;
     name: string,
-    sets: Map<number,number>;
-    isInProgress : boolean;
+    sets: SetInProgress[];
+    isCurrent : boolean;
     isFinished : boolean;
+}
+
+export interface SetInProgress {
+    reps: number;
+    isInProgress : boolean;
+    isCurrent : boolean;
 }
