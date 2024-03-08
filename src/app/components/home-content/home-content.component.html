@@ -30,48 +30,19 @@
                                 vitae iaculis. In eu turpis iaculis, feugiat risus quis, aliquet urna. Quisque fringilla
                                 mollis risus, eu pulvinar dolor</p>
                                 <div class="relative flex flex-col md:flex-row  justify-start gap-4 items-start max-w-64 ">
-                                    <div class="relative flex">
-    
-                                        <input type="text" id="increment-input" data-input-counter
+                                    <div *ngFor="let exerc of dummyWorkoutExercises.exercises[j].sets | keyvalue; let e = index" class="relative flex">
+                                        <input   type="text"
+                                         id="increment-input-{{e}}"
+                                         data-input-counter
                                             data-input-counter-min="1" data-input-counter-max="5"
                                             aria-describedby="helper-text-explanation"
                                             class="bg-gray-200 text-black border-x-0 border-gray-300 h-10 font-medium text-center  text-sm focus:ring-blue-500 focus:border-blue-500 block w-full rounded-xl  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="{{j}}. Set"  required />
+                                            placeholder="{{e}}. Set"  required />
                                         <div
                                             class="text-gray-900 absolute bottom-1 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 flex items-center text-xs  space-x-1 rtl:space-x-reverse">
-    
-                                         
                                         </div>
-    
                                     </div>
-                                    <div class="relative flex">
-    
-                                        <input type="text" id="increment-input" data-input-counter
-                                            data-input-counter-min="1" data-input-counter-max="5"
-                                            aria-describedby="helper-text-explanation"
-                                            class="bg-gray-200 text-black border-x-0 border-gray-300 h-10 font-medium text-center  text-sm focus:ring-blue-500 focus:border-blue-500 block w-full rounded-xl  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="2. Set"  required />
-                                        <div
-                                            class="text-gray-900 absolute bottom-1 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 flex items-center text-xs  space-x-1 rtl:space-x-reverse">
-    
-                                  
-                                        </div>
-    
-                                    </div>
-                                    <div class="relative flex">
-    
-                                        <input type="text" id="increment-input" data-input-counter
-                                            data-input-counter-min="1" data-input-counter-max="5"
-                                            aria-describedby="helper-text-explanation"
-                                            class="bg-gray-200 text-black border-x-0 border-gray-300 h-10 font-medium text-center  text-sm focus:ring-blue-500 focus:border-blue-500 block w-full rounded-xl  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="3. Set"  required />
-                                        <div
-                                            class="text-gray-900 absolute bottom-1 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 flex items-center text-xs  space-x-1 rtl:space-x-reverse">
-    
-                                         
-                                        </div>
-    
-                                    </div>
+                            
                                 </div>
                         </div>
                     </div>

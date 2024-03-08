@@ -138,8 +138,13 @@ export class HomeContentComponent {
   showExercises: boolean = false;
 
   repsControl() {
+
+
     const $targetEl: HTMLInputElement = document.getElementById(
-      'increment-input'
+      'increment-input-0'
+    ) as HTMLInputElement;
+    const $targetEl1: HTMLInputElement = document.getElementById(
+      'increment-input-1'
     ) as HTMLInputElement;
 
     // optionally set the increment and decrement elements
@@ -163,7 +168,7 @@ export class HomeContentComponent {
 
     // instance options object
     const instanceOptions: InstanceOptions = {
-      id: 'increment-input',
+      id: 'increment-inpssut',
       override: true,
     };
 
@@ -174,6 +179,13 @@ export class HomeContentComponent {
      * options: optional
      * instanceOptions: optional
      */
+    const counterInput1: InputCounterInterface = new InputCounter(
+      $targetEl1,
+      $incrementEl,
+      $decrementEl,
+      options,
+      instanceOptions
+    );
     const counterInput: InputCounterInterface = new InputCounter(
       $targetEl,
       $incrementEl,
@@ -184,7 +196,7 @@ export class HomeContentComponent {
 
     // increment the value of the input field
     counterInput.increment();
-
+    counterInput1.increment();
     // decrement the value of the input field
     counterInput.decrement();
   }
