@@ -356,6 +356,7 @@ export class HomeContentComponent {
       this.dummyWorkoutExercises.exercises[currentExerciseIndex + 1].isCurrent = true;
       this.dummyWorkoutExercises.exercises[currentExerciseIndex + 1].sets[0].isCurrent = true;
     } 
+
   }
   onInputChange(inputValue: number, setIndex: number, exerciseIndex: number): void {
     const currentExercise = this.dummyWorkoutExercises.exercises[exerciseIndex];
@@ -373,34 +374,6 @@ export class HomeContentComponent {
     this.dummyWorkoutExercises.exercises = [...this.dummyWorkoutExercises.exercises];
 
   }
-
-
-  // onInputChange(value: any,setIndex: number, exerciseIndex: number) {
-  //   // Convert the input value to a number and check your condition
-  //   const inputValue = value;
-
-  //   // Assuming you want to set isCurrent to true if the number is within a specific range
-  //   // Change the condition based on your specific needs
-
-
-  //   if ( inputValue > 0) {
-  //     const nextSetIndex = setIndex + 1;
-
-  //     if (nextSetIndex < this.dummyWorkoutExercises.exercises[exerciseIndex].sets.length) {
-
-
-
-  //       this.dummyWorkoutExercises.exercises[exerciseIndex].sets[nextSetIndex].isCurrent = true;
-  //     } else{
-  //       const nextSetIndex = setIndex + 0;
-  //       const nextExerciseIndex = exerciseIndex + 1;
-  //       this.dummyWorkoutExercises.exercises[nextExerciseIndex].sets[nextSetIndex].isCurrent = true;
-  //     }
-
-
-  //     //this.dummyWorkoutExercises.exercises[e + 1].isCurrent = true;
-  //   }
-  // }
 
   buildWorkout() {
     this.workoutService.addWorkout(this.user.id).subscribe({
