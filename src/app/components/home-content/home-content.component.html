@@ -23,13 +23,14 @@
                                 d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
                                 clip-rule="evenodd" />
                         </svg>
-                        <div class="ml-6">
+                   
+                        <div class="ml-6" >
                             <h4 class="font-bold text-blue-500">{{item.name}}</h4>
                             <p class="mt-2 max-w-screen-sm text-sm text-gray-500">Aliquam tincidunt malesuada tortor
                                 vitae iaculis. In eu turpis iaculis, feugiat risus quis, aliquet urna. Quisque fringilla
                                 mollis risus, eu pulvinar dolor</p>
-                            <div class="relative flex flex-col md:flex-row  justify-start gap-4 items-start max-w-64 ">
-                                <div *ngFor="let exercise of dummyWorkoutExercises.exercises[exerciseIndex].sets;  let setIndex = index"
+                            <div class="relative flex flex-col md:flex-row  justify-start gap-4 items-start max-w-64 " *ngIf="item.isCurrent" >
+                                <div *ngFor="let exercise of dummyWorkoutExercises.exercises[exerciseIndex].sets;   let setIndex = index" 
                                     class="relative flex">
                                     <input [ngClass]="{ 'bg-slate-300': !exercise.isCurrent }" type="text"
                                         id="reps-input-{{setIndex}}" data-input-counter [disabled]="!exercise.isCurrent"
@@ -37,14 +38,14 @@
                                         class="  text-blue-500 border-x-0 border-gray-300 h-10 w-16 font-medium text-center  text-sm focus:ring-blue-500 focus:border-blue-500 
                                             block w-full rounded-xl  dark:bg-gray-700 dark:border-gray-600 
                                             dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="{{setIndex}}. Set" (input)="onInputChange($event.target.value, setIndex,exerciseIndex)"
+                                        placeholder="{{setIndex + 1}}. Set" (input)="onInputChange($event.target.value, setIndex,exerciseIndex)"
                                         required />
                                     <div
                                         class="text-blue-500  absolute bottom-1 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 flex items-center text-xs  space-x-1 rtl:space-x-reverse">
                                     </div>
                                 </div>
 
-                                <button type="button" (click)="addRepForSet(exerciseIndex)"
+                                <button id="incrementSetButton" *ngIf="!isMaximumSetLimitReached" type="button" (click)="addRepForSet(exerciseIndex)"
                                     class="  text-nowrap px-2 py-2  text-white text-sm tracking-wider  font-medium focus:outline-none  border-2 border-bliu-4  bg-bliu-4/30  hover:scale-110 transition-all duration-300">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-6 h-5">
@@ -52,11 +53,12 @@
                                             d="M12 4.5v15m7.5-7.5h-15" />
                                     </svg></button>
 
-                                <button type="button" (click)="waitAndGoDown(pages[1].pageId)"
+                                <button type="button" (click)="nextExercise(exerciseIndex)"
                                     class="  text-nowrap px-3 py-2 rounded-lg text-white text-sm tracking-wider  font-medium focus:outline-none border-2 border-bliu-4  hover:scale-105 hover:bg-bliu-4/80  hover:text-white transition-all duration-300">
                                     Next Exercise</button>
                             </div>
                         </div>
+                  
                     </div>
                     <!-- <div class="relative w-full">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"

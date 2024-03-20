@@ -53,7 +53,7 @@ export class HomeContentComponent {
   ];
   faLink = faLink;
   isEquipmentSelected: boolean = false;
-
+  isMaximumSetLimitReached = false;
   // Populate from service
   equipment: Equipment[] = [];
   muscleGroups: MuscleGroup[] = [];
@@ -195,8 +195,8 @@ export class HomeContentComponent {
 
   showExercises: boolean = false;
 
-  repsInputControl(){
-   // this.dummyWorkoutExercises.exercises.forEach(x => x.)
+  repsInputControl() {
+    // this.dummyWorkoutExercises.exercises.forEach(x => x.)
   }
   initialiseWorkoutExerciseReps() {
     // Select all input elements that include 'increment-input-' in their ID
@@ -258,7 +258,7 @@ export class HomeContentComponent {
     private exerciseService: ExerciseService,
     public auth: AuthService,
     private userService: UserService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.equipmentService
@@ -328,27 +328,39 @@ export class HomeContentComponent {
   //     }
   //   })
   // }
-  addRepForSet(exerciseIndex){
-    this.dummyWorkoutExercises.exercises[exerciseIndex].sets.push({
+  addRepForSet(exerciseIndex) {
+    const newSet = {
       reps: 0,
       isCurrent: false,
       isInProgress: false,
-    },)
+    };
+
+    this.dummyWorkoutExercises.exercises[exerciseIndex].sets.push(newSet);
+    this.isMaximumSetLimitReached = this.dummyWorkoutExercises.exercises[exerciseIndex].sets.length >= 5;
+  }
+  nextExercise(currentExerciseIndex: number): void {
+    if (currentExerciseIndex < this.dummyWorkoutExercises.exercises.length - 1) {
+      this.isMaximumSetLimitReached = false;
+      // Mark the current exercise as not in progress
+      this.dummyWorkoutExercises.exercises[currentExerciseIndex].isCurrent = false;
+      // Mark the next exercise as in progress
+      this.dummyWorkoutExercises.exercises[currentExerciseIndex + 1].isCurrent = true;
+    }
   }
   onInputChange(inputValue: number, setIndex: number, exerciseIndex: number): void {
-      const currentExercise = this.dummyWorkoutExercises.exercises[exerciseIndex];
+    const currentExercise = this.dummyWorkoutExercises.exercises[exerciseIndex];
 
-      if (setIndex < currentExercise.sets.length - 1) {
-        // Disable current and enable next set in the current exercise
-        
-        currentExercise.sets[setIndex + 1].isCurrent = true;
-      } else if (exerciseIndex < this.dummyWorkoutExercises.exercises.length - 1) {
-        // If it's the last set of the current exercise, disable it and enable the first set of the next exercise
-        currentExercise.sets[setIndex].isCurrent = false;
-        this.dummyWorkoutExercises.exercises[exerciseIndex + 1].sets[0].isCurrent = true;
-      }
-      // Force Angular to update the view
-      this.dummyWorkoutExercises.exercises = [...this.dummyWorkoutExercises.exercises];
+    if (setIndex < currentExercise.sets.length - 1) {
+      // Disable current and enable next set in the current exercise
+
+      currentExercise.sets[setIndex + 1].isCurrent = true;
+    } else if (exerciseIndex < this.dummyWorkoutExercises.exercises.length - 1) {
+      // If it's the last set of the current exercise, disable it and enable the first set of the next exercise
+      currentExercise.sets[setIndex].isCurrent = false;
+      this.dummyWorkoutExercises.exercises[exerciseIndex + 1].sets[0].isCurrent = true;
+    }
+    // Force Angular to update the view
+    this.dummyWorkoutExercises.exercises = [...this.dummyWorkoutExercises.exercises];
 
   }
 
@@ -356,16 +368,16 @@ export class HomeContentComponent {
   // onInputChange(value: any,setIndex: number, exerciseIndex: number) {
   //   // Convert the input value to a number and check your condition
   //   const inputValue = value;
-  
+
   //   // Assuming you want to set isCurrent to true if the number is within a specific range
   //   // Change the condition based on your specific needs
 
 
   //   if ( inputValue > 0) {
   //     const nextSetIndex = setIndex + 1;
-      
+
   //     if (nextSetIndex < this.dummyWorkoutExercises.exercises[exerciseIndex].sets.length) {
-    
+
 
 
   //       this.dummyWorkoutExercises.exercises[exerciseIndex].sets[nextSetIndex].isCurrent = true;
