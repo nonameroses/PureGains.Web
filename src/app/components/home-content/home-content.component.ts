@@ -328,6 +328,57 @@ export class HomeContentComponent {
   //     }
   //   })
   // }
+  addRepForSet(exerciseIndex){
+    this.dummyWorkoutExercises.exercises[exerciseIndex].sets.push({
+      reps: 0,
+      isCurrent: false,
+      isInProgress: false,
+    },)
+  }
+  onInputChange(inputValue: number, setIndex: number, exerciseIndex: number): void {
+      const currentExercise = this.dummyWorkoutExercises.exercises[exerciseIndex];
+
+      if (setIndex < currentExercise.sets.length - 1) {
+        // Disable current and enable next set in the current exercise
+        
+        currentExercise.sets[setIndex + 1].isCurrent = true;
+      } else if (exerciseIndex < this.dummyWorkoutExercises.exercises.length - 1) {
+        // If it's the last set of the current exercise, disable it and enable the first set of the next exercise
+        currentExercise.sets[setIndex].isCurrent = false;
+        this.dummyWorkoutExercises.exercises[exerciseIndex + 1].sets[0].isCurrent = true;
+      }
+      // Force Angular to update the view
+      this.dummyWorkoutExercises.exercises = [...this.dummyWorkoutExercises.exercises];
+
+  }
+
+
+  // onInputChange(value: any,setIndex: number, exerciseIndex: number) {
+  //   // Convert the input value to a number and check your condition
+  //   const inputValue = value;
+  
+  //   // Assuming you want to set isCurrent to true if the number is within a specific range
+  //   // Change the condition based on your specific needs
+
+
+  //   if ( inputValue > 0) {
+  //     const nextSetIndex = setIndex + 1;
+      
+  //     if (nextSetIndex < this.dummyWorkoutExercises.exercises[exerciseIndex].sets.length) {
+    
+
+
+  //       this.dummyWorkoutExercises.exercises[exerciseIndex].sets[nextSetIndex].isCurrent = true;
+  //     } else{
+  //       const nextSetIndex = setIndex + 0;
+  //       const nextExerciseIndex = exerciseIndex + 1;
+  //       this.dummyWorkoutExercises.exercises[nextExerciseIndex].sets[nextSetIndex].isCurrent = true;
+  //     }
+
+
+  //     //this.dummyWorkoutExercises.exercises[e + 1].isCurrent = true;
+  //   }
+  // }
 
   buildWorkout() {
     this.workoutService.addWorkout(this.user.id).subscribe({
