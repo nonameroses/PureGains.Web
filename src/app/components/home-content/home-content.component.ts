@@ -28,6 +28,7 @@ import { WorkoutInProgress } from 'src/app/shared/models/workout-exercise-in-pro
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import { response } from 'express';
 @Component({
   selector: 'app-home-content',
   templateUrl: './home-content.component.html',
@@ -79,6 +80,8 @@ export class HomeContentComponent {
   id: any;
   muscleGroupExercises: MuscleGroupExercises[] = [];
 
+
+  userWorkouts: Workout[] = [];
   dummyWorkoutExercises: WorkoutInProgress = {
     id: 1,
     exercises: [
@@ -305,6 +308,19 @@ export class HomeContentComponent {
         console.error('Error fetching user', error);
       },
     });
+
+    this.workoutService.getWorkouts(2175).subscribe({
+      next: (response) => {
+        const events = response.map(workout => ({
+          title: workout.totalDuration ? `Duration: ${workout.totalDuration} mins` : 'Workout Session',
+          start: workout.date,
+          // You can include other FullCalendar Event Object properties here
+        }));
+
+        console.log(response);
+        this.calendarOptions = { ...this.calendarOptions, events };
+      }
+    })
   }
 
   limitExerciseNumber(): Exercise[] {

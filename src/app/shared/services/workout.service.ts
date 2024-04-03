@@ -11,8 +11,8 @@ export class WorkoutService {
 
   constructor(private http: HttpClient) { }
 
-  getWorkouts() {
-    return this.http.get<Workout[]>('https://localhost:7199/Workout/getWorkouts');
+  getWorkouts(userId : number) {
+    return this.http.get<Workout[]>('https://localhost:7199/Workout/getWorkouts?userId=' +userId);
   }
 
 
