@@ -25,14 +25,22 @@ import type { InputCounterOptions, InputCounterInterface } from 'flowbite';
 
 import { MuscleGroupExercises } from 'src/app/shared/models/muscle-group-exercises';
 import { WorkoutInProgress } from 'src/app/shared/models/workout-exercise-in-progress-interface';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { CalendarOptions } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
 @Component({
   selector: 'app-home-content',
   templateUrl: './home-content.component.html',
   styleUrls: ['./test.scss'],
   standalone: true,
-  imports: [FontAwesomeModule, CommonModule, NavBarComponent],
+  imports: [FontAwesomeModule, CommonModule, NavBarComponent, FullCalendarModule ],
 })
 export class HomeContentComponent {
+  calendarOptions: CalendarOptions = {
+    initialView: 'dayGridMonth',
+    plugins: [dayGridPlugin]
+  };
+  
   modal: ModalInterface;
   activeTab: number = 0;
 
