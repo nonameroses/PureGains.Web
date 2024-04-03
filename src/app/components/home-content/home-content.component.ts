@@ -258,7 +258,7 @@ export class HomeContentComponent {
     private exerciseService: ExerciseService,
     public auth: AuthService,
     private userService: UserService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.equipmentService
@@ -335,44 +335,64 @@ export class HomeContentComponent {
       isInProgress: false,
     };
 
-    if(this.dummyWorkoutExercises.exercises[exerciseIndex].sets.filter(x => x.isCurrent === true).length >= 3){
+    if (
+      this.dummyWorkoutExercises.exercises[exerciseIndex].sets.filter(
+        (x) => x.isCurrent === true
+      ).length >= 3
+    ) {
       newSet.isCurrent = true;
       this.dummyWorkoutExercises.exercises[exerciseIndex].sets.push(newSet);
-    } else{
+    } else {
       this.dummyWorkoutExercises.exercises[exerciseIndex].sets.push(newSet);
- 
     }
-  
-    this.isMaximumSetLimitReached = this.dummyWorkoutExercises.exercises[exerciseIndex].sets.length >= 5;
-    
+
+    this.isMaximumSetLimitReached =
+      this.dummyWorkoutExercises.exercises[exerciseIndex].sets.length >= 5;
   }
   nextExercise(currentExerciseIndex: number): void {
-    if (currentExerciseIndex < this.dummyWorkoutExercises.exercises.length - 1) {
+    if (
+      currentExerciseIndex <
+      this.dummyWorkoutExercises.exercises.length - 1
+    ) {
       this.isMaximumSetLimitReached = false;
       // Mark the current exercise as not in progress
-      this.dummyWorkoutExercises.exercises[currentExerciseIndex].isCurrent = false;
-      this.dummyWorkoutExercises.exercises[currentExerciseIndex].isFinished = true;
+      this.dummyWorkoutExercises.exercises[currentExerciseIndex].isCurrent =
+        false;
+      this.dummyWorkoutExercises.exercises[currentExerciseIndex].isFinished =
+        true;
       // Mark the next exercise as in progress
-      this.dummyWorkoutExercises.exercises[currentExerciseIndex + 1].isCurrent = true;
-      this.dummyWorkoutExercises.exercises[currentExerciseIndex + 1].sets[0].isCurrent = true;
-    } 
-
+      this.dummyWorkoutExercises.exercises[currentExerciseIndex + 1].isCurrent =
+        true;
+      this.dummyWorkoutExercises.exercises[
+        currentExerciseIndex + 1
+      ].sets[0].isCurrent = true;
+    }
   }
-  onInputChange(inputValue: number, setIndex: number, exerciseIndex: number): void {
+  onInputChange(
+    inputValue: number,
+    setIndex: number,
+    exerciseIndex: number
+  ): void {
     const currentExercise = this.dummyWorkoutExercises.exercises[exerciseIndex];
 
     if (setIndex < currentExercise.sets.length - 1) {
       // Disable current and enable next set in the current exercise
 
       currentExercise.sets[setIndex + 1].isCurrent = true;
-    } else if (exerciseIndex < this.dummyWorkoutExercises.exercises.length - 1) {
+    } else if (
+      exerciseIndex <
+      this.dummyWorkoutExercises.exercises.length - 1
+    ) {
       // If it's the last set of the current exercise, disable it and enable the first set of the next exercise
       //currentExercise.sets[setIndex].isCurrent = false;
-      this.dummyWorkoutExercises.exercises[exerciseIndex + 1].sets[0].isCurrent = true;
+      this.dummyWorkoutExercises.exercises[
+        exerciseIndex + 1
+      ].sets[0].isCurrent = true;
     }
     // Force Angular to update the view
-    this.dummyWorkoutExercises.exercises = [...this.dummyWorkoutExercises.exercises];
-
+    this.dummyWorkoutExercises.exercises = [
+      ...this.dummyWorkoutExercises.exercises,
+    ];
   }
 
   buildWorkout() {
@@ -408,33 +428,28 @@ export class HomeContentComponent {
     return this.selectedEquipment;
   }
   getSelectedMuscleGroup(event: any): MuscleGroup[] {
-    var currentSelection = event?.target.id;
+    const currentSelectionId = event?.target.id;
 
-    this.selectedMuscleGroups = this.muscleGroups.filter((e) => e.isSelected);
+    this.selectedMuscleGroups = this.muscleGroups.filter(
+      (muscleGroup) => muscleGroup.isSelected
+    );
 
-    if (
-      currentSelection === 'Full-Body' &&
-      this.selectedMuscleGroups.length > 1
-    ) {
-      this.selectedMuscleGroups
-        .filter((x) => x.name !== 'Full-Body')
-        .map((x) => (x.isSelected = false));
+    const isFullBodySelected =
+      currentSelectionId === 'Full-Body' &&
+      this.selectedMuscleGroups.length > 1;
 
-      this.selectedMuscleGroups
-        .filter((x) => x.name === 'Full-Body')
-        .map((x) => (x.isSelected = true));
+    this.selectedMuscleGroups.forEach((muscleGroup) => {
+      if (muscleGroup.name === 'Full-Body') {
+        muscleGroup.isSelected = isFullBodySelected;
+      } else {
+        muscleGroup.isSelected = !isFullBodySelected;
+      }
+    });
+    
+    this.selectedMuscleGroups = this.selectedMuscleGroups.filter(
+      (muscleGroup) => muscleGroup.isSelected
+    );
 
-      this.selectedMuscleGroups = this.selectedMuscleGroups.filter(
-        (x) => x.name === 'Full-Body'
-      );
-    } else {
-      this.selectedMuscleGroups
-        .filter((x) => x.name === 'Full-Body')
-        .map((x) => (x.isSelected = false));
-      this.selectedMuscleGroups = this.selectedMuscleGroups.filter(
-        (x) => x.name !== 'Full-Body'
-      );
-    }
     return this.selectedMuscleGroups;
   }
 
