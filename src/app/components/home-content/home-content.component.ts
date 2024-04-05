@@ -59,6 +59,9 @@ export class HomeContentComponent {
     {
       pageId: 'workoutPage',
     },
+    {
+      pageId: 'calendarPage',
+    },
   ];
   faLink = faLink;
   isEquipmentSelected: boolean = false;
@@ -298,8 +301,20 @@ export class HomeContentComponent {
         this.checkOrInsertUser(this.user);
         this.userService.getUserByAuthId(this.user.auth0UserId).subscribe({
           next: (response) => {
-            console.log(response);
+       
             this.user = response;
+            this.workoutService.getWorkouts(this.user.id).subscribe({
+              next: (response) => {
+                const events = response.map(workout => ({
+                  title: workout.totalDuration ? `Duration: ${workout.totalDuration} mins` : 'Workout Session',
+                  start: workout.date,
+                  // You can include other FullCalendar Event Object properties here
+                }));
+        
+             
+                this.calendarOptions = { ...this.calendarOptions, events };
+              }
+            })
           },
         });
         //this.initialiseWorkout(this.user.id);
@@ -309,18 +324,7 @@ export class HomeContentComponent {
       },
     });
 
-    this.workoutService.getWorkouts(2175).subscribe({
-      next: (response) => {
-        const events = response.map(workout => ({
-          title: workout.totalDuration ? `Duration: ${workout.totalDuration} mins` : 'Workout Session',
-          start: workout.date,
-          // You can include other FullCalendar Event Object properties here
-        }));
-
-        console.log(response);
-        this.calendarOptions = { ...this.calendarOptions, events };
-      }
-    })
+   
   }
 
   limitExerciseNumber(): Exercise[] {
@@ -481,6 +485,10 @@ export class HomeContentComponent {
     if (this.selectedEquipment.length > 0) {
       this.isEquipmentSelected = true;
     }
+  }
+
+  finishWorkout(){
+    
   }
 
   public waitAndGoDown(id: string) {
