@@ -28,7 +28,7 @@ import { WorkoutInProgress } from 'src/app/shared/models/workout-exercise-in-pro
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import { response } from 'express';
+import { DataService } from 'src/app/shared/services/data.service';
 @Component({
   selector: 'app-home-content',
   templateUrl: './home-content.component.html',
@@ -37,11 +37,7 @@ import { response } from 'express';
   imports: [FontAwesomeModule, CommonModule, NavBarComponent, FullCalendarModule ],
 })
 export class HomeContentComponent {
-  calendarOptions: CalendarOptions = {
-    initialView: 'dayGridMonth',
-    plugins: [dayGridPlugin]
-  };
-  
+
   modal: ModalInterface;
   activeTab: number = 0;
 
@@ -58,9 +54,6 @@ export class HomeContentComponent {
     },
     {
       pageId: 'workoutPage',
-    },
-    {
-      pageId: 'calendarPage',
     },
   ];
   faLink = faLink;
@@ -271,7 +264,8 @@ export class HomeContentComponent {
     private workoutExerciseService: WorkoutExerciseService,
     private exerciseService: ExerciseService,
     public auth: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private dataService: DataService
   ) {}
 
   ngOnInit() {
@@ -311,8 +305,8 @@ export class HomeContentComponent {
                   // You can include other FullCalendar Event Object properties here
                 }));
         
-             
-                this.calendarOptions = { ...this.calendarOptions, events };
+                this.dataService.sendData(events);
+               
               }
             })
           },
@@ -488,7 +482,7 @@ export class HomeContentComponent {
   }
 
   finishWorkout(){
-    
+
   }
 
   public waitAndGoDown(id: string) {
