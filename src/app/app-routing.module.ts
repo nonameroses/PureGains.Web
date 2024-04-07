@@ -1,11 +1,10 @@
-import {
-  Routes,
-} from '@angular/router';
+import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ExternalApiComponent } from './pages/external-api/external-api.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { authGuardFn } from '@auth0/auth0-angular';
+import { CalendarComponent } from './pages/calendar/calendar.component';
 
 export const routes: Routes = [
   {
@@ -14,21 +13,23 @@ export const routes: Routes = [
     canActivate: [authGuardFn],
   },
   {
-    path: 'external-api',
-    component: ExternalApiComponent,
+    path: 'calendar',
+    component: CalendarComponent,
     canActivate: [authGuardFn],
   },
   {
     path: 'error',
     component: ErrorComponent,
   },
-  { path: '**', 
-  redirectTo: '',  
-  component: HomeComponent,
- },
+  { path: '**', redirectTo: '', component: HomeComponent },
   {
     path: '',
     component: HomeComponent,
     pathMatch: 'full',
   },
+  // {
+  //   path: 'calendar',
+  //   component: CalendarComponent,
+  //   canActivate: [authGuardFn],
+  // },
 ];

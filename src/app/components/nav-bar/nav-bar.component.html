@@ -11,11 +11,11 @@
 
 
       <div *ngIf="auth.isAuthenticated$ | async" class="items-center mr-12 hidden space-x-12 lg:flex ">
-        <a class="flex text-gray-600 cursor-pointer transition-colors duration-300 font-semibld text-white  "  >
+        <a (click)="navigateToHome()" class="flex text-gray-600 cursor-pointer transition-colors duration-300 font-semibld text-white  "  >
           Home
       </a>
-      <a class="flex text-gray-600 cursor-pointer transition-colors duration-300 font-semibld text-white "  >
-        About Us
+      <a (click)="navigateToCalendar()" class="flex text-gray-600 cursor-pointer transition-colors duration-300 font-semibld text-white "  >
+        Calendar
       </a>
       
         <!-- <div *ngIf="auth.user$ | async as user" class="flex flex-wrap items-center text-xl font-semibld antialiased">

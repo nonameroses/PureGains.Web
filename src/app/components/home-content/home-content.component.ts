@@ -29,6 +29,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { DataService } from 'src/app/shared/services/data.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-home-content',
   templateUrl: './home-content.component.html',
@@ -265,7 +266,8 @@ export class HomeContentComponent {
     private exerciseService: ExerciseService,
     public auth: AuthService,
     private userService: UserService,
-    private dataService: DataService
+    private dataService: DataService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -482,7 +484,7 @@ export class HomeContentComponent {
   }
 
   finishWorkout(){
-
+    this.router.navigate(['/calendar']);
   }
 
   public waitAndGoDown(id: string) {

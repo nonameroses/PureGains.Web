@@ -9,7 +9,7 @@ import {
   NgbDropdownMenu,
   NgbDropdownToggle,
 } from '@ng-bootstrap/ng-bootstrap';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -34,6 +34,7 @@ export class NavBarComponent {
 
   constructor(
     public auth: AuthService,
+    private router: Router,
     @Inject(DOCUMENT) private doc: Document
   ) {}
 
@@ -43,5 +44,12 @@ export class NavBarComponent {
 
   logout() {
     this.auth.logout({ logoutParams: { returnTo: this.doc.location.origin } });
+  }
+
+  navigateToHome(){
+    this.router.navigate(['/']);
+  }
+  navigateToCalendar(){
+    this.router.navigate(['/calendar']);
   }
 }
