@@ -4,3 +4,7 @@
   align-items: center;
   justify-content: center;
 }
+.test {
+background: linear-gradient(180.2deg, rgb(28, 34, 43) 6.8%, rgb(62, 73, 85) 131%);
+  background: linear-gradient(180.2deg, rgb(16, 19, 30) 6.8%, rgb(21, 27, 45) 131%);
+}
