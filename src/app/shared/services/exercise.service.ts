@@ -9,11 +9,15 @@ export class ExerciseService {
 
   constructor(private http: HttpClient) { }
 
-  getExercisesForUser(equipmentIds: number[], muscleGroupIds: number[]) {
+  getInitialExercisesForUser(equipmentIds: number[], muscleGroupIds: number[]) {
     const request = {'equipmentIds': equipmentIds, 'muscleGroupIds': muscleGroupIds };
 
-    return this.http.post<Exercise[]>('https://localhost:7199/Exercises/getExercisesForUser', request);
+    return this.http.post<Exercise[]>('https://localhost:7199/Exercises/getInitialExercisesForUser', request);
   }
 
+  getExercisesForUserWorkout(exerciseIds: number[]) {
+ 
 
+    return this.http.post<Exercise[]>('https://localhost:7199/Exercises/getExercisesForUserWorkout', exerciseIds);
+  }
 }

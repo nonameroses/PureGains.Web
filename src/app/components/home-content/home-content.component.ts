@@ -3,8 +3,6 @@ import { Component } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
-import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { Equipment } from 'src/app/shared/models/equipment-interface';
 import { User } from 'src/app/shared/models/identity-models/user-interface';
 import { MuscleGroup } from 'src/app/shared/models/muscle-group.interface';
@@ -24,7 +22,10 @@ import { InputCounter } from 'flowbite';
 import type { InputCounterOptions, InputCounterInterface } from 'flowbite';
 
 import { MuscleGroupExercises } from 'src/app/shared/models/muscle-group-exercises';
-import { WorkoutInProgress } from 'src/app/shared/models/workout-exercise-in-progress-interface';
+import {
+  ExerciseInProgress,
+  WorkoutInProgress,
+} from 'src/app/shared/models/workout-exercise-in-progress-interface';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -35,10 +36,14 @@ import { Router } from '@angular/router';
   templateUrl: './home-content.component.html',
   styleUrls: ['./test.scss'],
   standalone: true,
-  imports: [FontAwesomeModule, CommonModule, NavBarComponent, FullCalendarModule ],
+  imports: [
+    FontAwesomeModule,
+    CommonModule,
+    NavBarComponent,
+    FullCalendarModule,
+  ],
 })
 export class HomeContentComponent {
-
   modal: ModalInterface;
   activeTab: number = 0;
 
@@ -71,14 +76,15 @@ export class HomeContentComponent {
   allExercises: Exercise[] = [];
   currentExercises: Exercise[] = [];
 
-  workoutInProgress: Workout;
-
-  workoutExercises: WorkoutExercise[] = [];
+  //workoutExercises: WorkoutExercise[] = [];
   id: any;
+
+  // For the Modal
   muscleGroupExercises: MuscleGroupExercises[] = [];
 
+  workoutInProgress: WorkoutInProgress;
+  exercisesInProgress: ExerciseInProgress[] = [];
 
-  userWorkouts: Workout[] = [];
   dummyWorkoutExercises: WorkoutInProgress = {
     id: 1,
     exercises: [
@@ -203,9 +209,69 @@ export class HomeContentComponent {
 
   showExercises: boolean = false;
 
-  repsInputControl() {
-    // this.dummyWorkoutExercises.exercises.forEach(x => x.)
+  constructor(
+    private equipmentService: EquipmentService,
+    private muscleGroupService: MuscleGroupService,
+    private workoutService: WorkoutService,
+    private workoutExerciseService: WorkoutExerciseService,
+    private exerciseService: ExerciseService,
+    public auth: AuthService,
+    private userService: UserService,
+    private dataService: DataService,
+    private router: Router
+  ) {}
+
+  ngOnInit() {
+    this.equipmentService
+      .getEquipment()
+      .subscribe((response) =>
+        (this.equipment = response).map((x) => (x.isSelected = false))
+      );
+
+    this.muscleGroupService
+      .getMuscleGroups()
+      .subscribe((response) =>
+        (this.muscleGroups = response).map((x) => (x.isSelected = false))
+      );
+
+    this.auth.user$.subscribe({
+      next: (profile) => {
+        this.user = {
+          auth0UserId: profile.sub,
+          email: profile.email,
+          familyName: profile.family_name,
+          givenName: profile.given_name,
+          nickname: profile.nickname,
+          isProfileCreated: true,
+          createdAt: new Date(2012, 0, 1),
+        } as User;
+        this.checkOrInsertUser(this.user);
+        this.userService.getUserByAuthId(this.user.auth0UserId).subscribe({
+          next: (response) => {
+            this.user = response;
+            this.workoutService.getWorkouts(this.user.id).subscribe({
+              next: (response) => {
+                const events = response.map((workout) => ({
+                  title: workout.totalDuration
+                    ? `Duration: ${workout.totalDuration} mins`
+                    : 'Workout Session',
+                  start: workout.date,
+                  // You can include other FullCalendar Event Object properties here
+                }));
+
+                this.dataService.sendData(events);
+              },
+            });
+          },
+        });
+        //this.initialiseWorkout(this.user.id);
+      },
+      error: (error) => {
+        console.error('Error fetching user', error);
+      },
+    });
   }
+
   initialiseWorkoutExerciseReps() {
     // Select all input elements that include 'increment-input-' in their ID
     const inputElements = document.querySelectorAll('[id^="reps-input-"]');
@@ -257,82 +323,15 @@ export class HomeContentComponent {
   toggleExercises(muscleGroup: any): void {
     muscleGroup.showExercises = !muscleGroup.showExercises;
   }
-
-  constructor(
-    private equipmentService: EquipmentService,
-    private muscleGroupService: MuscleGroupService,
-    private workoutService: WorkoutService,
-    private workoutExerciseService: WorkoutExerciseService,
-    private exerciseService: ExerciseService,
-    public auth: AuthService,
-    private userService: UserService,
-    private dataService: DataService,
-    private router: Router
-  ) {}
-
-  ngOnInit() {
-    this.equipmentService
-      .getEquipment()
-      .subscribe((response) =>
-        (this.equipment = response).map((x) => (x.isSelected = false))
-      );
-
-    this.muscleGroupService
-      .getMuscleGroups()
-      .subscribe((response) =>
-        (this.muscleGroups = response).map((x) => (x.isSelected = false))
-      );
-
-    this.auth.user$.subscribe({
-      next: (profile) => {
-        this.user = {
-          auth0UserId: profile.sub,
-          email: profile.email,
-          familyName: profile.family_name,
-          givenName: profile.given_name,
-          nickname: profile.nickname,
-          isProfileCreated: true,
-          createdAt: new Date(2012, 0, 1),
-        } as User;
-        this.checkOrInsertUser(this.user);
-        this.userService.getUserByAuthId(this.user.auth0UserId).subscribe({
-          next: (response) => {
-       
-            this.user = response;
-            this.workoutService.getWorkouts(this.user.id).subscribe({
-              next: (response) => {
-                const events = response.map(workout => ({
-                  title: workout.totalDuration ? `Duration: ${workout.totalDuration} mins` : 'Workout Session',
-                  start: workout.date,
-                  // You can include other FullCalendar Event Object properties here
-                }));
-        
-                this.dataService.sendData(events);
-               
-              }
-            })
-          },
-        });
-        //this.initialiseWorkout(this.user.id);
-      },
-      error: (error) => {
-        console.error('Error fetching user', error);
-      },
-    });
-
-   
-  }
-
   limitExerciseNumber(): Exercise[] {
     var limit: number = 5;
     this.currentExercises = this.allExercises.splice(0, limit);
-    console.log(this.currentExercises);
+
     return this.currentExercises;
   }
 
   removeExercise(int: any) {
-    this.currentExercises.splice(int, 1);
-    console.log(this.currentExercises);
+    this.currentExercises.splice(int, 1)[0];
   }
   checkOrInsertUser(user: User) {
     if (!this.user.isProfileCreated) {
@@ -343,7 +342,6 @@ export class HomeContentComponent {
         },
       });
     }
-    //this.userService.getUserById()
   }
   // initialiseWorkout(id: number){
   //   this.workoutService.addWorkout(id).subscribe({
@@ -360,34 +358,34 @@ export class HomeContentComponent {
     };
 
     if (
-      this.dummyWorkoutExercises.exercises[exerciseIndex].sets.filter(
+      this.workoutInProgress.exercises[exerciseIndex].sets.filter(
         (x) => x.isCurrent === true
       ).length >= 3
     ) {
       newSet.isCurrent = true;
-      this.dummyWorkoutExercises.exercises[exerciseIndex].sets.push(newSet);
+      this.workoutInProgress.exercises[exerciseIndex].sets.push(newSet);
     } else {
-      this.dummyWorkoutExercises.exercises[exerciseIndex].sets.push(newSet);
+      this.workoutInProgress.exercises[exerciseIndex].sets.push(newSet);
     }
 
     this.isMaximumSetLimitReached =
-      this.dummyWorkoutExercises.exercises[exerciseIndex].sets.length >= 5;
+      this.workoutInProgress.exercises[exerciseIndex].sets.length >= 5;
   }
   nextExercise(currentExerciseIndex: number): void {
     if (
       currentExerciseIndex <
-      this.dummyWorkoutExercises.exercises.length - 1
+      this.workoutInProgress.exercises.length - 1
     ) {
       this.isMaximumSetLimitReached = false;
       // Mark the current exercise as not in progress
-      this.dummyWorkoutExercises.exercises[currentExerciseIndex].isCurrent =
+      this.workoutInProgress.exercises[currentExerciseIndex].isCurrent =
         false;
-      this.dummyWorkoutExercises.exercises[currentExerciseIndex].isFinished =
+      this.workoutInProgress.exercises[currentExerciseIndex].isFinished =
         true;
       // Mark the next exercise as in progress
-      this.dummyWorkoutExercises.exercises[currentExerciseIndex + 1].isCurrent =
+      this.workoutInProgress.exercises[currentExerciseIndex + 1].isCurrent =
         true;
-      this.dummyWorkoutExercises.exercises[
+      this.workoutInProgress.exercises[
         currentExerciseIndex + 1
       ].sets[0].isCurrent = true;
     }
@@ -397,7 +395,7 @@ export class HomeContentComponent {
     setIndex: number,
     exerciseIndex: number
   ): void {
-    const currentExercise = this.dummyWorkoutExercises.exercises[exerciseIndex];
+    const currentExercise = this.workoutInProgress.exercises[exerciseIndex];
 
     if (setIndex < currentExercise.sets.length - 1) {
       // Disable current and enable next set in the current exercise
@@ -405,17 +403,17 @@ export class HomeContentComponent {
       currentExercise.sets[setIndex + 1].isCurrent = true;
     } else if (
       exerciseIndex <
-      this.dummyWorkoutExercises.exercises.length - 1
+      this.workoutInProgress.exercises.length - 1
     ) {
       // If it's the last set of the current exercise, disable it and enable the first set of the next exercise
       //currentExercise.sets[setIndex].isCurrent = false;
-      this.dummyWorkoutExercises.exercises[
+      this.workoutInProgress.exercises[
         exerciseIndex + 1
       ].sets[0].isCurrent = true;
     }
     // Force Angular to update the view
-    this.dummyWorkoutExercises.exercises = [
-      ...this.dummyWorkoutExercises.exercises,
+    this.workoutInProgress.exercises = [
+      ...this.workoutInProgress.exercises,
     ];
   }
 
@@ -424,10 +422,8 @@ export class HomeContentComponent {
       next: (response) => {
         this.workoutInProgress = response;
 
-        // this.workoutExerciseService.addWorkoutExercise(this.workoutInProgress.)
-
         this.exerciseService
-          .getExercisesForUser(
+          .getInitialExercisesForUser(
             this.selectedEquipment.map((e) => e.id),
             this.selectedMuscleGroups.map((m) => m.id)
           )
@@ -442,6 +438,60 @@ export class HomeContentComponent {
     });
   }
 
+  beginWorkout() {
+    this.workoutExerciseService
+      .addWorkoutExercise(
+        this.workoutInProgress.id,
+        this.currentExercises.map((x) => x.id)
+      )
+      .subscribe({
+        next: (exerciseIds) => {
+          this.exerciseService
+            .getExercisesForUserWorkout(exerciseIds)
+            .subscribe({
+              next: (response) => {
+                const exercisesInProgress: ExerciseInProgress[] = response.map(
+                  (exercise) => ({
+                    id: exercise.id,
+                    name: exercise.name,
+
+                    sets: [
+                      {
+                        reps: 0,
+                        isInProgress: false,
+                        isCurrent: false,
+                      },
+                      {
+                        reps: 0,
+                        isInProgress: false,
+                        isCurrent: false,
+                      },
+                      {
+                        reps: 0,
+                        isInProgress: false,
+                        isCurrent: false,
+                      },
+                    ],
+                    isCurrent: false,
+                    isFinished: false,
+                  })
+                );
+
+                this.workoutInProgress = {
+                  id: this.workoutInProgress.id,
+                  exercises: exercisesInProgress,
+                  isFinished: false,
+                };
+
+                this.workoutInProgress.exercises[0].isCurrent = true;
+                this.workoutInProgress.exercises[0].sets[0].isCurrent = true;
+                this.workoutInProgress.exercises[0].sets[0].isInProgress = true;
+                console.log(this.workoutInProgress);
+              },
+            });
+        },
+      });
+  }
   ngAfterViewInit() {
     this.initialiseModal();
     this.initialiseWorkoutExerciseReps();
@@ -469,7 +519,7 @@ export class HomeContentComponent {
         muscleGroup.isSelected = !isFullBodySelected;
       }
     });
-    
+
     this.selectedMuscleGroups = this.selectedMuscleGroups.filter(
       (muscleGroup) => muscleGroup.isSelected
     );
@@ -483,7 +533,7 @@ export class HomeContentComponent {
     }
   }
 
-  finishWorkout(){
+  finishWorkout() {
     this.router.navigate(['/calendar']);
   }
 
@@ -534,6 +584,7 @@ export class HomeContentComponent {
   openModal() {
     this.modal.show();
   }
+
   initialiseModal() {
     const $modalElement: HTMLElement = document.querySelector('#modalEl');
 
