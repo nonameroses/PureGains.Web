@@ -82,10 +82,12 @@ export class HomeContentComponent {
   // For the Modal
   muscleGroupExercises: MuscleGroupExercises[] = [];
 
-  workoutInProgress: WorkoutInProgress;
-  exercisesInProgress: ExerciseInProgress[] = [];
 
-  dummyWorkoutExercises: WorkoutInProgress = {
+  exercisesInProgress: ExerciseInProgress[] = [];
+  workoutInProgress: WorkoutInProgress;
+
+
+  initialWorkoutExercises: WorkoutInProgress = {
     id: 1,
     exercises: [
       {
@@ -222,6 +224,8 @@ export class HomeContentComponent {
   ) {}
 
   ngOnInit() {
+    this.workoutInProgress = this.initialWorkoutExercises;
+
     this.equipmentService
       .getEquipment()
       .subscribe((response) =>

@@ -594,8 +594,6 @@
             <!-- component -->
             <div class="flex  items-center justify-center    p-6 md:px-60">
                 <div class="space-y-6 border-l-2 border-slate-700 border-dashed">
-
-
                     <div *ngFor="let exercise of workoutInProgress.exercises; let exerciseIndex = index"
                         class="relative w-full">
                         <div *ngIf="exercise.isCurrent">
@@ -607,7 +605,6 @@
                                     clip-rule="evenodd" />
                             </svg>
                         </div>
-
                         <div *ngIf="exercise.isFinished">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                 class="absolute -top-0.5 z-10 -ml-3.5 h-7 w-7 rounded-full text-bliu-4">
