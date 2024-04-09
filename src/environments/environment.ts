@@ -25,7 +25,24 @@ export const environment = {
     errorPath,
   },
   httpInterceptor: {
-    allowedList: [`${apiUri}/*`],
+    allowedList: [
+      {
+        // Match any request that starts 'https://{yourDomain}/api/v2/' (note the asterisk)
+        uri: 'https://{localhost:7199}/*',
+        tokenOptions: {
+          authorizationParams: {
+            // The attached token should target this audience
+            audience: `${audience}`,
+
+            // The attached token should have these scopes
+            //scope: 'read:current_user'
+          }
+        }
+      }
+    ]
+
+ 
+
   },
 };
 

@@ -18,6 +18,6 @@ export const environment = {
     errorPath,
   },
   httpInterceptor: {
-    allowedList: [`${apiUri}/*`],
+    allowedList: [`${apiUri}/*`, 'https://localhost:7199/Equipment/getEquipment', config.apiUri],
   },
 };
