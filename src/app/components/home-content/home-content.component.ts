@@ -31,6 +31,8 @@ import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { DataService } from 'src/app/shared/services/data.service';
 import { Router } from '@angular/router';
+import { v4 as uuidv4 } from 'uuid';
+
 @Component({
   selector: 'app-home-content',
   templateUrl: './home-content.component.html',
@@ -82,10 +84,8 @@ export class HomeContentComponent {
   // For the Modal
   muscleGroupExercises: MuscleGroupExercises[] = [];
 
-
   exercisesInProgress: ExerciseInProgress[] = [];
   workoutInProgress: WorkoutInProgress;
-
 
   initialWorkoutExercises: WorkoutInProgress = {
     id: 1,
@@ -240,13 +240,18 @@ export class HomeContentComponent {
 
     this.auth.user$.subscribe({
       next: (profile) => {
+        if (profile === null) {
+          console.log('maybe');
+          const sessionId = uuidv4();
+          sessionStorage.setItem('sessionId', sessionId);
+        }
         this.user = {
           auth0UserId: profile.sub,
           email: profile.email,
           familyName: profile.family_name,
           givenName: profile.given_name,
           nickname: profile.nickname,
-          isProfileCreated: true,
+          isProfileCreated: false,
           createdAt: new Date(2012, 0, 1),
         } as User;
         this.checkOrInsertUser(this.user);
@@ -298,7 +303,7 @@ export class HomeContentComponent {
         ...instanceOptions,
         id: `reps-input-${index}`,
       };
-      console.log(dynamicInstanceOptions);
+
       // Create a new InputCounter instance for the current element
       const counterInput: InputCounterInterface = new InputCounter(
         $targetEl as HTMLInputElement,
@@ -341,19 +346,12 @@ export class HomeContentComponent {
     if (!this.user.isProfileCreated) {
       this.userService.addUser(user).subscribe({
         next: (response) => {
-          console.log(response);
           return;
         },
       });
     }
   }
-  // initialiseWorkout(id: number){
-  //   this.workoutService.addWorkout(id).subscribe({
-  //     next: (response) => {
-  //       this.workout = response
-  //     }
-  //   })
-  // }
+
   addRepForSet(exerciseIndex) {
     const newSet = {
       reps: 0,
@@ -376,16 +374,11 @@ export class HomeContentComponent {
       this.workoutInProgress.exercises[exerciseIndex].sets.length >= 5;
   }
   nextExercise(currentExerciseIndex: number): void {
-    if (
-      currentExerciseIndex <
-      this.workoutInProgress.exercises.length - 1
-    ) {
+    if (currentExerciseIndex < this.workoutInProgress.exercises.length - 1) {
       this.isMaximumSetLimitReached = false;
       // Mark the current exercise as not in progress
-      this.workoutInProgress.exercises[currentExerciseIndex].isCurrent =
-        false;
-      this.workoutInProgress.exercises[currentExerciseIndex].isFinished =
-        true;
+      this.workoutInProgress.exercises[currentExerciseIndex].isCurrent = false;
+      this.workoutInProgress.exercises[currentExerciseIndex].isFinished = true;
       // Mark the next exercise as in progress
       this.workoutInProgress.exercises[currentExerciseIndex + 1].isCurrent =
         true;
@@ -405,20 +398,14 @@ export class HomeContentComponent {
       // Disable current and enable next set in the current exercise
 
       currentExercise.sets[setIndex + 1].isCurrent = true;
-    } else if (
-      exerciseIndex <
-      this.workoutInProgress.exercises.length - 1
-    ) {
+    } else if (exerciseIndex < this.workoutInProgress.exercises.length - 1) {
       // If it's the last set of the current exercise, disable it and enable the first set of the next exercise
       //currentExercise.sets[setIndex].isCurrent = false;
-      this.workoutInProgress.exercises[
-        exerciseIndex + 1
-      ].sets[0].isCurrent = true;
+      this.workoutInProgress.exercises[exerciseIndex + 1].sets[0].isCurrent =
+        true;
     }
     // Force Angular to update the view
-    this.workoutInProgress.exercises = [
-      ...this.workoutInProgress.exercises,
-    ];
+    this.workoutInProgress.exercises = [...this.workoutInProgress.exercises];
   }
 
   buildWorkout() {

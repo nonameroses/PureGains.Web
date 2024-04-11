@@ -48,6 +48,7 @@
     "preline": "^2.0.3",
     "rxjs": "^6.6.7",
     "tslib": "^2.5.0",
+    "uuid": "^9.0.1",
     "zone.js": "~0.14.2"
   },
   "devDependencies": {
