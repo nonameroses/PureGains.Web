@@ -562,6 +562,16 @@ export class HomeContentComponent {
   }
 
   finishWorkout() {
+    this.workoutService.getWorkouts(this.user.id).subscribe({
+      next: (workoutResponse) => {
+        const events = workoutResponse.map((workout) => ({
+          title: workout.totalDuration ? `Duration: ${workout.totalDuration} mins` : 'Workout Session',
+          start: workout.date,
+        }));
+        this.dataService.sendData(events);
+      },
+    });
+    
     this.router.navigate(['/calendar']);
   }
 
