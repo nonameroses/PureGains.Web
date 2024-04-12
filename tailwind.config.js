@@ -83,6 +83,7 @@ module.exports = {
   fontFamily: {
     'sans': ['Roboto', 'sans-serif'],
     'roboto': ['Roboto', 'sans-serif'],
+    'sovjet': ['SovjetBox', 'sans-serif'],
   },animation: {
     'rotate-to-180': 'rotate-to-180 0.5s ease-in-out forwards',
     'rotate-to-0': 'rotate-to-0 0.5s ease-in-out forwards',

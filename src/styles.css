@@ -17,6 +17,12 @@
     .snap-start {
       scroll-snap-align: start;
     }
+    @font-face {
+      font-family: 'SovjetBox';
+      src: url('./assets/fonts/SovjetBoxBd_v0_9.otf') format('opentype');
+      font-weight: bold;  
+      font-style: normal;
+    }
   }
 
   
