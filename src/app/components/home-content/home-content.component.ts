@@ -243,78 +243,72 @@ export class HomeContentComponent {
       this.auth.user$.subscribe({
         next: (profile) => {
           if (profile === null) {
-            console.log('maybe');
+            console.log('Creating session user...');
             const sessionId = uuidv4();
             sessionStorage.setItem('sessionId', sessionId);
+            sessionStorage.setItem('isSessionUser', 'true');  // Set a flag indicating this is a session user
             this.user = { auth0UserId: sessionId } as User;
-            
-            this.checkOrInsertUser(this.user).subscribe(() => {
-              this.userService.getUserByAuthId(this.user.auth0UserId).subscribe({
-                next: (response) => {
-                  this.user = response;
-                  this.workoutService.getWorkouts(this.user.id).subscribe({
-                    next: (workoutResponse) => {
-                      const events = workoutResponse.map((workout) => ({
-                        title: workout.totalDuration
-                          ? `Duration: ${workout.totalDuration} mins`
-                          : 'Workout Session',
-                        start: workout.date,
-                      }));
-                      this.dataService.sendData(events);
-                    },
-                  });
-                },
-              });
-            });
-        } else {
-          // user logged in
-          this.user = {
-            auth0UserId: profile.sub,
-            email: profile.email,
-            familyName: profile.family_name,
-            givenName: profile.given_name,
-            nickname: profile.nickname,
-            isProfileCreated: false,
-            createdAt: new Date(2012, 0, 1),
-          } as User;
-
-          this.checkOrInsertUser(this.user);
-          this.userService.getUserByAuthId(this.user.auth0UserId).subscribe({
-            next: (response) => {
-              this.user = response;
-              this.workoutService.getWorkouts(this.user.id).subscribe({
-                next: (response) => {
-                  const events = response.map((workout) => ({
-                    title: workout.totalDuration
-                      ? `Duration: ${workout.totalDuration} mins`
-                      : 'Workout Session',
-                    start: workout.date,
-                    // You can include other FullCalendar Event Object properties here
-                  }));
-
-                  this.dataService.sendData(events);
-                },
-              });
-            },
-          });
-        }
-      },
-      error: (error) => {
-        console.error('Error fetching user', error);
+            this.initializeUserSession();
+          } else {
+            sessionStorage.removeItem('isSessionUser');  // Clear session user flag
+            sessionStorage.removeItem('sessionId');  // Clear the sessionId
+      
+            console.log('Handling logged-in user...');
+            this.user = {
+              auth0UserId: profile.sub,
+              email: profile.email,
+              familyName: profile.family_name,
+              givenName: profile.given_name,
+              nickname: profile.nickname,
+              isProfileCreated: false,
+              createdAt: new Date()
+            } as User;
+      
+            this.initializeUserSession();
+          }
+        },
+        error: (error) => {
+          console.error('Error fetching user', error);
+        },
+      });
+      
+  }
+  initializeUserSession() {
+    this.checkOrInsertUser(this.user).subscribe(() => {
+      this.userService.getUserByAuthId(this.user.auth0UserId).subscribe({
+        next: (response) => {
+          this.user = response;
+          this.loadUserWorkouts();
+        },
+      });
+    });
+  }
+  
+  loadUserWorkouts() {
+    this.workoutService.getWorkouts(this.user.id).subscribe({
+      next: (workoutResponse) => {
+        const events = workoutResponse.map((workout) => ({
+          title: workout.totalDuration ? `Duration: ${workout.totalDuration} mins` : 'Workout Session',
+          start: workout.date,
+        }));
+        this.dataService.sendData(events);
       },
     });
   }
 
-  // @HostListener('window:beforeunload', ['$event'])
-  // unloadNotification($event: any) {
-  //   const sessionId = sessionStorage.getItem('sessionId');
-  //   if (sessionId) {
-  //     navigator.sendBeacon('https://localhost:7199/api/User/deleteUser?id=' + sessionId);
-  //     console.log("works nx");
-  //   } else {
-  //     console.log("Does not work")
-  //   }
-  // }
+  @HostListener('window:beforeunload', ['$event'])
+  unloadNotification($event: any) {
+    const sessionId = sessionStorage.getItem('sessionId');
+    const isSessionUser = sessionStorage.getItem('isSessionUser');
+  
+    if (sessionId && isSessionUser === 'true') {
+      navigator.sendBeacon(`https://localhost:7199/api/User/deleteUser?id=${sessionId}`);
+      console.log("Session user deletion triggered.");
+    } else {
+      console.log("No session user to delete, or not applicable.");
+    }
+  }
+  
   
   initialiseWorkoutExerciseReps() {
     // Select all input elements that include 'increment-input-' in their ID
