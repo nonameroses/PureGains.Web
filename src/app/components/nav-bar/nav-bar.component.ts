@@ -47,7 +47,9 @@ export class NavBarComponent {
   }
 
   navigateToHome(){
-    this.router.navigate(['/']);
+    this.router.navigate(['/']).then(() => {
+      window.location.reload();
+    });
   }
   navigateToCalendar(){
     this.router.navigate(['/calendar']);

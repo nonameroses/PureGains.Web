@@ -30,10 +30,11 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { DataService } from 'src/app/shared/services/data.service';
-import { Router } from '@angular/router';
+import {  Router } from '@angular/router';
 import { v4 as uuidv4 } from 'uuid';
 import { switchMap, tap } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
+import { AppService } from 'src/app/shared/services/app.service';
 
 @Component({
   selector: 'app-home-content',
@@ -47,6 +48,7 @@ import { EMPTY } from 'rxjs';
     FullCalendarModule,
   ],
 })
+
 export class HomeContentComponent {
   modal: ModalInterface;
   activeTab: number = 0;
@@ -212,7 +214,6 @@ export class HomeContentComponent {
   };
 
   showExercises: boolean = false;
-
   constructor(
     private equipmentService: EquipmentService,
     private muscleGroupService: MuscleGroupService,
@@ -222,8 +223,10 @@ export class HomeContentComponent {
     public auth: AuthService,
     private userService: UserService,
     private dataService: DataService,
-    private router: Router
+    private router: Router,
+    private appService: AppService
   ) {}
+
 
   ngOnInit() {
     this.workoutInProgress = this.initialWorkoutExercises;
@@ -308,6 +311,7 @@ export class HomeContentComponent {
       console.log("No session user to delete, or not applicable.");
     }
   }
+  
   
   
   initialiseWorkoutExerciseReps() {
@@ -571,7 +575,7 @@ export class HomeContentComponent {
         this.dataService.sendData(events);
       },
     });
-    
+
     this.router.navigate(['/calendar']);
   }
 
