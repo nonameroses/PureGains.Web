@@ -15,7 +15,7 @@ export const routes: Routes = [
   {
     path: 'calendar',
     component: CalendarComponent,
-    canActivate: [authGuardFn],
+  //  canActivate: [authGuardFn],
   },
   {
     path: 'error',

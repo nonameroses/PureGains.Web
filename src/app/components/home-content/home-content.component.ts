@@ -32,6 +32,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import { DataService } from 'src/app/shared/services/data.service';
 import { Router } from '@angular/router';
 import { v4 as uuidv4 } from 'uuid';
+import { switchMap, tap } from 'rxjs/operators';
+import { EMPTY } from 'rxjs';
 
 @Component({
   selector: 'app-home-content',
@@ -238,41 +240,68 @@ export class HomeContentComponent {
         (this.muscleGroups = response).map((x) => (x.isSelected = false))
       );
 
-    this.auth.user$.subscribe({
-      next: (profile) => {
-        if (profile === null) {
-          console.log('maybe');
-          const sessionId = uuidv4();
-          sessionStorage.setItem('sessionId', sessionId);
-        }
-        this.user = {
-          auth0UserId: profile.sub,
-          email: profile.email,
-          familyName: profile.family_name,
-          givenName: profile.given_name,
-          nickname: profile.nickname,
-          isProfileCreated: false,
-          createdAt: new Date(2012, 0, 1),
-        } as User;
-        this.checkOrInsertUser(this.user);
-        this.userService.getUserByAuthId(this.user.auth0UserId).subscribe({
-          next: (response) => {
-            this.user = response;
-            this.workoutService.getWorkouts(this.user.id).subscribe({
-              next: (response) => {
-                const events = response.map((workout) => ({
-                  title: workout.totalDuration
-                    ? `Duration: ${workout.totalDuration} mins`
-                    : 'Workout Session',
-                  start: workout.date,
-                  // You can include other FullCalendar Event Object properties here
-                }));
-
-                this.dataService.sendData(events);
-              },
+      this.auth.user$.subscribe({
+        next: (profile) => {
+          if (profile === null) {
+            console.log('maybe');
+            const sessionId = uuidv4();
+            sessionStorage.setItem('sessionId', sessionId);
+            this.user = { auth0UserId: sessionId } as User;
+            
+            this.checkOrInsertUser(this.user).subscribe(() => {
+              this.userService.getUserByAuthId(this.user.auth0UserId).subscribe({
+                next: (response) => {
+                  this.user = response;
+                  this.workoutService.getWorkouts(this.user.id).subscribe({
+                    next: (workoutResponse) => {
+                      const events = workoutResponse.map((workout) => ({
+                        title: workout.totalDuration
+                          ? `Duration: ${workout.totalDuration} mins`
+                          : 'Workout Session',
+                        start: workout.date,
+                      }));
+                      this.dataService.sendData(events);
+                    },
+                  });
+                },
+              });
             });
-          },
-        });
+        } else {
+          // user logged in
+          this.user = {
+            auth0UserId: profile.sub,
+            email: profile.email,
+            familyName: profile.family_name,
+            givenName: profile.given_name,
+            nickname: profile.nickname,
+            isProfileCreated: false,
+            createdAt: new Date(2012, 0, 1),
+          } as User;
+
+          this.checkOrInsertUser(this.user);
+          this.userService.getUserByAuthId(this.user.auth0UserId).subscribe({
+            next: (response) => {
+              this.user = response;
+              this.workoutService.getWorkouts(this.user.id).subscribe({
+                next: (response) => {
+                  const events = response.map((workout) => ({
+                    title: workout.totalDuration
+                      ? `Duration: ${workout.totalDuration} mins`
+                      : 'Workout Session',
+                    start: workout.date,
+                    // You can include other FullCalendar Event Object properties here
+                  }));
+
+                  this.dataService.sendData(events);
+                },
+              });
+            },
+          });
+        }
+        // this.userService.getUserExists(profile.sub).subscribe({next: (response) => {
+        //   console.log(response + "DADADA");
+        // }})
+
         //this.initialiseWorkout(this.user.id);
       },
       error: (error) => {
@@ -343,13 +372,21 @@ export class HomeContentComponent {
     this.currentExercises.splice(int, 1)[0];
   }
   checkOrInsertUser(user: User) {
-    if (!this.user.isProfileCreated) {
-      this.userService.addUser(user).subscribe({
-        next: (response) => {
-          return;
-        },
-      });
-    }
+    return this.userService.getUserByAuthId(user.auth0UserId).pipe(
+      switchMap((value) => {
+        if (value) {
+          return EMPTY;
+        } else {
+          return this.userService.addUser(user).pipe(
+            tap({
+              next: (response) => {
+                // User Added
+              },
+            })
+          );
+        }
+      })
+    );
   }
 
   addRepForSet(exerciseIndex) {
