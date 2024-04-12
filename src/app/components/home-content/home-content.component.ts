@@ -348,6 +348,7 @@ export class HomeContentComponent {
     });
   }
   populateMuscleGroupExercises() {
+    this.muscleGroupExercises = [];
     for (let i = 0; i < this.selectedMuscleGroups.length; i++) {
       this.muscleGroupExercises.push({
         name: this.selectedMuscleGroups[i].name,
