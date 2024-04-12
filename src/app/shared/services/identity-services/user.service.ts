@@ -21,4 +21,8 @@ export class UserService {
   addUser(request: User) : Observable<any> {
     return this.http.put<User>('https://localhost:7199/api/User', request);
   }
+
+  deleteUser(id: string){
+    return this.http.delete<User>(`${config.apiUri}/api/User?id=` + id);
+  }
 }

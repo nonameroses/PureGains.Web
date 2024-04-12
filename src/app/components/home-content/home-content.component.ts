@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
@@ -298,11 +298,6 @@ export class HomeContentComponent {
             },
           });
         }
-        // this.userService.getUserExists(profile.sub).subscribe({next: (response) => {
-        //   console.log(response + "DADADA");
-        // }})
-
-        //this.initialiseWorkout(this.user.id);
       },
       error: (error) => {
         console.error('Error fetching user', error);
@@ -310,6 +305,17 @@ export class HomeContentComponent {
     });
   }
 
+  // @HostListener('window:beforeunload', ['$event'])
+  // unloadNotification($event: any) {
+  //   const sessionId = sessionStorage.getItem('sessionId');
+  //   if (sessionId) {
+  //     navigator.sendBeacon('https://localhost:7199/api/User/deleteUser?id=' + sessionId);
+  //     console.log("works nx");
+  //   } else {
+  //     console.log("Does not work")
+  //   }
+  // }
+  
   initialiseWorkoutExerciseReps() {
     // Select all input elements that include 'increment-input-' in their ID
     const inputElements = document.querySelectorAll('[id^="reps-input-"]');
