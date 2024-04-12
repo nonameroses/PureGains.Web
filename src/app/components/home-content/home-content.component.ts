@@ -626,13 +626,16 @@ export class HomeContentComponent {
   openModal() {
     this.modal.show();
   }
+  closeModal(){
+    this.modal.hide();
+  }
 
   initialiseModal() {
     const $modalElement: HTMLElement = document.querySelector('#modalEl');
 
     const modalOptions: ModalOptions = {
       placement: 'bottom-right',
-      backdrop: 'dynamic',
+      backdrop: 'static',
       backdropClasses: 'bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-40',
       closable: true,
       onHide: () => {
@@ -654,6 +657,8 @@ export class HomeContentComponent {
 
     this.modal = new Modal($modalElement, modalOptions, instanceOptions);
   }
+
+ 
 }
 
 function scroll(selector: string) {

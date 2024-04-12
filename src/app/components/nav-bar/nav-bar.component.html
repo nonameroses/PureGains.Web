@@ -6,30 +6,30 @@
     <!-- Page Scroll Progress -->
 
     <!-- Navbar -->
-    <nav class="flex justify-around py-8  bg-opacity-0  w-full fixed top-0 left-0 right-0 z-10">
+
+    <nav class="flex  justify-around py-8 bg-opacity-0 w-full fixed top-0 left-0 right-0 z-10">
       <!-- Logo Container -->
-
-      <a (click)="navigateToHome()" class="flex text-gray-600 cursor-pointer transition-colors duration-300 font-semibld text-white  "  >
-        Home
-    </a>
-      <div *ngIf="auth.isAuthenticated$ | async" class="items-center mr-12 hidden space-x-12 lg:flex ">
-     
-      <a (click)="navigateToCalendar()" class="flex text-gray-600 cursor-pointer transition-colors duration-300 font-semibld text-white "  >
-        Calendar
-      </a>
-  
+      <div class="flex items-center space-x-4"> <!-- Flex container with horizontal spacing -->
+        <a (click)="navigateToHome()"
+          class="cursor-pointer transition-colors duration-300 font-semibold text-white hover:text-gray-600">
+          Home
+        </a>
+        <div *ngIf="auth.isAuthenticated$ | async" class="flex items-center space-x-4">
+          <!-- Only shows when authenticated -->
+          <a (click)="navigateToCalendar()"
+            class="cursor-pointer transition-colors duration-300 font-semibold text-white hover:text-gray-600">
+            Calendar
+          </a>
+        </div>
       </div>
-      
-      <a class="cursor-pointer justify-center">
-        <h3 class="items-center text-3xl text-bliu-4 font-sovjet  object-cover">
-  
-          PureGains
-       
-        </h3>
-      </a>
 
+      <div class="flex flex-col items-center">
+        <a class="cursor-pointer">
+          <h3 class="text-3xl text-bliu-4 font-sovjet">PureGains</h3>
+        </a>
+      </div>
       <!-- Icon Menu Section -->
-      <div class="flex items-center ">
+      <div class="flex items-center">
         <!-- Register -->
         <a *ngIf="(auth.isAuthenticated$ | async) === false"
           class="flex text-white-600 hover:text-blue-500 cursor-pointer transition-colors duration-300">
@@ -45,40 +45,27 @@
         <!-- Login -->
 
         <div *ngIf="(auth.isAuthenticated$ | async) === false">
-          <a (click)="loginWithRedirect()" class="flex text-gray-600 cursor-pointer transition-colors duration-300 font-bold text-white">
-          <svg class="fill-current h-5 w-5 mr-2 mt-0.5" xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 24 24"
-            >
-           
-          </svg>
+          <a (click)="loginWithRedirect()"
+            class="flex text-gray-600 cursor-pointer transition-colors duration-300 font-bold text-white">
+            <svg class="fill-current h-5 w-5 mr-2 mt-0.5" xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 24 24"></svg>
 
-          Login
-        </a>
-
+            Login
+          </a>
         </div>
 
-        <a class="flex text-gray-600 cursor-pointer transition-colors duration-300 font-semibld text-white mr-4"
-        *ngIf="auth.isAuthenticated$ | async">
-        Profile
-      </a>
-        <a class="flex text-gray-600 cursor-pointer transition-colors duration-300 font-semibld text-white mr-4"
-          *ngIf="auth.isAuthenticated$ | async">
-          Settings
-        </a>
 
-        <a    (click)="logout()" class="flex text-gray-600 cursor-pointer transition-colors duration-300 font-bold text-white"
+        <a (click)="logout()"
+          class="flex text-gray-600 cursor-pointer transition-colors duration-300 font-bold text-white"
           *ngIf="auth.isAuthenticated$ | async">
           <svg class="fill-current h-5 w-5 mr-2 mt-0.5" xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 24 24"
-         >
+            xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 24 24">
             <path
               d="M10,17V14H3V10H10V7L15,12L10,17M10,2H19A2,2 0 0,1 21,4V20A2,2 0 0,1 19,22H10A2,2 0 0,1 8,20V18H10V20H19V4H10V6H8V4A2,2 0 0,1 10,2Z" />
           </svg>
 
           Logout
         </a>
-
-    
       </div>
     </nav>
   </div>
