@@ -10,6 +10,7 @@ export interface ExerciseInProgress {
     sets: SetInProgress[];
     isCurrent : boolean;
     isFinished : boolean;
+    youtubeUrl: string;
 }
 
 export interface SetInProgress {

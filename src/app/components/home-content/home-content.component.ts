@@ -116,6 +116,7 @@ export class HomeContentComponent {
         ],
         isFinished: false,
         isCurrent: true,
+        youtubeUrl: "youtube.com"
       },
       {
         id: 2,
@@ -139,6 +140,7 @@ export class HomeContentComponent {
         ],
         isFinished: false,
         isCurrent: false,
+        youtubeUrl: "youtube.com"
       },
       {
         id: 3,
@@ -162,6 +164,7 @@ export class HomeContentComponent {
         ],
         isFinished: false,
         isCurrent: false,
+        youtubeUrl: "youtube.com"
       },
       {
         id: 4,
@@ -185,6 +188,7 @@ export class HomeContentComponent {
         ],
         isFinished: false,
         isCurrent: false,
+        youtubeUrl: "youtube.com"
       },
       {
         id: 5,
@@ -208,6 +212,7 @@ export class HomeContentComponent {
         ],
         isFinished: false,
         isCurrent: false,
+        youtubeUrl: "youtube.com"
       },
     ],
     isFinished: false,
@@ -487,7 +492,7 @@ export class HomeContentComponent {
                   (exercise) => ({
                     id: exercise.id,
                     name: exercise.name,
-
+                    youtubeUrl: exercise.youtubeUrl,
                     sets: [
                       {
                         reps: 0,
@@ -519,7 +524,6 @@ export class HomeContentComponent {
                 this.workoutInProgress.exercises[0].isCurrent = true;
                 this.workoutInProgress.exercises[0].sets[0].isCurrent = true;
                 this.workoutInProgress.exercises[0].sets[0].isInProgress = true;
-                console.log(this.workoutInProgress);
               },
             });
         },
