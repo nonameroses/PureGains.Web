@@ -20,6 +20,7 @@ import { Exercise } from 'src/app/shared/models/exercise.interface';
 import { InstanceOptions, Modal, ModalInterface, ModalOptions } from 'flowbite';
 import { InputCounter } from 'flowbite';
 import type { InputCounterOptions, InputCounterInterface } from 'flowbite';
+import config from './../../../../auth_config.json';
 
 import { MuscleGroupExercises } from 'src/app/shared/models/muscle-group-exercises';
 import {
@@ -310,11 +311,8 @@ export class HomeContentComponent {
     const isSessionUser = sessionStorage.getItem('isSessionUser');
   
     if (sessionId && isSessionUser === 'true') {
-      navigator.sendBeacon(`https://localhost:7199/api/User/deleteUser?id=${sessionId}`);
-      console.log("Session user deletion triggered.");
-    } else {
-      console.log("No session user to delete, or not applicable.");
-    }
+      navigator.sendBeacon(`${config.apiUri}/api/User/deleteUser?id=` + sessionId);
+    } 
   }
   
   

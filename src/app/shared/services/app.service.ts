@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
-
+import config from '../../../../auth_config.json';
 @Injectable({
   providedIn: 'root'
 })
@@ -22,10 +22,8 @@ export class AppService {
     const isSessionUser = sessionStorage.getItem('isSessionUser');
     
     if (sessionId && isSessionUser === 'true') {
-      navigator.sendBeacon(`https://localhost:7199/api/User/deleteUser?id=${sessionId}`);
+      navigator.sendBeacon(`${config.apiUri}/api/User/deleteUser?id=` + sessionId);
       console.log("Session user deletion triggered.");
-    } else {
-      console.log("No session user to delete, or not applicable.");
     }
   }
 }
