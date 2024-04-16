@@ -311,7 +311,11 @@ export class HomeContentComponent {
     const isSessionUser = sessionStorage.getItem('isSessionUser');
   
     if (sessionId && isSessionUser === 'true') {
-      navigator.sendBeacon(`${config.apiUri}/api/User/deleteUser?id=` + sessionId);
+      this.userService.deleteUser(sessionId).subscribe({
+        next: (response) => console.log('Delete request may have been sent'),
+        error: (error) => console.log('Error sending delete request')
+      });
+      
     } 
   }
   
