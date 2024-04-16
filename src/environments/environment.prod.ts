@@ -20,7 +20,7 @@ export const environment = {
     clientId,
     authorizationParams: {
       ...(audience && audience === 'https://puregains.com' ? { audience } : null),
-      redirect_uri: "https://puregainsclient.azurewebsites.net/",
+      redirect_uri: "https://puregainsclient.azurewebsites.net/callback",
     },
     errorPath,
   },
