@@ -39,7 +39,7 @@ export class NavBarComponent {
   ) {}
 
   loginWithRedirect() {
-    this.auth.loginWithRedirect();
+    this.auth.loginWithRedirect({appState: { target: 'dadadadada' }});
   }
 
   logout() {
