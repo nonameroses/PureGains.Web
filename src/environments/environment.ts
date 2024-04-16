@@ -29,15 +29,7 @@ export const environment = {
       {
         // Match any request that starts 'https://{yourDomain}/api/v2/' (note the asterisk)
         uri: 'https://puregainsapi.azurewebsites.net/*',
-        tokenOptions: {
-          authorizationParams: {
-            // The attached token should target this audience
-            audience: `${audience}`,
-
-            // The attached token should have these scopes
-            //scope: 'read:current_user'
-          }
-        }
+      
       }
     ]
 
