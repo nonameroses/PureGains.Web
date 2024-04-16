@@ -20,7 +20,7 @@ export const environment = {
     clientId,
     authorizationParams: {
       ...(audience && audience === 'https://puregains.com' ? { audience } : null),
-      redirect_uri: "https://puregainsclient.azurewebsites.net/callback",
+      redirect_uri: "http://localhost:4200/callback",
     },
     errorPath,
   },
@@ -28,16 +28,16 @@ export const environment = {
     allowedList: [
       {
         // Match any request that starts 'https://{yourDomain}/api/v2/' (note the asterisk)
-        uri: 'https://puregainsapi.azurewebsites.net/*',
-        tokenOptions: {
-          authorizationParams: {
-            // The attached token should target this audience
-            audience: `${audience}`,
+        // uri: 'https://puregainsapi.azurewebsites.net/*',
+        // tokenOptions: {
+        //   authorizationParams: {
+        //     // The attached token should target this audience
+        //     audience: `${audience}`,
 
-            // The attached token should have these scopes
-            //scope: 'read:current_user'
-          }
-        }
+        //     // The attached token should have these scopes
+        //     //scope: 'read:current_user'
+        //   }
+        // }
       }
     ]
 
