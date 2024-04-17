@@ -44,7 +44,9 @@
                         class=" relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active ">
                         <!-- Icon -->
                         <div
-                            class="flex items-center justify-center w-10 h-10 rounded-full border border-white  bg-bliu-4 text-slate-500 group-[.is-active]:text-emerald-50 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+                            class="flex items-center justify-center w-10 h-10 rounded-full border border-white  bg-bliu-4 
+                            text-slate-500 group-[.is-active]:text-emerald-50 shadow shrink-0 md:order-1 
+                            md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
                             <svg class="text-black" xmlns="http://www.w3.org/2000/svg" width="12" height="10">
                                 <path fill-rule="nonzero"
                                     d="M10.422 1.257 4.655 7.025 2.553 4.923A.916.916 0 0 0 1.257 6.22l2.75 2.75a.916.916 0 0 0 1.296 0l6.415-6.416a.916.916 0 0 0-1.296-1.296Z" />
@@ -102,8 +104,8 @@
                 </div>
 
             </div>
-            <div class="footer col-span-8 rounded-lg flex items-center justify-center  ">
-                <!-- Footer content -->
+            <div class="footer col-span-12 md:col-span-8 rounded-lg flex items-center justify-center  ">
+    
                 <button type="button" (click)="waitAndGoDown(pages[1].pageId)"
                     class="  px-12 py-2 rounded-lg text-white text-sm tracking-wider text-lg font-medium outline-none border-2 border-bliu-4  hover:bg-bliu-4  hover:text-white transition-all duration-300">
                     Continue</button>
@@ -219,7 +221,7 @@
                 </div>
 
             </div>
-            <div class="footer col-span-8 rounded-lg flex items-center justify-center  ">
+            <div class="footer col-span-12 md:col-span-8 rounded-lg flex items-center justify-center  ">
                 <!-- Footer content -->
             
                 <button type="button" (click)="waitAndGoUp(pages[0].pageId)"
@@ -464,7 +466,7 @@
                 </div>
 
             </div>
-            <div class="footer col-span-8 rounded-lg flex items-center justify-center  ">
+            <div class="footer col-span-12 md:col-span-8 rounded-lg flex items-center justify-center  ">
                 <button type="button" (click)="waitAndGoUp(pages[1].pageId)"
                     class="  px-12 py-2 mr-2 rounded-lg text-white text-sm tracking-wider text-lg font-medium outline-none border-2 border-bliu-4 hover:bg-sky-600 hover:text-white transition-all duration-300">
                     Go Back</button>
