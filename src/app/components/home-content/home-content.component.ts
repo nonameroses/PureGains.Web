@@ -386,13 +386,20 @@ export class HomeContentComponent {
   limitExerciseNumber(): Exercise[] {
     var limit: number = 5;
 
+    this.shuffleArray(this.allExercises);
     this.currentExercises = this.allExercises.splice(0, limit);
     
     
 
     return this.currentExercises;
   }
+  shuffleArray(array: any[]): void {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+    }}
 
+ 
   removeExercise(int: any) {
     this.currentExercises.splice(int, 1)[0];
   }
