@@ -375,10 +375,31 @@ export class HomeContentComponent {
   }
   limitExerciseNumber(): Exercise[] {
     var limit: number = 5;
+
     this.currentExercises = this.allExercises.splice(0, limit);
+    
+    this.mapExerciseImage(this.currentExercises);
 
     return this.currentExercises;
   }
+
+  mapExerciseImage(exercises: Exercise[]): Exercise[] {
+
+    const muscleGroupImages: Record<number, string> = {
+      1: '../assets/exercises/letter-b.png',
+      2: '../assets/exercises/letter-b.png',
+      3: '../assets/exercises/letter-c.png',
+      4: '../assets/exercises/letter-t.png',
+      5: '../assets/exercises/letter-s.png',
+      6: '../assets/exercises/letter-b.png',
+      7: '../assets/exercises/letter-a.png',
+  };
+
+    return exercises.map(exercise => ({
+        ...exercise,
+        imagePath: muscleGroupImages[exercise.primaryMuscleGroupId] || 'path/to/default_image.png'
+    }));
+}
 
   removeExercise(int: any) {
     this.currentExercises.splice(int, 1)[0];

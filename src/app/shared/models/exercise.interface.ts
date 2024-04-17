@@ -4,4 +4,5 @@ export interface Exercise {
     description: string;
     youtubeUrl: string;
     primaryMuscleGroupId: number;
+    imagePath: string;
 }
