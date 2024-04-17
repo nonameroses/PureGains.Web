@@ -219,6 +219,17 @@ export class HomeContentComponent {
     isFinished: false,
   };
 
+  private muscleGroupImages: Record<number, string> = {
+    1: '../assets/exercises/letter-b.png',
+    2: '../assets/exercises/letter-b.png',
+    3: '../assets/exercises/letter-c.png',
+    4: '../assets/exercises/letter-t.png',
+    5: '../assets/exercises/letter-s.png',
+    6: '../assets/exercises/letter-b.png',
+    7: '../assets/exercises/letter-l.png',
+    8: '../assets/exercises/letter-f.png',
+  };
+  
   showExercises: boolean = false;
   constructor(
     private equipmentService: EquipmentService,
@@ -356,16 +367,23 @@ export class HomeContentComponent {
   }
   populateMuscleGroupExercises() {
     this.muscleGroupExercises = [];
-    for (let i = 0; i < this.selectedMuscleGroups.length; i++) {
-      this.muscleGroupExercises.push({
-        name: this.selectedMuscleGroups[i].name,
-        exercises: this.allExercises.filter(
-          (x) => x.primaryMuscleGroupId == this.selectedMuscleGroups[i].id
-        ),
-        showExercises: false,
-      });
-    }
+    this.muscleGroupExercises = this.selectedMuscleGroups.map(group => ({
+      name: group.name,
+      exercises: this.allExercises.filter(exercise => exercise.primaryMuscleGroupId === group.id),
+      showExercises: false,
+      imagePath: this.muscleGroupImages[group.id] || 'path/to/default_image.png'
+    }));
   }
+
+
+
+  private mapExerciseImage(exercises: Exercise[]): Exercise[] {
+    return exercises.map(exercise => ({
+      ...exercise,
+      imagePath: this.muscleGroupImages[exercise.primaryMuscleGroupId] || 'path/to/default_image.png'
+    }));
+  }
+
   addExerciseToWorkout(exercise) {
     this.currentExercises.push(exercise);
     this.modal.hide();
@@ -378,28 +396,29 @@ export class HomeContentComponent {
 
     this.currentExercises = this.allExercises.splice(0, limit);
     
-    this.mapExerciseImage(this.currentExercises);
+    
 
     return this.currentExercises;
   }
 
-  mapExerciseImage(exercises: Exercise[]): Exercise[] {
+//   mapExerciseImage(exercises: Exercise[]): Exercise[] {
 
-    const muscleGroupImages: Record<number, string> = {
-      1: '../assets/exercises/letter-b.png',
-      2: '../assets/exercises/letter-b.png',
-      3: '../assets/exercises/letter-c.png',
-      4: '../assets/exercises/letter-t.png',
-      5: '../assets/exercises/letter-s.png',
-      6: '../assets/exercises/letter-b.png',
-      7: '../assets/exercises/letter-a.png',
-  };
+//     const muscleGroupImages: Record<number, string> = {
+//       1: '../assets/exercises/letter-b.png',
+//       2: '../assets/exercises/letter-b.png',
+//       3: '../assets/exercises/letter-c.png',
+//       4: '../assets/exercises/letter-t.png',
+//       5: '../assets/exercises/letter-s.png',
+//       6: '../assets/exercises/letter-b.png',
+//       7: '../assets/exercises/letter-a.png',
+//   };
 
-    return exercises.map(exercise => ({
-        ...exercise,
-        imagePath: muscleGroupImages[exercise.primaryMuscleGroupId] || 'path/to/default_image.png'
-    }));
-}
+//   console.log(exercises);
+//     return exercises.map(exercise => ({
+      
+//       imagePath: muscleGroupImages[exercise.primaryMuscleGroupId]
+//     }));
+// }
 
   removeExercise(int: any) {
     this.currentExercises.splice(int, 1)[0];

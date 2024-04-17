@@ -4,4 +4,5 @@ export interface MuscleGroupExercises {
     name: string,
     exercises: Exercise[]
     showExercises : boolean;
+    imagePath: string;
 }

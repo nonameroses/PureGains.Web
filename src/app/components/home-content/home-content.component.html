@@ -278,7 +278,7 @@
                                         </svg>
                                         <div>
                                             <img class="rounded-full h-10 w-10  object-cover"
-                                                src="item.imagePath"
+                                                src="{{item.imagePath}}"
                                                 alt="unsplash image">
                                         </div>
                                         <!-- sm:mr-44 lg:mr-96 -->
@@ -360,7 +360,12 @@
                                                     <a href="#" (click)="toggleExercises(muscleGroup)"
                                                         class=" overflow-hidden transition-all duration-500 flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-800 hover:bg-gray-700 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
                                                         <!-- Muscle Group Name and Icon -->
-                                                 
+                                                        <div>
+                                                            <img class="rounded-full h-10 w-10  object-cover"
+                                                                src="{{muscleGroup.imagePath}}"
+                                                                alt="unsplash image">
+                                                        </div>
+                                                       
                                                         <span
                                                             class="flex-1 ms-3 whitespace-nowrap text-gray-100">{{muscleGroup.name}}</span>
 
