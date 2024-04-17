@@ -221,15 +221,15 @@
             </div>
             <div class="footer col-span-8 rounded-lg flex items-center justify-center  ">
                 <!-- Footer content -->
-
-                <button type="button" (click)="waitAndGoDown(pages[0].pageId)"
-                    class="  px-12 py-2 rounded-lg text-white text-sm tracking-wider text-lg font-medium outline-none border-2 border-bliu-4  hover:bg-bliu-4  hover:text-white transition-all duration-300">
+            
+                <button type="button" (click)="waitAndGoUp(pages[0].pageId)"
+                    class="  px-12 py-2 mr-2 rounded-lg text-white text-sm tracking-wider text-lg font-medium outline-none border-2 border-bliu-4  hover:bg-bliu-4  hover:text-white transition-all duration-300">
                     Go Back</button>
-
-                <button type="button" (click)="waitAndGoDown(pages[2].pageId) ; buildWorkout()"
-                    class="  px-12 py-2 rounded-lg text-white text-sm tracking-wider text-lg font-medium outline-none border-2 border-bliu-4  hover:bg-bliu-4  hover:text-white transition-all duration-300">
+            
+                <button type="button" (click)="waitAndGoDownForWorkout(pages[2].pageId) ; buildWorkout()"
+                    class="  px-12 py-2 rounded-lg text-white text-sm tracking-wider text-lg font-medium outline-none border-2 bg-sky-700  border-bliu-4  hover:bg-bliu-4  hover:text-white transition-all duration-300">
                     Continue</button>
-
+            
             </div>
         </div>
     </body>
@@ -465,7 +465,7 @@
 
             </div>
             <div class="footer col-span-8 rounded-lg flex items-center justify-center  ">
-                <button type="button" (click)="waitAndGoDown(pages[1].pageId)"
+                <button type="button" (click)="waitAndGoUp(pages[1].pageId)"
                     class="  px-12 py-2 mr-2 rounded-lg text-white text-sm tracking-wider text-lg font-medium outline-none border-2 border-bliu-4 hover:bg-sky-600 hover:text-white transition-all duration-300">
                     Go Back</button>
                 <button type="button" (click)="waitAndGoDown(pages[3].pageId); beginWorkout()"

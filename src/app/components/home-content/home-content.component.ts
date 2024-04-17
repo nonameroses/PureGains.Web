@@ -609,10 +609,13 @@ export class HomeContentComponent {
   public waitAndGoDown(id: string) {
     if (this.selectedEquipment.length > 0) {
       this.waitForElement(id);
-      this.isEquipmentSelected = true;
     }
   }
-
+ public waitAndGoDownForWorkout(id: string){
+  if (this.selectedMuscleGroups.length > 0) {
+    this.waitForElement(id);
+  }
+ }
   public waitAndGoUp(id: string) {
     this.waitForElement(id);
   }
