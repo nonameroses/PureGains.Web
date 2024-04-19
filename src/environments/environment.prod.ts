@@ -28,7 +28,7 @@ export const environment = {
     allowedList: [
       {
         // Match any request that starts 'https://{yourDomain}/api/v2/' (note the asterisk)
-        uri: 'https://puregainsapi.azurewebsites.net/*',
+        // uri: 'https://puregainsapi.azurewebsites.net/*',
         tokenOptions: {
           authorizationParams: {
          

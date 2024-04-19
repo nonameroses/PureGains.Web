@@ -28,7 +28,7 @@ export const environment = {
     allowedList: [
       {
      
-        uri: 'https://puregainsapi.azurewebsites.net/*',
+
         tokenOptions: {
           authorizationParams: {
          
