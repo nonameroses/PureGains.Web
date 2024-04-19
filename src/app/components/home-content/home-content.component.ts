@@ -36,6 +36,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { switchMap, tap } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
 import { AppService } from 'src/app/shared/services/app.service';
+import { response } from 'express';
 
 @Component({
   selector: 'app-home-content',
@@ -53,6 +54,7 @@ import { AppService } from 'src/app/shared/services/app.service';
 export class HomeContentComponent {
   modal: ModalInterface;
   activeTab: number = 0;
+  testUser: User;
 
   user: User = null;
   pages: PageSelectionModel[] = [
@@ -217,6 +219,7 @@ export class HomeContentComponent {
       },
     ],
     isFinished: false,
+
   };
 
   private muscleGroupImages: Record<number, string> = {
@@ -298,6 +301,7 @@ export class HomeContentComponent {
       this.userService.getUserByAuthId(this.user.auth0UserId).subscribe({
         next: (response) => {
           this.user = response;
+          this.testUser = response;
           this.loadUserWorkouts();
         },
       });
@@ -478,24 +482,31 @@ export class HomeContentComponent {
   }
 
   buildWorkout() {
-    this.workoutService.addWorkout(this.user.id).subscribe({
+    this.userService.getUserByAuthId(this.user.auth0UserId).subscribe({
       next: (response) => {
-        this.workoutInProgress = response;
+        this.workoutService.addWorkout(response.id).subscribe({
+          next: (response) => {
+            this.workoutInProgress = response;
+    
+            this.exerciseService
+              .getInitialExercisesForUser(
+                this.selectedEquipment.map((e) => e.id),
+                this.selectedMuscleGroups.map((m) => m.id)
+              )
+              .subscribe({
+                next: (response) => {
+                  this.allExercises = response;
+                  this.limitExerciseNumber();
+                  this.populateMuscleGroupExercises();
+                },
+              });
+          },
+        });
+      }
+    })
 
-        this.exerciseService
-          .getInitialExercisesForUser(
-            this.selectedEquipment.map((e) => e.id),
-            this.selectedMuscleGroups.map((m) => m.id)
-          )
-          .subscribe({
-            next: (response) => {
-              this.allExercises = response;
-              this.limitExerciseNumber();
-              this.populateMuscleGroupExercises();
-            },
-          });
-      },
-    });
+
+ 
   }
 
   beginWorkout() {
@@ -593,15 +604,24 @@ export class HomeContentComponent {
   }
 
   finishWorkout() {
-    this.workoutService.getWorkouts(this.user.id).subscribe({
-      next: (workoutResponse) => {
-        const events = workoutResponse.map((workout) => ({
-          title: workout.totalDuration ? `Duration: ${workout.totalDuration} mins` : 'Workout Session',
-          start: workout.date,
-        }));
-        this.dataService.sendData(events);
-      },
-    });
+    this.auth.user$.subscribe({
+      next: (profile) => {
+        this.userService.getUserByAuthId(profile.sub).subscribe({
+          next: (response) => {
+            this.workoutService.getWorkouts(response.id).subscribe({
+              next: (workoutResponse) => {
+                const events = workoutResponse.map((workout) => ({
+                  title: workout.totalDuration ? `Duration: ${workout.totalDuration} mins` : 'Workout Session',
+                  start: workout.date,
+                }));
+               this.dataService.sendData(events);
+              },
+            });
+          },
+        });
+
+     
+      }});
 
     this.router.navigate(['/calendar']);
   }

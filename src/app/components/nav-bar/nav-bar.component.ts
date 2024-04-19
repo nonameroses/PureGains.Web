@@ -10,6 +10,9 @@ import {
   NgbDropdownToggle,
 } from '@ng-bootstrap/ng-bootstrap';
 import { Router, RouterLink } from '@angular/router';
+import { WorkoutService } from 'src/app/shared/services/workout.service';
+import { DataService } from 'src/app/shared/services/data.service';
+import { UserService } from 'src/app/shared/services/identity-services/user.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -35,11 +38,14 @@ export class NavBarComponent {
   constructor(
     public auth: AuthService,
     private router: Router,
+    private workoutService: WorkoutService,
+    private dataService: DataService,
+    private userService: UserService,
     @Inject(DOCUMENT) private doc: Document
   ) {}
 
   loginWithRedirect() {
-    this.auth.loginWithRedirect({appState: { target: 'dadadadada' }});
+    this.auth.loginWithRedirect();
   }
 
   logout() {
@@ -52,6 +58,31 @@ export class NavBarComponent {
     });
   }
   navigateToCalendar(){
+
+    this.loadUserWorkouts();
     this.router.navigate(['/calendar']);
+  }
+  
+  loadUserWorkouts() {
+    this.auth.user$.subscribe({
+      next: (profile) => {
+        this.userService.getUserByAuthId(profile.sub).subscribe({
+          next: (response) => {
+            this.workoutService.getWorkouts(response.id).subscribe({
+              next: (workoutResponse) => {
+                const events = workoutResponse.map((workout) => ({
+                  title: workout.totalDuration ? `Duration: ${workout.totalDuration} mins` : 'Workout Session',
+                  start: workout.date,
+                }));
+               this.dataService.sendData(events);
+              },
+            });
+          },
+        });
+
+     
+      }});
+
+    
   }
 }
