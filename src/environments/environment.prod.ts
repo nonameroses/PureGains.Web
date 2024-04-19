@@ -27,8 +27,8 @@ export const environment = {
   httpInterceptor: {
     allowedList: [
       {
-        // Match any request that starts 'https://{yourDomain}/api/v2/' (note the asterisk)
-        // uri: 'https://puregainsapi.azurewebsites.net/*',
+     
+
         tokenOptions: {
           authorizationParams: {
          
@@ -36,6 +36,7 @@ export const environment = {
 
           }
        }
+      
       }
     ]
 

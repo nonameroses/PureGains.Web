@@ -6,6 +6,11 @@ import { environment as env } from './environments/environment';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { provideRouter } from '@angular/router';
+import { enableProdMode } from '@angular/core';
+
+if (env.production) {
+  enableProdMode();
+}
 
 bootstrapApplication(AppComponent, {
   providers: [

@@ -266,7 +266,6 @@ export class HomeContentComponent {
       this.auth.user$.subscribe({
         next: (profile) => {
           if (profile === null) {
-            console.log('Creating session user...');
             const sessionId = uuidv4();
             sessionStorage.setItem('sessionId', sessionId);
             sessionStorage.setItem('isSessionUser', 'true');  // Set a flag indicating this is a session user
