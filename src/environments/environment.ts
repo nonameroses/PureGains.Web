@@ -29,6 +29,13 @@ export const environment = {
       {
      
         uri: 'https://puregainsapi.azurewebsites.net/*',
+        tokenOptions: {
+          authorizationParams: {
+         
+            audience: `${audience}`,
+
+          }
+       }
       
       }
     ]
