@@ -483,24 +483,46 @@ export class HomeContentComponent {
   buildWorkout() {
     this.userService.getUserByAuthId(this.user.auth0UserId).subscribe({
       next: (response) => {
-        this.workoutService.addWorkout(response.id).subscribe({
-          next: (response) => {
-            this.workoutInProgress = response;
-    
-            this.exerciseService
-              .getInitialExercisesForUser(
-                this.selectedEquipment.map((e) => e.id),
-                this.selectedMuscleGroups.map((m) => m.id)
-              )
-              .subscribe({
-                next: (response) => {
-                  this.allExercises = response;
-                  this.limitExerciseNumber();
-                  this.populateMuscleGroupExercises();
-                },
-              });
-          },
-        });
+        if(response){
+          this.workoutService.addWorkout(response.id).subscribe({
+            next: (response) => {
+              this.workoutInProgress = response;
+      
+              this.exerciseService
+                .getInitialExercisesForUser(
+                  this.selectedEquipment.map((e) => e.id),
+                  this.selectedMuscleGroups.map((m) => m.id)
+                )
+                .subscribe({
+                  next: (response) => {
+                    this.allExercises = response;
+                    this.limitExerciseNumber();
+                    this.populateMuscleGroupExercises();
+                  },
+                });
+            },
+          });
+        } else {
+          this.workoutService.addWorkout(this.user.id).subscribe({
+            next: (response) => {
+              this.workoutInProgress = response;
+      
+              this.exerciseService
+                .getInitialExercisesForUser(
+                  this.selectedEquipment.map((e) => e.id),
+                  this.selectedMuscleGroups.map((m) => m.id)
+                )
+                .subscribe({
+                  next: (response) => {
+                    this.allExercises = response;
+                    this.limitExerciseNumber();
+                    this.populateMuscleGroupExercises();
+                  },
+                });
+            },
+          });
+        }
+       
       }
     })
 

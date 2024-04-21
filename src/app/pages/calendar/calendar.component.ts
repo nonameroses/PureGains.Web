@@ -6,6 +6,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import { NavBarComponent } from 'src/app/components/nav-bar/nav-bar.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DataService } from 'src/app/shared/services/data.service';
+import { AuthService } from '@auth0/auth0-angular';
 @Component({
   selector: 'app-calendar',
   standalone: true,
@@ -19,7 +20,7 @@ export class CalendarComponent {
     plugins: [dayGridPlugin]
   };
   data: any;
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService, public auth: AuthService) {}
 
   ngOnInit() {
     this.dataService.data.subscribe(events => {
